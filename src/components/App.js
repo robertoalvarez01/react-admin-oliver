@@ -12,6 +12,8 @@ import NewCategoria from '../pages/NewCategoria';
 import NewMarca from '../pages/NewMarca';
 import Probe from '../components/Probe';
 import imageForm from '../components/ImagesForm';
+import ViewProduct from '../pages/ViewProduct';
+import EditProduct from '../pages/EditProduct';
 
 
 // import BadgeNew from '../pages/BadgeNew';
@@ -25,11 +27,13 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/ingresar" component={Login} />
           <Route exact path="/prueba" component={Probe} /> {/* Retirar esta linea despues... */}
-          <Route exact path="/imagen/:productId" component={imageForm} />
-          <Route exact path="/productos" component={Products} />
+          {/*}<Route exact path="/imagen/:productId" component={imageForm} />
+          <Route exact path="/describirProducto/:productId" component={ViewProduct} />
+          <Route exact path="/editarProducto/:productId" component={EditProduct} />
+          <Route exact path="/producto/agregar" component={NewProduct} />
+          <Route exact path="/productos" component={Products} />{*/}
           <Route exact path="/categorias" component={Categorias} />
           <Route exact path="/marcas" component={Marcas} />
-          <Route exact path="/producto/agregar" component={NewProduct} />
           <Route exact path="/categoria/agregar" component={NewCategoria} />
           <Route exact path="/marca/agregar" component={NewMarca} />
           {/* <Route component={NotFound} /> */}

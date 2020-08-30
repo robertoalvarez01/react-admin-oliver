@@ -26,7 +26,7 @@ class ProductListItem extends React.Component {
           headers: myHeaders,
           redirect: 'follow'
         };
-
+        console.log(idProduct)
         fetch(`${config.url}/producto/${idProduct}`, requestOptions)
           .then(response => response.text())
           .then(result => {
@@ -59,7 +59,7 @@ class ProductListItem extends React.Component {
         <td>{this.props.producto.precioUni}</td>
         <td>{this.props.producto.disponible && <p>Disponible</p>}{!this.props.producto.disponible && <p>No Disponible</p>}</td>
         <td>{this.props.producto.categoria.descripcion}</td>
-        <td>Editar - <Link onClick={() => this.handleDelete(this.props.producto._id)}>Eliminar</Link> - <Link to={`/imagen/${this.props.producto._id}`}>Imagen</Link></td>
+        <td><Link to={`/describirProducto/${this.props.producto._id}`}>Ver</Link> - <Link to={`/editarProducto/${this.props.producto._id}`}>Editar</Link> - <Link onClick={() => this.handleDelete(this.props.producto._id)}>Eliminar</Link> - <Link to={`/imagen/${this.props.producto._id}`}>Imagen</Link></td>
       </tr>
     );
   }

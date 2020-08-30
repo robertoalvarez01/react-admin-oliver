@@ -27,7 +27,7 @@ class Categorias extends React.Component {
     redirect: 'follow'
     };
 
-    fetch(`${config.url}/categoria`, requestOptions)
+    fetch(`${config.url}/subcategoria`, requestOptions)
     .then(response => response.text())
     .then(result => {
         const resultados = JSON.parse(result);

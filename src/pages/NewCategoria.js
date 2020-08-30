@@ -12,11 +12,36 @@ class NewCategoria extends React.Component {
 		const adminUser = localStorage.getItem('administrador');
 		if (adminUser === null) {
 			this.props.history.push('/ingresar');
-		}
+    }
+    const administrador = JSON.parse(localStorage.getItem('administrador'));
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append("token", administrador.token);
+
+      var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+      };
+
+      fetch(`${config.url}/categoria` , requestOptions)
+      .then(response => response.text())
+      .then(result => {
+          const categoriasRes = JSON.parse(result).categorias;
+          this.setState({
+              categorias:categoriasRes
+          })
+      })
+      .catch(error => console.log('error', error));
+    } catch (error) {
+      
+    }
 	}
   state = {
+    categorias: [],
     form: {
-      descripcion: ''
+      descripcion: '',
+      categoria: ''
     },
   };
 
@@ -38,6 +63,7 @@ class NewCategoria extends React.Component {
     
     var urlencoded = new URLSearchParams();
     urlencoded.append("descripcion", this.state.form.descripcion);
+    urlencoded.append("categoria", this.state.form.categoria);
     
     var requestOptions = {
       method: 'POST',
@@ -46,7 +72,7 @@ class NewCategoria extends React.Component {
       redirect: 'follow'
     };
     
-    fetch(`${config.url}/categoria`, requestOptions)
+    fetch(`${config.url}/subcategoria`, requestOptions)
       .then(response => response.text())
       .then(resultado => {
         const result = JSON.parse(resultado);
@@ -80,11 +106,38 @@ class NewCategoria extends React.Component {
         <div className="container mt-4 p-2">
             <Link to="/categorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
             <p className="text-center h3 mb-2">Agregar categoria</p>
-            <CategoriaMarcaForm
-            onChange={this.handleChange}
-            formValues={this.state.form}
-            onSubmit={this.handleSubmit}
-            />
+            <div className="container bg-light border rounded p-4"> 
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <label>Descripción: (obligatorio)</label>
+                  <input
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    name="descripcion"
+                    value={this.state.form.descripcion}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Categoria Padre: (obligatorio)</label>
+                  <select
+                    onChange={this.handleChange}
+                    className="form-control"
+                    name="categoria"
+                    value={this.state.form.categoria}
+                  >
+                  <option value="none" hidden>Select an Option</option>
+                  {this.state.categorias.map(categoria => {
+                      return <option key={categoria._id} value={categoria._id}>{categoria.descripcion}</option>
+                  })}
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-outline-success btn-block">
+                  Guardar
+                </button>
+              </form>
+            </div>
         </div>
       </React.Fragment>
     );

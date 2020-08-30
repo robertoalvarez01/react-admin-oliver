@@ -8,7 +8,7 @@ class CategoriasListItem extends React.Component {
     return (
       <tr>
         <th scope="row">{this.props.categoria._id}</th>
-        <td>{this.props.categoria.descripcion}</td>
+        <td>{this.props.categoria.categoria.descripcion+" - "+this.props.categoria.descripcion}</td>
         <td>Editar - Eliminar</td>
       </tr>
     );

@@ -27,7 +27,7 @@ class ProductListItem extends React.Component {
           redirect: 'follow'
         };
         console.log(idProduct)
-        fetch(`${config.url}/producto/${idProduct}`, requestOptions)
+        fetch(`${config.url}/subproducto/${idProduct}`, requestOptions)
           .then(response => response.text())
           .then(result => {
             const dataProduct = JSON.parse(result);
@@ -55,11 +55,10 @@ class ProductListItem extends React.Component {
     return (
       <tr>
         <th scope="row">{this.props.producto.nombre}</th>
-        <td>{this.props.producto.marca.descripcion}</td>
-        <td>{this.props.producto.precioUni}</td>
-        <td>{this.props.producto.disponible && <p>Disponible</p>}{!this.props.producto.disponible && <p>No Disponible</p>}</td>
-        <td>{this.props.producto.categoria.descripcion}</td>
-        <td><Link to={`/describirProducto/${this.props.producto._id}`}>Ver</Link> - <Link to={`/editarProducto/${this.props.producto._id}`}>Editar</Link> - <Link onClick={() => this.handleDelete(this.props.producto._id)}>Eliminar</Link> - <Link to={`/imagen/${this.props.producto._id}`}>Imagen</Link></td>
+        <td>{this.props.producto.stock}</td>
+        <td>{this.props.producto.codigoBarra}</td>
+       <td>{this.props.producto.precioUni}</td>
+        <td><Link to={`/describirProducto/${this.props.producto._id}`}>Ver</Link> - <Link to={`/editarProducto/${this.props.producto._id}`}>Editar</Link> - <Link onClick={() => this.handleDelete(this.props.producto._id)}>Eliminar</Link></td>
       </tr>
     );
   }
@@ -83,10 +82,9 @@ class ProductList extends React.Component {
                 <thead className="thead-dark">
                     <tr>
                     <th scope="col">Producto</th>
-                    <th scope="col">Marca</th>
+                    <th scope="col">stock</th>
+                    <th scope="col">Codigo de barra</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Categoria</th>
                     <th scope="col">Acciones</th>
                     </tr>
                 </thead>

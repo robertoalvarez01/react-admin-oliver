@@ -32,7 +32,7 @@ class Products extends React.Component {
     redirect: 'follow'
     };
 
-    fetch(`${config.url}/producto`, requestOptions)
+    fetch(`${config.url}/subproducto`, requestOptions)
     .then(response => response.text())
     .then(result => {
         const resultados = JSON.parse(result);

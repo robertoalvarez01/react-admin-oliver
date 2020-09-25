@@ -27,11 +27,11 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/ingresar" component={Login} />
           <Route exact path="/prueba" component={Probe} /> {/* Retirar esta linea despues... */}
-          {/*}<Route exact path="/imagen/:productId" component={imageForm} />
+          {/*}<Route exact path="/imagen/:productId" component={imageForm} />{*/}
           <Route exact path="/describirProducto/:productId" component={ViewProduct} />
           <Route exact path="/editarProducto/:productId" component={EditProduct} />
           <Route exact path="/producto/agregar" component={NewProduct} />
-          <Route exact path="/productos" component={Products} />{*/}
+          <Route exact path="/productos" component={Products} />
           <Route exact path="/categorias" component={Categorias} />
           <Route exact path="/marcas" component={Marcas} />
           <Route exact path="/categoria/agregar" component={NewCategoria} />

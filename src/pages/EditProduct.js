@@ -22,12 +22,11 @@ class EditProduct extends React.Component {
     redirect: 'follow'
     };
 
-    fetch(`${config.url}/producto/${this.props.match.params.productId}`, requestOptions)
+    fetch(`${config.url}/subproducto/${this.props.match.params.productId}`, requestOptions)
     .then(response => response.text())
     .then(result => {
         const product = JSON.parse(result);
         this.setState({form : product.res});
-        this.setState({form : {...this.state.form, categoria: product.res.categoria._id, marca: product.res.marca._id}})
         console.log(this.state);
     })
     .catch(error => console.log('error', error));
@@ -36,12 +35,9 @@ class EditProduct extends React.Component {
     form: {
       nombre: '',
       precioUni: '',
-      categoria: '',
-      descripcionBasica: '',
-      marca: '',
-      descripcion: '',
       stock: '',
       minimo: '',
+      peso: '',
       codigoBarra: '',
     },
   };
@@ -67,13 +63,10 @@ class EditProduct extends React.Component {
     var urlencoded = new URLSearchParams();
     urlencoded.append("nombre", this.state.form.nombre);
     urlencoded.append("precioUni", this.state.form.precioUni);
-    urlencoded.append("categoria", this.state.form.categoria);
-    urlencoded.append("descripcionBasica", this.state.form.descripcionBasica);
-    urlencoded.append("marca", this.state.form.marca);
-    urlencoded.append("descripcion", this.state.form.descripcion);
+    urlencoded.append("peso", this.state.form.peso);
     urlencoded.append("stock", this.state.form.stock);
     urlencoded.append("minimo", this.state.form.minimo);
-    urlencoded.append("codigoBarra", this.state.form.minimo);
+    urlencoded.append("codigoBarra", this.state.form.codigoBarra);
     
     var requestOptions = {
       method: 'PUT',
@@ -82,7 +75,7 @@ class EditProduct extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`${config.url}/producto/${this.props.match.params.productId}`, requestOptions)
+    fetch(`${config.url}/subproducto/${this.props.match.params.productId}`, requestOptions)
       .then(response => response.text())
       .then(resultado => {
         const result = JSON.parse(resultado);
@@ -115,7 +108,7 @@ class EditProduct extends React.Component {
 
         <div className="container mt-4 p-2">
             <Link to="/productos" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
-            <p className="text-center h3 mb-2">Agregar producto</p>
+            <p className="text-center h3 mb-2">Agregar subproducto</p>
             <ProductForm
             onChange={this.handleChange}
             formValues={this.state.form}

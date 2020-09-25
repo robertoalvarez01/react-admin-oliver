@@ -17,7 +17,7 @@ export default class Home extends Component {
     return (
       <div>
         <div className="list-group container text-center mt-4">
-        	<Link to="/productos" className="list-group-item list-group-item-action">PRODUCTOS</Link>
+        	<Link to="/productos" className="list-group-item list-group-item-action">SUBPRODUCTOS</Link>
 					<Link to="/categorias" className="list-group-item list-group-item-action">CATEGORIAS</Link>
 					<Link to="/marcas" className="list-group-item list-group-item-action">MARCAS</Link>
 					<Link to="/ingresar" className="list-group-item list-group-item-action list-group-item-danger">CERRAR SESIÓN</Link>

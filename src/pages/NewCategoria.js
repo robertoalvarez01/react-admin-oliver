@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import CategoriaMarcaForm from '../components/CategoriaMarcaForm';
+import CategoriaForm from '../components/CategoriaForm';
 
 import config from '../config/config';
 const Swal = require('sweetalert2');
@@ -99,46 +99,10 @@ class NewCategoria extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/* <div className="BadgeNew__hero">
-          <img className="img-fluid" src={header} alt="Logo" />
-        </div> */}
-
-        <div className="container mt-4 p-2">
-            <Link to="/categorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
-            <p className="text-center h3 mb-2">Agregar categoria</p>
-            <div className="container bg-light border rounded p-4"> 
-              <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <label>Descripción: (obligatorio)</label>
-                  <input
-                    onChange={this.handleChange}
-                    className="form-control"
-                    type="text"
-                    name="descripcion"
-                    value={this.state.form.descripcion}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Categoria Padre: (obligatorio)</label>
-                  <select
-                    onChange={this.handleChange}
-                    className="form-control"
-                    name="categoria"
-                    value={this.state.form.categoria}
-                  >
-                  <option value="none" hidden>Select an Option</option>
-                  {this.state.categorias.map(categoria => {
-                      return <option key={categoria._id} value={categoria._id}>{categoria.descripcion}</option>
-                  })}
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-outline-success btn-block">
-                  Guardar
-                </button>
-              </form>
-            </div>
-        </div>
+        <CategoriaForm 
+        onChange={this.handleChange}
+        formValues={this.state.form}
+        onSubmit={this.handleSubmit}/>
       </React.Fragment>
     );
   }

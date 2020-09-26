@@ -9,7 +9,14 @@ class MarcasListItem extends React.Component {
       <tr>
         <th scope="row">{this.props.marca.idMarca}</th>
         <td>{this.props.marca.marca}</td>
-        <td>Editar - Eliminar</td>
+        <td>
+          <button className="btn btn-outline-danger mx-1" onClick={()=>this.props.delete(this.props.marca.idMarca)}>
+            <i className="fas fa-trash-alt"></i>
+          </button>
+          <Link className="btn btn-outline-warning mx-1" to={`/marca/editar/${this.props.marca.idMarca}`}>
+            <i className="fas fa-pen"></i>
+          </Link>
+        </td>
       </tr>
     );
   }
@@ -18,23 +25,21 @@ class MarcasListItem extends React.Component {
 class MarcasList extends React.Component {
   render() {
     return (
-        <div className="mx-3 mt-3">
-            <div>
-                <Link to="/marca/agregar" className="btn btn-outline-success float-right mb-2">Agregar marca</Link>
-                <Link to="/" className="btn btn-outline-danger float-right mb-2 mr-2">Volver al inicio</Link>
-            </div>
-            <table className="table">
+        <div className="container mt-3">
+            <table className="table text-center table-hover">
                 <thead className="thead-dark">
                     <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Acciones</th>
+                      <th scope="col">#</th>
+                      <th scope="col">Marca</th>
+                      <th scope="col">
+                        <Link to="/marca/agregar" className="btn btn-outline-success">Agregar marca</Link>
+                      </th>
                     </tr>
                 </thead>
             <tbody>
             {this.props.marcas.map(marca => {
                 return (
-                    <MarcasListItem key={marca.idMarca} marca={marca} />
+                    <MarcasListItem delete={this.props.delete} key={marca.idMarca} marca={marca} />
                 );
             })}
             </tbody>

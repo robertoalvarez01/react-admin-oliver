@@ -1,89 +1,62 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 
-import CategoriaMarcaForm from '../components/CategoriaMarcaForm';
+import MarcaForm from '../components/MarcaForm';
 import config from '../config/config';
 const Swal = require('sweetalert2');
 
 class NewMarca extends React.Component {
-
+    constructor(props) {
+      super(props);
+      this.state = {
+        loading:false
+      }
+    }
     componentDidMount(){
-		const adminUser = localStorage.getItem('administrador');
-		if (adminUser === null) {
-			this.props.history.push('/ingresar');
-		}
-	}
-  state = {
-    form: {
-      descripcion: ''
-    },
-  };
-
-  handleChange = e => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.name]: e.target.value,
-      },
-    });
-  };
+      const adminUser = localStorage.getItem('administrador');
+      if (adminUser === null) {
+        this.props.history.push('/ingresar');
+      }
+    }
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({loading:true});
     const administrador = JSON.parse(localStorage.getItem('administrador'));
-    var myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("descripcion", this.state.form.descripcion);
-    
-    var requestOptions = {
+    let data = new FormData(document.getElementById('formAgregarMarca'));
+    let requestOptions = {
       method: 'POST',
       headers: myHeaders,
-      body: urlencoded,
+      body: data,
       redirect: 'follow'
     };
-    
-    fetch(`${config.url}/marca`, requestOptions)
-      .then(response => response.text())
-      .then(resultado => {
-        const result = JSON.parse(resultado);
-        console.log(result);
-        if (!result.ok) {
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: result.err.message
-            })
-        }
-
-        Swal.fire(
-            'Guardado exitoso',
-            'Se guardó '+ result.marca.descripcion + ' de manera exitosa!',
-            'success'
-        )
-
-        this.props.history.push('/marcas');
-      })
-      .catch(error => console.log('error', error));
+    fetch(`${config.url}/marca`,requestOptions).then(response => response.json()).then(resultado => {
+      this.setState({loading:false});
+      Swal.fire(
+          'Guardado exitoso',
+          'Se guardó '+ data.get('marca') + ' de manera exitosa!',
+          'success'
+      ).then(()=>(this.props.history.push('/marcas')))
+    })
+    .catch(error => console.log('error', error));
   };
 
   render() {
     return (
+      (this.state.loading)?<Loader/>:
       <React.Fragment>
-        {/* <div className="BadgeNew__hero">
-          <img className="img-fluid" src={header} alt="Logo" />
-        </div> */}
-
         <div className="container mt-4 p-2">
             <Link to="/marcas" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
             <p className="text-center h3 mb-2">Agregar marca</p>
-            <CategoriaMarcaForm
-            onChange={this.handleChange}
-            formValues={this.state.form}
-            onSubmit={this.handleSubmit}
+            <MarcaForm
+              onChange={this.handleChange}
+              onSubmit={this.handleSubmit}
+              loading={this.state.loading}
+              accion="agregar"
             />
         </div>
       </React.Fragment>

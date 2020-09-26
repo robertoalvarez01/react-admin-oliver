@@ -11,9 +11,9 @@ import Categorias from '../pages/Categorias';
 import NewCategoria from '../pages/NewCategoria';
 import NewMarca from '../pages/NewMarca';
 import Probe from '../components/Probe';
-import imageForm from '../components/ImagesForm';
 import ViewProduct from '../pages/ViewProduct';
 import EditProduct from '../pages/EditProduct';
+import EditMarca from '../pages/EditMarca';
 
 
 // import BadgeNew from '../pages/BadgeNew';
@@ -36,6 +36,7 @@ function App() {
           <Route exact path="/marcas" component={Marcas} />
           <Route exact path="/categoria/agregar" component={NewCategoria} />
           <Route exact path="/marca/agregar" component={NewMarca} />
+          <Route exact path="/marca/editar/:id" component={EditMarca} />
           {/* <Route component={NotFound} /> */}
         </Switch>
       </Layout>

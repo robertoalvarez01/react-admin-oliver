@@ -7,8 +7,8 @@ class MarcasListItem extends React.Component {
   render() {
     return (
       <tr>
-        <th scope="row">{this.props.marca._id}</th>
-        <td>{this.props.marca.descripcion}</td>
+        <th scope="row">{this.props.marca.idMarca}</th>
+        <td>{this.props.marca.marca}</td>
         <td>Editar - Eliminar</td>
       </tr>
     );
@@ -34,7 +34,7 @@ class MarcasList extends React.Component {
             <tbody>
             {this.props.marcas.map(marca => {
                 return (
-                    <MarcasListItem key={marca._id} marca={marca} />
+                    <MarcasListItem key={marca.idMarca} marca={marca} />
                 );
             })}
             </tbody>

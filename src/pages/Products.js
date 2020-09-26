@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import ProductList from "../components/ProductList";
 import config from '../config/config';
 
@@ -22,7 +20,7 @@ class Products extends React.Component {
     if (adminUser === null) {
       this.props.history.push('/ingresar');
     }
-    const administrador = JSON.parse(localStorage.getItem('administrador'));
+    const administrador = JSON.parse(adminUser);
     var myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
 
@@ -33,11 +31,9 @@ class Products extends React.Component {
     };
 
     fetch(`${config.url}/subproducto`, requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
-        const resultados = JSON.parse(result);
-        console.log(resultados) // SACAR ESTA LINEA DESPUES!!!!
-        this.setState({data : resultados.productos})
+        this.setState({data : result.data})
     })
     .catch(error => console.log('error', error));
   }

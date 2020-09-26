@@ -42,10 +42,9 @@ export default class Home extends Component {
 		};
 
 		fetch(`${config.url}/login`, requestOptions)
-		.then(response => response.text())
+		.then(response => response.json())
 		.then(result => {
-			const dataUser = JSON.parse(result);
-			if (!dataUser.ok || dataUser.usuario.role !== "ADMIN_ROLE") {
+			if (!result.ok || result.usuario.admin!==1) {
 				return Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
@@ -55,12 +54,12 @@ export default class Home extends Component {
 
 			Swal.fire(
 				'Ingreso exitoso!',
-				'Bienvenido '+dataUser.usuario.nombre+', no olvides cerrar sesion cuando termines...',
+				'Bienvenido '+result.usuario.nombre+', no olvides cerrar sesion cuando termines...',
 				'success'
-			)
-
-			localStorage.setItem('administrador', result);
-			this.props.history.push('/');
+			).then(()=>{
+				localStorage.setItem('administrador', JSON.stringify(result));
+				window.location.assign('/');
+			})
 		})
 		.catch(error => console.log('error', error));
 	};

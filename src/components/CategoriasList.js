@@ -7,8 +7,8 @@ class CategoriasListItem extends React.Component {
   render() {
     return (
       <tr>
-        <th scope="row">{this.props.categoria._id}</th>
-        <td>{this.props.categoria.categoria.descripcion+" - "+this.props.categoria.descripcion}</td>
+        <th scope="row">{this.props.categoria.idCategoria}</th>
+        <td>{this.props.categoria.categoria}</td>
         <td>Editar - Eliminar</td>
       </tr>
     );
@@ -16,12 +16,6 @@ class CategoriasListItem extends React.Component {
 }
 
 class CategoriasList extends React.Component {
-    componentDidMount(){
-		const adminUser = localStorage.getItem('administrador');
-		if (adminUser === null) {
-			this.props.history.push('/ingresar');
-		}
-	}
   render() {
     return (
         <div className="mx-3 mt-3">
@@ -40,7 +34,7 @@ class CategoriasList extends React.Component {
             <tbody>
             {this.props.categorias.map(categoria => {
                 return (
-                    <CategoriasListItem key={categoria._id} categoria={categoria} />
+                    <CategoriasListItem key={categoria.idCategoria} categoria={categoria} />
                 );
             })}
             </tbody>

@@ -6,33 +6,29 @@ import config from '../config/config';
 class Marcas extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       data: [],
     };
   }
 
   componentDidMount() {
-    const adminUser = localStorage.getItem('administrador');
-    if (adminUser === null) {
+    const administrador = JSON.parse(localStorage.getItem('administrador'));
+    if (administrador === null) {
       this.props.history.push('/ingresar');
     }
-    const administrador = JSON.parse(localStorage.getItem('administrador'));
     var myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
 
     var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
     };
 
     fetch(`${config.url}/marca`, requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
-        const resultados = JSON.parse(result);
-        console.log(resultados) // SACAR ESTA LINEA DESPUES!!!!
-        this.setState({data : resultados.marcas})
+        this.setState({data : result.data})
     })
     .catch(error => console.log('error', error));
   }

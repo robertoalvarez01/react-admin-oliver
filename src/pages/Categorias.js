@@ -13,13 +13,12 @@ class Categorias extends React.Component {
   }
 
   componentDidMount() {
-    const adminUser = localStorage.getItem('administrador');
-    if (adminUser === null) {
-        this.props.history.push('/ingresar');
-    }
-    const administrador = JSON.parse(localStorage.getItem('administrador'));
+    const adminUser = JSON.parse(localStorage.getItem('administrador'));
+		if (adminUser === null || !adminUser.usuario.admin) {
+			window.location.assign('/ingresar');
+		}
     var myHeaders = new Headers();
-    myHeaders.append("token", administrador.token);
+    myHeaders.append("token", adminUser.token);
 
     var requestOptions = {
     method: 'GET',
@@ -28,11 +27,9 @@ class Categorias extends React.Component {
     };
 
     fetch(`${config.url}/subcategoria`, requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
-        const resultados = JSON.parse(result);
-        console.log(resultados) // SACAR ESTA LINEA DESPUES!!!!
-        this.setState({data : resultados.categorias})
+        this.setState({data : result.data})
     })
     .catch(error => console.log('error', error));
   }

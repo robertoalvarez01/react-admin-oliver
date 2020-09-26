@@ -1,0 +1,44 @@
+[
+    {
+        "id":1,
+        "titulo":"Productos",
+        "subtitulo":"Administrá ahora tus productos",
+        "boton":"Administrar",
+        "url":"/productos"
+    },
+    {
+        "id":2,
+        "titulo":"Subproductos",
+        "subtitulo":"Administrá la seccion subproductos",
+        "boton":"Administrar",
+        "url":"/subproductos"
+    },
+    {
+        "id":3,
+        "titulo":"Categorias",
+        "subtitulo":"Administrá ahora las categorias",
+        "boton":"Administrar",
+        "url":"/categorias"
+    },
+    {
+        "id":4,
+        "titulo":"Subcategorias",
+        "subtitulo":"Administrar subcategorias",
+        "boton":"Administrar",
+        "url":"/subcategorias"
+    },
+    {
+        "id":5,
+        "titulo":"Marcas",
+        "subtitulo":"Administra tus casos marcas",
+        "boton":"Administrar",
+        "url":"marcas"
+    },
+    {
+        "id":6,
+        "titulo":"Tamaños",
+        "subtitulo":"Administrá ahora los tamaños",
+        "boton":"Administrar",
+        "url":"/tamaños"
+    }
+]

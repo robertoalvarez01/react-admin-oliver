@@ -6,7 +6,7 @@ import config from '../config/config';
 import CategoriaForm from '../components/CategoriaForm';
 const Swal = require('sweetalert2');
 
-class EditMarca extends React.Component {
+class EditCategoria extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -93,4 +93,4 @@ class EditMarca extends React.Component {
     }
 }
 
-export default EditMarca;
+export default EditCategoria;

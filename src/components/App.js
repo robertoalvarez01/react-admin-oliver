@@ -14,6 +14,7 @@ import Probe from '../components/Probe';
 import ViewProduct from '../pages/ViewProduct';
 import EditProduct from '../pages/EditProduct';
 import EditMarca from '../pages/EditMarca';
+import EditCategoria from '../pages/EditCategoria';
 
 
 // import BadgeNew from '../pages/BadgeNew';
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/producto/agregar" component={NewProduct} />
           <Route exact path="/productos" component={Products} />
           <Route exact path="/categorias" component={Categorias} />
+          <Route exact path="/categoria/editar/:id" component={EditCategoria} />
           <Route exact path="/marcas" component={Marcas} />
           <Route exact path="/categoria/agregar" component={NewCategoria} />
           <Route exact path="/marca/agregar" component={NewMarca} />

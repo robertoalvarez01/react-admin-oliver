@@ -37,7 +37,7 @@ export default class Home extends Component {
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link className="dropdown-item" to="/productos">Productos</Link>
-                  <Link className="dropdown-item" to="/">Subproductos</Link>
+                  <Link className="dropdown-item" to="/subproductos">Subproductos</Link>
                 </div>
               </li>
               <li className="nav-item dropdown">

@@ -18,6 +18,9 @@ import EditCategoria from '../pages/EditCategoria';
 import SubCategorias from '../pages/Subcategorias';
 import NewSubCategoria from '../pages/NewSubCategoria';
 import EditSubCategoria from '../pages/EditSubCategoria';
+import SubProducto from '../pages/SubProducto';
+import NewSubProducto from '../pages/NewSubProducto';
+import EditSubProducto from '../pages/EditSubProducto'
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -32,16 +35,24 @@ function App() {
           <Route exact path="/prueba" component={Probe} /> {/* Retirar esta linea despues... */}
           {/*}<Route exact path="/imagen/:productId" component={imageForm} />{*/}
           <Route exact path="/describirProducto/:productId" component={ViewProduct} />
-          <Route exact path="/producto/editar/:productId" component={EditProduct} />
-          <Route exact path="/producto/agregar" component={NewProduct} />
+
+          <Route exact path="/subproductos" component={SubProducto} />
+          <Route exact path="/subproducto/agregar" component={NewSubProducto} />
+          <Route exact path="/subproducto/editar/:id" component={EditSubProducto} />
+
           <Route exact path="/productos" component={Products} />
+          <Route exact path="/producto/agregar" component={NewProduct} />
+          <Route exact path="/producto/editar/:productId" component={EditProduct} />
+
           <Route exact path="/categorias" component={Categorias} />
+          <Route exact path="/categoria/agregar" component={NewCategoria} />
           <Route exact path="/categoria/editar/:id" component={EditCategoria} />
+
           <Route exact path="/subcategorias" component={SubCategorias} />
           <Route exact path="/subcategoria/agregar" component={NewSubCategoria} />
           <Route exact path="/subcategoria/editar/:id" component={EditSubCategoria} />
+
           <Route exact path="/marcas" component={Marcas} />
-          <Route exact path="/categoria/agregar" component={NewCategoria} />
           <Route exact path="/marca/agregar" component={NewMarca} />
           <Route exact path="/marca/editar/:id" component={EditMarca} />
           {/* <Route component={NotFound} /> */}

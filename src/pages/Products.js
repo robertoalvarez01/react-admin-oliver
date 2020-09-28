@@ -1,62 +1,63 @@
 import React from 'react';
+import Loader from '../components/Loader';
 import ProductList from "../components/ProductList";
 import config from '../config/config';
-
-// import './styles/Badges.css';
-// import confLogo from '../images/badge-header.svg';
-// import BadgesList from '../components/BadgesList';
+import {authentication,requestDelete,getData} from '../helpers/helpers';
+const Swal = require('sweetalert2');
 
 class Products extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       data: [],
+      loading:false,
+      error:null
     };
   }
 
   componentDidMount() {
-    const adminUser = localStorage.getItem('administrador');
-    if (adminUser === null) {
-      this.props.history.push('/ingresar');
-    }
-    const administrador = JSON.parse(adminUser);
-    var myHeaders = new Headers();
-    myHeaders.append("token", administrador.token);
-
-    var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-    };
-
-    fetch(`${config.url}/subproducto`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        this.setState({data : result.data})
-    })
-    .catch(error => console.log('error', error));
+    this.setState({...this.state,loading:true});
+    authentication();
+    this.getProductos();
   }
 
-//   componentDidUpdate(prevProps, prevState) {
-//     console.log({
-//       prevProps: prevProps,
-//       prevState: prevState,
-//     });
+  async getProductos(){
+    try {
+      const data = await getData(`${config.url}/producto`);
+      this.setState({...this.state,data:data.data,loading:false});
+    } catch (error) {
+      this.setState({...this.state,error,loading:false})
+    }
+  }
 
-//     console.log({
-//       props: this.props,
-//       state: this.state,
-//     });
-//   }
-
-  componentWillUnmount() {
+  delete(id){
+    Swal.fire({
+      title: '¿Seguro quieres eliminar el producto?',
+      text: "Esta accción no se puede deshacer",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        await requestDelete(`${config.url}/producto/${id}`);
+        Swal.fire(
+          'Eliminado',
+          'Recurso eliminado',
+          'success'
+        ).then(()=>{
+            window.location.assign('/productos');
+        })
+      }
+    })
   }
 
   render() {
     return (
+      (this.state.loading)?<Loader/>:
       <React.Fragment>
-        <ProductList products={this.state.data} />
+        <ProductList products={this.state.data} delete={this.delete}/>
       </React.Fragment>
     );
   }

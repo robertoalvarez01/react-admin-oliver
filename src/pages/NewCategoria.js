@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication,getData} from '../helpers/helpers';
+import {authentication} from '../helpers/helpers';
 import CategoriaForm from '../components/CategoriaForm';
 import config from '../config/config';
 import Loader from '../components/Loader';

@@ -1,88 +1,89 @@
 import React from 'react';
-import config from '../config/config';
 
 class ProductForm extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            categorias: [],
-            marcas: []
-        };
-    }
   render() {
     return (
       <div className="container bg-light border rounded p-4"> 
         <form onSubmit={this.props.onSubmit}>
-          <div className="form-group">
-            <label>Nombre del producto: (obligatorio)</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="nombre"
-              value={this.props.formValues.nombre}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Precio por unidad: (obligatorio)</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="number"
-              name="precioUni"
-              value={this.props.formValues.precioUni}
-            />
-          </div>
-
-          <div className="form-group">
-              <label>Peso del producto: </label>
+          <div className="row">
+            <div className="form-group col-12 col-md-6">
+              <label>Nombre del producto: (obligatorio)</label>
               <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="number"
-              name="peso"
-              value={this.props.formValues.peso}
-            />
-          </div>
+                required
+                onChange={this.props.onChange}
+                className="form-control"
+                type="text"
+                name="producto"
+                defaultValue={this.props.formValues.producto}
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Stock actual: (obligatorio)</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="number"
-              name="stock"
-              value={this.props.formValues.stock}
-            />
-          </div>
+            <div className="form-group col-12 col-md-6">
+              <label>Precio por unidad: (no es obligatorio)</label>
+              <input
+                required
+                onChange={this.props.onChange}
+                className="form-control"
+                type="number"
+                step="any"
+                name="precioUnidad"
+                value={this.props.formValues.precioUnidad}
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Stock minimo para enviar un alerta de reposición: (obligatorio)</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="number"
-              name="minimo"
-              value={this.props.formValues.minimo}
-            />
-          </div>
+            <div className="form-group col-12 col-md-4">
+              <label>Categoria:</label>
+              <select required className="form-control" name="idCategoria" defaultValue={this.props.formValues.idCategoria} onChange={this.props.onChange}>
+                {this.props.categorias.map(cat=>(
+                  <option value={cat.idCategoria} key={cat.idCategoria}>{cat.categoria}</option>
+                ))}
+              </select>
+            </div>
 
-          <div className="form-group">
-            <label>Codigo de barra: (no es obligatorio)</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="codigoBarra"
-              value={this.props.formValues.codigoBarra}
-            />
-          </div>
+            <div className="form-group col-12 col-md-4">
+            <label>Marca:</label>
+              <select required className="form-control" name="idMarca" defaultValue={this.props.formValues.idMarca} onChange={this.props.onChange}>
+                {this.props.marcas.map(mk=>(
+                  <option value={mk.idMarca} key={mk.idMarca}>{mk.marca}</option>
+                ))}
+              </select>
+            </div>
 
-          <button type="submit" className="btn btn-outline-success btn-block">
-            Guardar
-          </button>
+            <div className="form-group col-12 col-md-4">
+            <label>Estado:</label>
+              <select required className="form-control" name="disponible" defaultValue={this.props.formValues.disponible} onChange={this.props.onChange}>
+                <option value="0">No disponible</option>
+                <option value="1">Disponible</option>
+              </select>
+            </div>
+
+            <div className="form-group col-12">
+                <label>Descripción: </label>
+                <textarea
+                required
+                onChange={this.props.onChange}
+                className="form-control"
+                rows="8"
+                name="descripcionBasica"
+                defaultValue={this.props.formValues.descripcionBasica}
+              ></textarea>
+            </div>
+
+            <div className="form-group col-12">
+              <label>Informacion nutricional:</label>
+              <textarea
+                required
+                onChange={this.props.onChange}
+                className="form-control"
+                rows="12"
+                name="descripcion"
+                defaultValue={this.props.formValues.descripcion}
+              ></textarea>
+            </div>
+            <button type="submit" className="btn btn-outline-success btn-block">
+              Guardar
+            </button>
+          </div>
         </form>
       </div>
     );

@@ -1,104 +1,149 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-
+import Loader from '../components/Loader';
 import ProductForm from '../components/ProductForm';
 import config from '../config/config';
-
+import {authentication, getData} from '../helpers/helpers';
 const Swal = require('sweetalert2');
+
 class NewProduct extends React.Component {
-  componentDidMount(){
-		const adminUser = localStorage.getItem('administrador');
-		if (adminUser === null) {
-			this.props.history.push('/ingresar');
-		}
-	}
-  state = {
-    form: {
-      nombre: '',
-      precioUni: '',
-      categoria: '',
-      descripcionBasica: '',
-      marca: '',
-      descripcion: '',
-      stock: '',
-      minimo: '',
-      codigoBarra: '',
-    },
-  };
+  constructor(props) {
+    super(props);
+    this.state={
+      formValues:{
+        producto: '',
+        precioUnidad: '',
+        descripcion: '',
+        descripcionBasica: '',
+        disponible: 1,
+        idCategoria: 0,
+        idMarca: 0
+      },
+      loading:false,
+      error:null,
+      categorias:[],
+      marcas:[]
+    }
+  }
+
+  async componentDidMount(){
+    try {
+      authentication();
+      this.setState({
+        ...this.state,
+        loading:true
+      });
+      await this.getCategorias();
+      await this.getMarcas();
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        error,
+        loading:false
+      })
+    } 
+  }
+  
+  async getCategorias(){
+    try {
+      const categorias = await getData(`${config.url}/categorias`);
+      return this.setState({
+        ...this.state,
+        categorias:categorias.data,
+        formValues:{
+          ...this.state.formValues,
+          idCategoria:categorias.data[0].idCategoria
+        }
+      })
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        error,
+        loading:false
+      })
+    }
+  }
+
+  async getMarcas(){
+    try {
+      const marcas = await getData(`${config.url}/marca`);
+      return this.setState({
+        ...this.state,
+        marcas:marcas.data,
+        formValues:{
+          ...this.state.formValues,
+          idMarca:marcas.data[0].idMarca
+        },
+        loading:false
+      })
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        error,
+        loading:false
+      })
+    }
+  }
 
   handleChange = e => {
     this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.name]: e.target.value,
-      },
+      ...this.state,
+      formValues: {
+        ...this.state.formValues,
+        [e.target.name]: e.target.value
+      }
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({...this.state,loading:true});
     const administrador = JSON.parse(localStorage.getItem('administrador'));
     var myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("nombre", this.state.form.nombre);
-    urlencoded.append("precioUni", this.state.form.precioUni);
-    urlencoded.append("categoria", this.state.form.categoria);
-    urlencoded.append("descripcionBasica", this.state.form.descripcionBasica);
-    urlencoded.append("marca", this.state.form.marca);
-    urlencoded.append("descripcion", this.state.form.descripcion);
-    urlencoded.append("stock", this.state.form.stock);
-    urlencoded.append("minimo", this.state.form.minimo);
-    urlencoded.append("codigoBarra", this.state.form.minimo);
-    
+    myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
-      body: urlencoded,
+      body: JSON.stringify(this.state.formValues),
       redirect: 'follow'
     };
     
     fetch(`${config.url}/producto`, requestOptions)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(resultado => {
-        const result = JSON.parse(resultado);
-        console.log(result);
-        if (!result.ok) {
+        this.setState({...this.state,loading:false});
+        if (resultado.info.code) {
             return Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: result.err.message
+                text: resultado.info.code
             })
         }
-
         Swal.fire(
             'Guardado exitoso',
-            'Se guardó '+ result.producto.nombre + ' de manera exitosa!',
+            'Se guardó el producto de manera exitosa!',
             'success'
-        )
-
-        this.props.history.push('/productos');
+        ).then(()=>this.props.history.push('/productos'));
       })
-      .catch(error => console.log('error', error));
+      .catch(error => this.setState({...this.state,error,loading:false}));
   };
 
   render() {
     return (
+      (this.state.loading)?<Loader/>:
       <React.Fragment>
-        {/* <div className="BadgeNew__hero">
-          <img className="img-fluid" src={header} alt="Logo" />
-        </div> */}
-
         <div className="container mt-4 p-2">
-            <Link to="/productos" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
-            <p className="text-center h3 mb-2">Agregar producto</p>
+            <div className="row justify-content-between px-3">
+              <p className="text-center h3 mb-2">Agregar producto</p>
+              <Link to="/productos" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
+            </div>
             <ProductForm
-            onChange={this.handleChange}
-            formValues={this.state.form}
-            onSubmit={this.handleSubmit}
+              onChange={this.handleChange}
+              formValues={this.state.formValues}
+              categorias={this.state.categorias}
+              marcas={this.state.marcas}
+              onSubmit={this.handleSubmit}
             />
         </div>
       </React.Fragment>

@@ -1,97 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import config from '../config/config';
-// import './styles/BadgesList.css';
-const Swal = require('sweetalert2');
 
 class ProductListItem extends React.Component {
-  handleDelete (idProduct){
-    console.log(idProduct);
-    const administrador = JSON.parse(localStorage.getItem('administrador'));
-    Swal.fire({
-      title: 'Estas seguro?',
-      text: "Quieres eliminar este producto?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si!'
-    }).then((result) => {
-      if (result.value) {
-        var myHeaders = new Headers();
-        myHeaders.append("token", administrador.token);
-
-        var requestOptions = {
-          method: 'DELETE',
-          headers: myHeaders,
-          redirect: 'follow'
-        };
-        console.log(idProduct)
-        fetch(`${config.url}/subproducto/${idProduct}`, requestOptions)
-          .then(response => response.text())
-          .then(result => {
-            const dataProduct = JSON.parse(result);
-            console.log(dataProduct);
-            if (!dataProduct.ok) {
-                return Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ocurrió un error inesperado, intente denuevo'
-                });				  
-            }
-
-            Swal.fire(
-                'Listo!',
-                'Se ha eliminado su producto!',
-                'success'
-            )
-            this.props.history.push('/productos');
-          })
-          .catch(error => console.log('error', error));
-      }
-    })
-  }
   render() {
     return (
       <tr>
-        <th scope="row">{this.props.producto.nombre}</th>
-        <td>{this.props.producto.stock}</td>
-        <td>{this.props.producto.codigoBarra}</td>
-       <td>{this.props.producto.precioUni}</td>
-        <td><Link to={`/describirProducto/${this.props.producto._id}`}>Ver</Link> - <Link to={`/editarProducto/${this.props.producto._id}`}>Editar</Link> - <Link onClick={() => this.handleDelete(this.props.producto._id)}>Eliminar</Link></td>
+        <th scope="row">{this.props.producto.producto}</th>
+        <td>{this.props.producto.marca}</td>
+        <td>{this.props.producto.categoria}</td>
+        <td>
+          <button className="btn btn-outline-danger mx-1" onClick={()=>this.props.delete(this.props.producto.idProducto)}>
+            <i className="fas fa-trash-alt"></i>
+          </button>
+          <Link className="btn btn-outline-warning mx-1" to={`/producto/editar/${this.props.producto.idProducto}`}>
+            <i className="fas fa-pen"></i>
+          </Link>
+        </td>
       </tr>
     );
   }
 }
 
 class ProductList extends React.Component {
-  componentDidMount(){
-		const adminUser = localStorage.getItem('administrador');
-		if (adminUser === null) {
-			this.props.history.push('/ingresar');
-		}
-	}
   render() {
     return (
-        <div className="mx-3 mt-3">
-            <div>
-                <Link to="/producto/agregar" className="btn btn-outline-success float-right mb-2">Agregar producto</Link>
-                <Link to="/" className="btn btn-outline-danger float-right mb-2 mr-2">Volver al inicio</Link>
-            </div>
-            <table className="table">
+        <div className="container mt-3">
+            <table className="table table-hover text-center">
                 <thead className="thead-dark">
                     <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">stock</th>
-                    <th scope="col">Codigo de barra</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Acciones</th>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Marca</th>
+                      <th scope="col">Categoria</th>
+                      <th scope="col">
+                        <Link to="/producto/agregar" className="btn btn-outline-success">Agregar producto</Link>
+                      </th>
                     </tr>
                 </thead>
             <tbody>
             {this.props.products.map(product => {
                 return (
-                    <ProductListItem key={product._id} producto={product} />
+                    <ProductListItem key={product.idProducto} producto={product} delete={this.props.delete}/>
                 );
             })}
             </tbody>

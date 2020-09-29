@@ -1,8 +1,5 @@
 import React from 'react';
 class CategoriaForm extends React.Component {
-  constructor(props) {
-      super(props);
-  }
   render() {
     return (
         <div className="container bg-light border rounded p-4"> 

@@ -1,9 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 class CategoriaForm extends React.Component {
-  constructor(props) {
-      super(props);
-  }
   render() {
     return (
         (this.props.formValues === undefined)?null:

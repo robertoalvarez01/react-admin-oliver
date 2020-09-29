@@ -21,6 +21,9 @@ import EditSubCategoria from '../pages/EditSubCategoria';
 import SubProducto from '../pages/SubProducto';
 import NewSubProducto from '../pages/NewSubProducto';
 import EditSubProducto from '../pages/EditSubProducto'
+import Tamaño from '../pages/Tamaño';
+import NewTamaño from '../pages/NewTamaño';
+import EditTamaño from '../pages/EditTamaño';
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -55,6 +58,10 @@ function App() {
           <Route exact path="/marcas" component={Marcas} />
           <Route exact path="/marca/agregar" component={NewMarca} />
           <Route exact path="/marca/editar/:id" component={EditMarca} />
+
+          <Route exact path="/tamaños" component={Tamaño} />
+          <Route exact path="/tamaño/agregar" component={NewTamaño} />
+          <Route exact path="/tamaño/editar/:id" component={EditTamaño} />
           {/* <Route component={NotFound} /> */}
         </Switch>
       </Layout>

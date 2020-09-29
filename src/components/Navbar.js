@@ -50,10 +50,10 @@ export default class Home extends Component {
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/marcas" tabIndex="-1" aria-disabled="true">Marcas</Link>
+                <Link className="nav-link" to="/marcas">Marcas</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link disabled" to="/tamaños" tabIndex="-1" aria-disabled="true">Tamaños</Link>
+                <Link className="nav-link" to="/tamaños">Tamaños</Link>
               </li>
               <li className="nav-item">
                 {(this.state.administrador!==null)?

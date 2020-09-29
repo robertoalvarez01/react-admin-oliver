@@ -45,7 +45,7 @@ class Tamaño extends React.Component {
   async delete(id){
     await Swal.fire({
       title: '¿Seguro quieres eliminar el tamaño?',
-      text: "Esta accción no se puede deshacer",
+      text: "Puede que existan productos con este tamaño, serán eliminados tambien",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

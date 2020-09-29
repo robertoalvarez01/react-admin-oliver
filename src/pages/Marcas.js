@@ -47,7 +47,7 @@ class Marcas extends React.Component {
   delete(id){
     Swal.fire({
       title: '¿Seguro quieres eliminar la marca?',
-      text: "Esta accción no se puede deshacer",
+      text: "Puede que existan productos con esta marca, serán eliminados tambien",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -69,7 +69,7 @@ class Marcas extends React.Component {
 
   render() {
     return (
-      (this.state.loading && this.state.data.length)?<Loader/>:
+      (this.state.loading)?<Loader/>:
       <React.Fragment>
         <MarcasList marcas={this.state.data} delete={this.delete}/>
       </React.Fragment>

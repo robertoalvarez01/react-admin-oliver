@@ -11,9 +11,12 @@ class SubProductos extends React.Component {
     this.state = {
       data: [],
       error:null,
-      loading:false
+      loading:false,
+      desde:1,
+      limite:50
     };
   }
+
 
   componentDidMount() {
     authentication();
@@ -26,7 +29,7 @@ class SubProductos extends React.Component {
   
   async getSubProducto(){
     try {
-      const data = await getData(`${config.url}/subproducto`);
+      const data = await getData(`${config.url}/subproducto?desde=${this.state.desde}&limite=${this.state.limite}`);
       this.setState({
         ...this.state,
         data:data.data,
@@ -62,6 +65,33 @@ class SubProductos extends React.Component {
     });
   }
 
+  async cargarMas(){
+    return new Promise((resolve,reject)=>{
+      this.setState({
+        ...this.state,
+        desde:this.state.desde+49
+      });
+      resolve();
+    }).then(()=>{
+      this.getSubProducto();
+    })
+  }
+
+  async buscarProducto(event){
+    try {
+      let key = event.target.value;
+      if(key.length===0) return this.cargarMas();
+      if(key.length<3) return;
+      const data = await getData(`${config.url}/subproductos/buscar?busqueda=${key}`);
+      this.setState({
+        ...this.state,
+        data:data.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   componentWillUnmount() {
   }
 
@@ -70,7 +100,14 @@ class SubProductos extends React.Component {
     return (
       (this.state.loading)?<Loader/>:
       <React.Fragment>
+        <div className="container pt-3">
+          <input type="text" className="form-control d-none" id="buscador" onChange={this.buscarProducto.bind(this)} placeholder="Ingrese el nombre del producto"/>
+        </div>
         <SubProductoList subproductos={this.state.data} delete={this.delete}/>
+        <div className="text-center">
+          <button className="btn btn-info mt-3 mx-2" onClick={()=>this.cargarMas(this.state.desde,this.state.limite)}>Ver más</button>
+          <button className="btn btn-warning mt-3 mx-2" onClick={()=>document.getElementById('buscador').classList.toggle('d-none')}>Buscar</button>
+        </div>
       </React.Fragment>
     );
   }

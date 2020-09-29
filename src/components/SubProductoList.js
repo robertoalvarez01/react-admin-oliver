@@ -26,7 +26,7 @@ class SubProductoListItem extends React.Component {
 class SubProductoList extends React.Component {
   render() {
     return (
-        <div className="container mt-3">
+        <div className="container mt-3" style={{'height':'80vh','overflowY':'scroll'}}>
             <table className="table text-center table-hover">
                 <thead className="thead-dark">
                     <tr>

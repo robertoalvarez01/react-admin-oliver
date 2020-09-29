@@ -1,4 +1,4 @@
-const url = 'http://localhost:3001'; // 'https://api.oliverpetshop.com.ar'; 
+const url = 'https://api.oliverpetshop.com.ar'; // 'https://api.oliverpetshop.com.ar'; 
 
 export default{
     url

@@ -1,4 +1,4 @@
-const authentication = ()=>{
+export const authentication = ()=>{
     const adminUser = JSON.parse(localStorage.getItem('administrador'));
     if (adminUser === null) {
         return window.location.assign('/ingresar');
@@ -6,7 +6,7 @@ const authentication = ()=>{
     return adminUser;
 }
 
-const requestDelete = async url=>{
+export const requestDelete = async url=>{
     try {
         const administrador = JSON.parse(localStorage.getItem('administrador'));
         let myHeaders = new Headers();
@@ -23,7 +23,7 @@ const requestDelete = async url=>{
     }
 }
 
-const getData = async url=>{
+export const getData = async url=>{
     try {
         const administrador = JSON.parse(localStorage.getItem('administrador'));
         let myHeaders = new Headers();
@@ -43,5 +43,3 @@ const getData = async url=>{
         return error;
     }
 }
-
-module.exports={authentication,requestDelete,getData}

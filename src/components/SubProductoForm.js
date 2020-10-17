@@ -6,7 +6,19 @@ const SubProductoForm = (props) => {
 
   const closeModal = ()=>setModalIsOpen(false);
   
-  const setProductoPadre = id=>{
+  const setProductoPadre = (id,producto)=>{
+    let options = [...document.querySelectorAll('#selectIdProductoPadre option')];
+    var arrayIncludes = [];
+    options.forEach(op=>{
+      arrayIncludes.push(op.value==id);
+    });
+    if(!arrayIncludes.includes(true)){
+      console.log('aca');
+      let newOption = document.createElement('option');
+      newOption.setAttribute('value',id);
+      newOption.innerHTML = producto;
+      document.getElementById('selectIdProductoPadre').appendChild(newOption);
+    }
     document.getElementById('selectIdProductoPadre').value = id;
     return closeModal();
   }

@@ -77,7 +77,7 @@ class EditSubCategoria extends React.Component {
 
     async getProductos(){
       try {
-        const data = await getData(`${config.url}/producto`);
+        const data = await getData(`${config.url}/producto?desde=1&limite=20`);
         this.setState({...this.state,productos:data.data});
       } catch (error) {
         this.setState({...this.state,error,loading:false})

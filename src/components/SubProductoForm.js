@@ -13,7 +13,6 @@ const SubProductoForm = (props) => {
       arrayIncludes.push(op.value==id);
     });
     if(!arrayIncludes.includes(true)){
-      console.log('aca');
       let newOption = document.createElement('option');
       newOption.setAttribute('value',id);
       newOption.innerHTML = producto;
@@ -28,6 +27,8 @@ const SubProductoForm = (props) => {
   }
   
   let claseContainerForm = (props.formId==='formModificarSubProducto')?'col-12 col-md-9':'col-12';
+
+
   return (
       <div className="container bg-light border rounded p-4"> 
         <form onSubmit={props.onSubmit} id={props.formId}>
@@ -58,7 +59,7 @@ const SubProductoForm = (props) => {
                 <div className="form-group col-12">
                   <div className="d-flex justify-content-between mb-2">
                     <label>Producto padre:</label>
-                    <button type="button" className="btn btn-outline-success" onClick={()=>setModalIsOpen(true)}>Buscar</button>
+                    <button type="button" disabled={true} className="btn btn-outline-success" onClick={()=>setModalIsOpen(true)}>Buscar</button>
                   </div>
                   <select required className="form-control" name="idProducto" id="selectIdProductoPadre" defaultValue={props.formValues.idProducto}>
                     <option value="">-- Seleccione el producto de referencia --</option>
@@ -102,7 +103,7 @@ const SubProductoForm = (props) => {
 
                 <div className="form-group col-12 col-md-4">
                   <label>Tamaño:</label>
-                  <select required className="form-control" name="idTamaño" onChange={props.onChange} defaultValue={props.formValues.tamaño}>
+                  <select required className="form-control" name="idTamaño" onChange={props.onChange} defaultValue={props.formValues.idTamaño}>
                     {props.tamaños.map(tm=>(
                       <option value={tm.idTamaño} key={tm.idTamaño}>{tm.tamaño}</option>
                     ))}
@@ -140,6 +141,9 @@ const SubProductoForm = (props) => {
             </button>
           </div>
         </form>
+        {
+          
+        }
         {(modalIsOpen)?<ModalBuscarProducto productos={props.productos} 
                                             closeModal={closeModal} 
                                             setProductoPadre={setProductoPadre}/>:null}

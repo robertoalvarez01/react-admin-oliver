@@ -15,14 +15,6 @@ class CategoriaForm extends React.Component {
                     required
                   />
             </div>
-            <div className="form-group">
-              <label>Categoria</label>
-              <select className="form-control" name="idCategoria" defaultValue={this.props.formValues.idCategoria} onChange={this.props.onChange}>
-                {this.props.categorias.map(categoria=>(
-                  <option key={categoria.idCategoria} value={categoria.idCategoria}>{categoria.categoria}</option>
-                ))}
-              </select>
-            </div>
             <button type="submit" className="btn btn-outline-success btn-block">
               Guardar
             </button>

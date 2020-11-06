@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication,getData} from '../helpers/helpers';
+import {authentication} from '../helpers/helpers';
 import SubCategoriaForm from '../components/SubCategoriaForm';
 import config from '../config/config';
 import Loader from '../components/Loader';
@@ -12,42 +12,14 @@ class NewSubCategoria extends React.Component {
     this.state = {
       loading:false,
       error:null,
-      categorias:[],
       formValues:{
-        subcategoria:'',
-        idCategoria:null
+        subcategoria:''
       }
     }
   }
   
   componentDidMount(){
     authentication();
-    this.setState({
-        ...this.state,
-        loading:true
-    })
-    this.getCategorias();
-  }
-
-  async getCategorias(){
-    try {
-        const data = await getData(`${config.url}/categorias`);
-        this.setState({
-            ...this.state,
-            formValues:{
-                subcategoria:'',
-                idCategoria:data.data[0].idCategoria
-            },
-            categorias:data.data,
-            loading:false
-        });
-    } catch (error) {
-        this.setState({
-            ...this.state,
-            loading:false,
-            error
-        })
-    }
   }
 
   handleChange = e => {
@@ -99,8 +71,7 @@ class NewSubCategoria extends React.Component {
         <div className="container mt-4 p-2">
               <Link to="/subcategorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
               <p className="text-center h3 mb-2">Agregar subcategoria</p>
-              <SubCategoriaForm
-              categorias={this.state.categorias} 
+              <SubCategoriaForm 
               onChange={this.handleChange}
               formValues={this.state.formValues}
               onSubmit={this.handleSubmit}/>

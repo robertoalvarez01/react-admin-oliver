@@ -12,10 +12,8 @@ class EditSubCategoria extends React.Component {
       this.state = {
         loading:false,
         error:null,
-        categorias:[],
         formValues:{
-          subcategoria:'',
-          idCategoria:null
+          subcategoria:''
         }
       }
     }
@@ -28,7 +26,6 @@ class EditSubCategoria extends React.Component {
                 loading:true
             })
             await this.getSubCategoria();
-            await this.getCategorias();
         } catch (error) {
             
         }
@@ -40,9 +37,9 @@ class EditSubCategoria extends React.Component {
             return this.setState({
                 ...this.state,
                 formValues:{
-                    subcategoria:data.data[0].subcategoria,
-                    idCategoria:data.data[0].idCategoria
-                }
+                    subcategoria:data.data[0].subcategoria
+                },
+                loading:false
             });
         } catch (error) {
             this.setState({
@@ -53,23 +50,6 @@ class EditSubCategoria extends React.Component {
         }
     }
 
-    async getCategorias(){
-      try {
-          const data = await getData(`${config.url}/categorias`);
-          return this.setState({
-              ...this.state,
-              categorias:data.data,
-              loading:false
-          });
-      } catch (error) {
-          this.setState({
-              ...this.state,
-              loading:false,
-              error
-          })
-      }
-    }
-  
     handleChange = e => {
       this.setState({
         ...this.state,
@@ -119,8 +99,7 @@ class EditSubCategoria extends React.Component {
           <div className="container mt-4 p-2">
                 <Link to="/subcategorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
                 <p className="text-center h3 mb-2">Editar subcategoria</p>
-                <SubCategoriaForm
-                categorias={this.state.categorias} 
+                <SubCategoriaForm 
                 onChange={this.handleChange}
                 formValues={this.state.formValues}
                 onSubmit={this.handleSubmit}/>

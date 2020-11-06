@@ -50,12 +50,10 @@ class EditCategoria extends React.Component {
       const administrador = JSON.parse(localStorage.getItem('administrador'));
       let myHeaders = new Headers();
       myHeaders.append("token", administrador.token);
-      myHeaders.append("Content-Type", "application/json");
       let requestOptions = {
         method: 'PUT',
         headers: myHeaders,
-        body: JSON.stringify(this.state.formValues),
-        redirect: 'follow'
+        body: new FormData(document.getElementById('form-categoria'))
       };
       fetch(`${config.url}/categoria/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
         this.setState({...this.state,loading:false});
@@ -83,6 +81,7 @@ class EditCategoria extends React.Component {
               <Link to="/categorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
               <p className="text-center h3 mb-2">Modificar categoria</p>
               <CategoriaForm
+                add={false}
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
                 formValues={this.state.formValues}

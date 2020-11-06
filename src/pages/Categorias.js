@@ -45,7 +45,7 @@ class Categorias extends React.Component {
   async delete(id){
     await Swal.fire({
       title: '¿Seguro quieres eliminar la categoría?',
-      text: "Puede que existan productos con esta categoria, serán eliminados tambien",
+      text: "Esta acción no se puede deshacer",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

@@ -37,10 +37,9 @@ class NewCategoria extends React.Component {
     const administrador = JSON.parse(localStorage.getItem('administrador'));
     let myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
-    myHeaders.append("Content-Type", "application/json");
     let requestOptions = {
       method: 'POST',
-      body: JSON.stringify(this.state.formValues),
+      body: new FormData(document.getElementById('form-categoria')),
       headers:myHeaders
     };
     fetch(`${config.url}/categoria`, requestOptions)
@@ -70,7 +69,8 @@ class NewCategoria extends React.Component {
         <div className="container mt-4 p-2">
               <Link to="/categorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
               <p className="text-center h3 mb-2">Agregar categoria</p>
-              <CategoriaForm 
+              <CategoriaForm
+              add={true} 
               onChange={this.handleChange}
               formValues={this.state.formValues}
               onSubmit={this.handleSubmit}/>

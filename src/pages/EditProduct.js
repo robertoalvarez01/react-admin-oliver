@@ -18,12 +18,14 @@ class EditProduct extends React.Component {
         descripcionBasica: '',
         disponible: 1,
         idCategoria: 0,
-        idMarca: 0
+        idMarca: 0,
+        idSubCategoria:0
       },
       loading:false,
       error:null,
       categorias:[],
-      marcas:[]
+      marcas:[],
+      subCategorias:[]
     }
   }
 
@@ -36,6 +38,7 @@ class EditProduct extends React.Component {
       });
       await this.getProducto();
       await this.getCategorias();
+      await this.getSubCategorias();
       await this.getMarcas();
     } catch (error) {
       this.setState({
@@ -58,7 +61,8 @@ class EditProduct extends React.Component {
           descripcionBasica: producto.data[0].descripcion_basica,
           disponible: producto.data[0].disponible,
           idCategoria: producto.data[0].idCategoria,
-          idMarca: producto.data[0].idMarca
+          idMarca: producto.data[0].idMarca,
+          idSubCategoria:producto.data[0].idSubCategoria
         }
       })
     } catch (error) {
@@ -76,6 +80,22 @@ class EditProduct extends React.Component {
       return this.setState({
         ...this.state,
         categorias:categorias.data
+      })
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        error,
+        loading:false
+      })
+    }
+  }
+
+  async getSubCategorias(){
+    try {
+      const subCategorias = await getData(`${config.url}/subcategoria`);
+      return this.setState({
+        ...this.state,
+        subCategorias:subCategorias.data
       })
     } catch (error) {
       this.setState({
@@ -159,7 +179,6 @@ class EditProduct extends React.Component {
         })
       });
   };
-
   render() {
     return (
       (this.state.loading)?<Loader/>:
@@ -177,6 +196,7 @@ class EditProduct extends React.Component {
               onChange={this.handleChange}
               formValues={this.state.formValues}
               categorias={this.state.categorias}
+              subCategorias={this.state.subCategorias}
               marcas={this.state.marcas}
               onSubmit={this.handleSubmit}
             />

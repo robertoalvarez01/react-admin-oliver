@@ -31,7 +31,7 @@ class ProductForm extends React.Component {
               />
             </div>
 
-            <div className="form-group col-12 col-md-4">
+            <div className="form-group col-12 col-md-3">
               <label>Categoria:</label>
               <select required className="form-control" name="idCategoria" defaultValue={this.props.formValues.idCategoria} onChange={this.props.onChange}>
                 {this.props.categorias.map(cat=>(
@@ -40,7 +40,16 @@ class ProductForm extends React.Component {
               </select>
             </div>
 
-            <div className="form-group col-12 col-md-4">
+            <div className="form-group col-12 col-md-3">
+              <label>Subcategoria:</label>
+              <select required className="form-control" name="idSubCategoria" defaultValue={this.props.formValues.idSubCategoria} onChange={this.props.onChange}>
+                {this.props.subCategorias.map(sc=>(
+                  <option value={sc.idSubCategoria} key={sc.idSubCategoria}>{sc.subcategoria}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group col-12 col-md-3">
             <label>Marca:</label>
               <select required className="form-control" name="idMarca" defaultValue={this.props.formValues.idMarca} onChange={this.props.onChange}>
                 {this.props.marcas.map(mk=>(
@@ -49,7 +58,7 @@ class ProductForm extends React.Component {
               </select>
             </div>
 
-            <div className="form-group col-12 col-md-4">
+            <div className="form-group col-12 col-md-3">
             <label>Estado:</label>
               <select required className="form-control" name="disponible" defaultValue={this.props.formValues.disponible} onChange={this.props.onChange}>
                 <option value="0">No disponible</option>

@@ -17,11 +17,13 @@ class NewProduct extends React.Component {
         descripcionBasica: '',
         disponible: 1,
         idCategoria: 0,
-        idMarca: 0
+        idMarca: 0,
+        idSubCategoria:0
       },
       loading:false,
       error:null,
       categorias:[],
+      subCategorias:[],
       marcas:[]
     }
   }
@@ -34,6 +36,7 @@ class NewProduct extends React.Component {
         loading:true
       });
       await this.getCategorias();
+      await this.getSubCategorias();
       await this.getMarcas();
     } catch (error) {
       this.setState({
@@ -53,6 +56,26 @@ class NewProduct extends React.Component {
         formValues:{
           ...this.state.formValues,
           idCategoria:categorias.data[0].idCategoria
+        }
+      })
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        error,
+        loading:false
+      })
+    }
+  }
+
+  async getSubCategorias(){
+    try {
+      const subCategorias = await getData(`${config.url}/subcategoria`);
+      return this.setState({
+        ...this.state,
+        subCategorias:subCategorias.data,
+        formValues:{
+          ...this.state.formValues,
+          idSubCategoria:subCategorias.data[0].idSubCategoria
         }
       })
     } catch (error) {
@@ -142,6 +165,7 @@ class NewProduct extends React.Component {
               onChange={this.handleChange}
               formValues={this.state.formValues}
               categorias={this.state.categorias}
+              subCategorias={this.state.subCategorias}
               marcas={this.state.marcas}
               onSubmit={this.handleSubmit}
             />

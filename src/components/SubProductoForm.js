@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ModalBuscarProducto from './ModalBuscarProducto';
-import config from '../config/config';
 const SubProductoForm = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -134,7 +133,7 @@ const SubProductoForm = (props) => {
             </div>
             {props.formId === 'formModificarSubProducto'?
             <div className="col-12 col-md-3 text-right">
-              <img src={`${config.url}/img/${props.formValues.foto}`} className="img-fluid" alt={props.formValues.subProducto} style={{'height':"350px"}}/> 
+              <img src={props.formValues.foto} className="img-fluid" alt={props.formValues.subProducto} style={{'height':"350px"}}/> 
             </div>:null}
             <button type="submit" className="btn btn-outline-success btn-block">
               Guardar

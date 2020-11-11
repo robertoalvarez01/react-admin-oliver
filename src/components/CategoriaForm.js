@@ -1,5 +1,4 @@
 import React from 'react';
-import config from '../config/config'
 class CategoriaForm extends React.Component {
   habilitarInputfile=event=>{
     document.getElementById('input-file-categoria').classList.toggle('d-none');
@@ -10,7 +9,7 @@ class CategoriaForm extends React.Component {
         <div className="container bg-light border rounded p-4"> 
           <form onSubmit={this.props.onSubmit} id="form-categoria">
             <div className="form-group">
-              {(!this.props.add)?<img src={`${config.url}/img/${this.props.formValues.foto}`} width="80px" height="80px" className="d-block"/>:null}
+              {(!this.props.add)?<img src={this.props.formValues.foto} alt={this.props.formValues.categoria} width="80px" height="80px" className="d-block"/>:null}
               <label>Categoria</label>
               <input
                     onChange={this.props.onChange}

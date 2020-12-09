@@ -41,7 +41,7 @@ export default class Home extends Component {
                 </div>
               </li>
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Categorias
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -54,6 +54,12 @@ export default class Home extends Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/tamaños">Tamaños</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/legales">Legales</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/zonas-envio">Zonas de envío</Link>
               </li>
               <li className="nav-item">
                 {(this.state.administrador!==null)?

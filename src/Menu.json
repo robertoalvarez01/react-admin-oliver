@@ -40,5 +40,19 @@
         "subtitulo":"Administrá ahora los tamaños",
         "boton":"Administrar",
         "url":"/tamaños"
+    },
+    {
+        "id":7,
+        "titulo":"Legales",
+        "subtitulo":"Actualizar terminos y legales",
+        "boton":"Administrar",
+        "url":"/legales"
+    },
+    {
+        "id":8,
+        "titulo":"Zonas",
+        "subtitulo":"Administrar zonas de envío",
+        "boton":"Administrar",
+        "url":"/zonas-envio"
     }
 ]

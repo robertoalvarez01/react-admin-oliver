@@ -24,6 +24,8 @@ import EditSubProducto from '../pages/EditSubProducto'
 import Tamaño from '../pages/Tamaño';
 import NewTamaño from '../pages/NewTamaño';
 import EditTamaño from '../pages/EditTamaño';
+import Legales from '../pages/Legales';
+import EditLegales from '../pages/EditLegales';
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -62,6 +64,14 @@ function App() {
           <Route exact path="/tamaños" component={Tamaño} />
           <Route exact path="/tamaño/agregar" component={NewTamaño} />
           <Route exact path="/tamaño/editar/:id" component={EditTamaño} />
+
+          <Route exact path="/legales" component={Legales} />
+          <Route exact path="/legales/editar" component={EditLegales} />
+
+          <Route exact path="/zonas-envio" component={Tamaño} />
+          <Route exact path="/zonas-envio/editar/:id" component={NewTamaño} />
+          <Route exact path="/zonas-envio/agregar" component={NewTamaño} />
+          
           {/* <Route component={NotFound} /> */}
         </Switch>
       </Layout>

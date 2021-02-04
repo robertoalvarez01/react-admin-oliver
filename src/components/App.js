@@ -29,6 +29,7 @@ import EditLegales from '../pages/EditLegales';
 import Zonas from '../pages/Zonas';
 import NewZona from '../pages/NewZona';
 import EditZona from '../pages/EditZona'
+import Envios from '../pages/envios';
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -74,6 +75,11 @@ function App() {
           <Route exact path="/zonas-envio" component={Zonas} />
           <Route exact path="/zonas-envio/editar/:id" component={EditZona} />
           <Route exact path="/zonas-envio/agregar" component={NewZona} />
+          
+          <Route exact path="/envios" component={Envios} />
+          <Route exact path="/envios/editar/:id" component={Envios} />
+          <Route exact path="/envios/agregar" component={Envios} />
+          
           
           {/* <Route component={NotFound} /> */}
         </Switch>

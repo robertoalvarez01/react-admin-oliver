@@ -54,5 +54,12 @@
         "subtitulo":"Administrar zonas de envío",
         "boton":"Administrar",
         "url":"/zonas-envio"
+    },
+    {
+        "id":9,
+        "titulo":"Envíos",
+        "subtitulo":"Ver estado de envíos",
+        "boton":"Ingresar",
+        "url":"/envios"
     }
 ]

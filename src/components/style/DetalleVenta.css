@@ -1,0 +1,5 @@
+.detalleVenta ul{
+    border-bottom:solid 3px #FFB347;
+}
+
+.detalleVenta span{font-weight: bold;}

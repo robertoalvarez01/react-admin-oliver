@@ -43,3 +43,24 @@ export const getData = async url=>{
         return error;
     }
 }
+
+export const requestPut = async url=>{
+    try {
+        const administrador = JSON.parse(localStorage.getItem('administrador'));
+        let myHeaders = new Headers();
+        myHeaders.append("token", administrador.token);
+
+        let requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+    
+        const data = await fetch(url, requestOptions).then(response => response.json()).then(result => {
+            return result;
+        });
+        return data;
+    } catch (error) {
+        return error;
+    }
+}

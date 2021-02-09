@@ -3,8 +3,6 @@ import Loader from '../components/Loader';
 import LegalesList from '../components/LegalesList';
 import config from '../config/config';
 import {authentication,getData} from '../helpers/helpers';
-const Swal = require('sweetalert2');
-
 export default class Legales extends Component {
     constructor(props) {
         super(props);

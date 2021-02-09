@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EnvioList from '../components/EnvioList';
 import Loader from '../components/Loader';
 import config from '../config/config';
-import {authentication,requestDelete,getData} from '../helpers/helpers';
+import {authentication,requestDelete,requestPut,getData} from '../helpers/helpers';
 import Modal from '../components/Modal';
 import DetalleVenta from '../components/DetalleVenta';
 const Swal = require('sweetalert2');
@@ -21,6 +21,7 @@ const Envios = () => {
     
     const getEnvios = async()=>{
       try {
+        setLoading(true);
         const data = await getData(`${config.url}/envios`);
         setData(data.data);
         setLoading(false);
@@ -63,7 +64,7 @@ const Envios = () => {
         setDataModal(dataVenta);
     }
 
-    const cambiarEstado = id=>{
+    const cambiarEstadoEntregado = id=>{
         Swal.fire({
             title: '¿Seguro quieres cambiar el estado del envío?',
             text: "Esta acción se puede revertir",
@@ -74,7 +75,36 @@ const Envios = () => {
             confirmButtonText: 'Confirmar'
         }).then(async(result) => {
             if (result.isConfirmed) {
-                await getData(`${config.url}/envios/modificarEstado/${id}`);
+                let email = data.filter(res=>res.idEnvio == id)[0].venta.email;
+                if(!email) return Swal.fire('Error','Ha ocurrido un error','error');
+                setLoading(true);
+                await requestPut(`${config.url}/envios/modificarEstadoEntregado/${id}?email=${email}`);
+                setLoading(false);
+                Swal.fire(
+                    'Listo!',
+                    'Estado del envio modificado',
+                    'success'
+                ).then(()=>{
+                    getEnvios();
+                })
+            }
+        })
+    }
+
+    const cambiarEstadoEnCamino = id=>{
+        Swal.fire({
+            title: '¿Seguro quieres notificar que el envío está en camino?',
+            text: "Esta acción se puede revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar'
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                let email = data.filter(res=>res.idEnvio == id)[0].venta.email;
+                if(!email) return Swal.fire('Error','Ha ocurrido un error','error');
+                await requestPut(`${config.url}/envios/modificarEstadoEnCamino/${id}?email=${email}`);
                 Swal.fire(
                     'Listo!',
                     'Estado del envio modificado',
@@ -90,7 +120,7 @@ const Envios = () => {
         (loading)?<Loader/>:
         <React.Fragment>
             {(modalIsOpen)?<Modal closeModal={switchModal}><DetalleVenta data={dataModal}/></Modal>:null}
-            <EnvioList envios={data} delete={borrar} mostrarDetalle={mostrarDetalle} cambiarEstado={cambiarEstado}/>
+            <EnvioList envios={data} delete={borrar} mostrarDetalle={mostrarDetalle} cambiarEstadoEntregado={cambiarEstadoEntregado} cambiarEstadoEnCamino={cambiarEstadoEnCamino}/>
         </React.Fragment>
     );
 }

@@ -1,5 +1,33 @@
 .detalleVenta ul{
     border-bottom:solid 3px #FFB347;
+    list-style: none;
+}
+
+.datosComprador{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.datosComprador p{
+    margin: 0;
+    font-size: 23px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.detalleVenta .datosComprador .fotoUsuario{
+    height: 50px;
+    border-radius: 25px;
 }
 
 .detalleVenta span{font-weight: bold;}
+
+@media(max-width:768px){
+    .detalleVenta h3{font-size: 20px;}
+    .detalleVenta ul{
+        font-size: 13px;
+        padding-left: 0px!important;
+    }
+
+    .detalleVenta table{font-size: 13px;}
+}

@@ -3,8 +3,11 @@ import './style/DetalleVenta.css';
 
 const DetalleVenta = (props) => {
     return (
-        <div className="detalleVenta">
-            <h3>Datos de Comprador:</h3>
+        <div className="detalleVenta container">
+            <section className="datosComprador mb-2">
+                <img className="fotoUsuario mr-3" src={(props.data.foto!='null')?props.data.foto:`https://storage.googleapis.com/web-oliver/user-default.png`} alt={props.data.nombre}/>
+                <p>{props.data.nombre}</p>
+            </section>
             <ul>
                 <li>
                     <p className="text-muted">Dirección: <span className="">{props.data.address}</span> <a href={`https://maps.google.com/?q=${props.data.lat},${props.data.lon}`} target="blank">(Ver residencia)</a></p>
@@ -26,20 +29,20 @@ const DetalleVenta = (props) => {
             <table className="table table-hover text-center">
                 <thead className="thead-dark">
                     <tr>
-                    <th scope="col">Producto</th>
+                    <th scope="col" className="d-none">Producto</th>
                     <th scope="col">Sub Producto</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col">Foto</th>
+                    <th scope="col" className="d-none">Foto</th>
                     </tr>
                 </thead>
                 <tbody>
                 {props.data.productos.map((prd,key) => {
                     return (
                         <tr key={key}>
-                            <th scope="row">{prd.producto}</th>
+                            <th scope="row" className="d-none">{prd.producto}</th>
                             <td>{prd.subProducto}</td>
                             <td>{prd.cantidad}</td>
-                            <td><img src={prd.foto} style={{width:'50px'}} alt={prd.subProducto}/></td>
+                            <td className="d-none"><img src={prd.foto} style={{width:'50px'}} alt={prd.subProducto}/></td>
                         </tr>
                     );
                 })}

@@ -5,6 +5,7 @@ import config from '../config/config';
 import {authentication,requestDelete,requestPut,getData} from '../helpers/helpers';
 import Modal from '../components/Modal';
 import DetalleVenta from '../components/DetalleVenta';
+import FiltrosEnvio from '../components/FiltrosEnvio';
 const Swal = require('sweetalert2');
 
 const Envios = () => {
@@ -18,11 +19,23 @@ const Envios = () => {
     const [loading, setLoading] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [dataModal, setDataModal] = useState(null);
+    const [filtros, setFiltros] = useState({
+        tipo:'',
+        idZona:'',
+        diaEntrega:''
+    })
     
     const getEnvios = async()=>{
       try {
         setLoading(true);
-        const data = await getData(`${config.url}/envios`);
+        let url = `${config.url}/envios`;
+        if(filtros.tipo!=''){
+            url += `?tipo=${filtros.tipo}`;
+        }
+        if(filtros.idZona!=''){
+            url += `${(filtros.tipo!='')?`&`:`?`}idZona=${filtros.idZona}`;
+        }
+        const data = await getData(url);
         setData(data.data);
         setLoading(false);
       } catch (error) {
@@ -32,7 +45,6 @@ const Envios = () => {
     }
 
     const borrar = (id)=>{
-        console.log(id);
         Swal.fire({
             title: '¿Seguro quieres eliminar el envío?',
             text: "Puede que existan ventas con este envío, se eliminarán también.",
@@ -116,11 +128,27 @@ const Envios = () => {
         })
     }
 
+    const aplicarFiltro = event=>{
+        return setFiltros({
+            ...filtros,
+            [event.target.name]:event.target.value
+        });
+    }
+
+    const filtrarEnvios = event=>{
+        event.preventDefault();
+        return getEnvios();
+    }
+
     return (
-        (loading)?<Loader/>:
         <React.Fragment>
             {(modalIsOpen)?<Modal closeModal={switchModal}><DetalleVenta data={dataModal}/></Modal>:null}
-            <EnvioList envios={data} delete={borrar} mostrarDetalle={mostrarDetalle} cambiarEstadoEntregado={cambiarEstadoEntregado} cambiarEstadoEnCamino={cambiarEstadoEnCamino}/>
+            <div className="container pt-3">
+                <h2>Listado de envíos</h2>
+                <FiltrosEnvio filtros={filtros} aplicarFiltro={aplicarFiltro} filtrarEnvios={filtrarEnvios}/>
+            </div>
+            {(loading)?<Loader/>:
+            <EnvioList envios={data} delete={borrar} mostrarDetalle={mostrarDetalle} cambiarEstadoEntregado={cambiarEstadoEntregado} cambiarEstadoEnCamino={cambiarEstadoEnCamino}/>}
         </React.Fragment>
     );
 }

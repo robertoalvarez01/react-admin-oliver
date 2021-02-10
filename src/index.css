@@ -2,3 +2,20 @@
 h1,h2,h3,h4,h5,h6{
     font-family: 'Quicksand', sans-serif;
 }
+
+table .buttonsMobile{
+    display: none;
+}
+
+table .buttonsDesktop{
+    display: block;
+}
+
+@media(max-width:768px){
+    table .buttonsDesktop{
+        display: none;
+    }
+    table .buttonsMobile{
+        display: block;
+    }
+}

@@ -23,7 +23,7 @@ export const requestDelete = async url=>{
     }
 }
 
-export const getData = async url=>{
+export const getData = async (url)=>{
     try {
         const administrador = JSON.parse(localStorage.getItem('administrador'));
         let myHeaders = new Headers();

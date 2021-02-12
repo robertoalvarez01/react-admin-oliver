@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '../../components/Loader';
 import config from '../../config/config';
-import {authentication,request} from '../../helpers/helpers';
+import {authentication,request,requestDelete} from '../../helpers/helpers';
 import Modal from '../../components/Modal';
 import MediosDePagoList from '../../components/MediosDePagoList';
 import MediosDePagoForm from '../../components/MediosDePagoForm';
@@ -45,13 +45,13 @@ const MediosDePago = () => {
             confirmButtonText: 'Confirmar'
         }).then(async(result) => {
             if (result.isConfirmed) {
-                //await requestDelete(`${config.url}/marca/${id}`);
+                await requestDelete(`${config.url}/medioDePago/${id}`);
                 Swal.fire(
                     'Eliminado',
                     'Recurso eliminado',
                     'success'
                 ).then(()=>{
-                    //getMedios();
+                    getMedios();
                 })
             }
         })

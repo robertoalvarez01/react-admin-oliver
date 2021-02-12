@@ -28,6 +28,7 @@ import Zonas from '../pages/Zona/Zonas';
 import NewZona from '../pages/Zona/NewZona';
 import EditZona from '../pages/Zona/EditZona'
 import Envios from '../pages/Envio/envios';
+import MediosDePago from '../pages/MedioDePago';
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -76,7 +77,7 @@ function App() {
           <Route exact path="/envios/editar/:id" component={Envios} />
           <Route exact path="/envios/agregar" component={Envios} />
           
-          
+          <Route exact path="/medios-de-pago" component={MediosDePago}/>
           {/* <Route component={NotFound} /> */}
         </Switch>
       </Layout>

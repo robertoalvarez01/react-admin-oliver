@@ -23,6 +23,27 @@ export const requestDelete = async url=>{
     }
 }
 
+export const request = (url,method,body=null)=>{
+    return new Promise(async(resolve,reject)=>{
+        const administrador = JSON.parse(localStorage.getItem('administrador'));
+        let myHeaders = new Headers();
+        myHeaders.append("token", administrador.token);
+        myHeaders.append("Content-Type","application/json");
+        let requestOptions = {
+            method,
+            headers: myHeaders,
+            redirect: 'follow',
+            body
+        };
+        const req = await fetch(url, requestOptions);
+        if(req.status==200){
+            const dataReq = await req.json();
+            return resolve(dataReq);
+        }
+        return reject('Problemas en el servidor');
+    })
+}
+
 export const getData = async (url)=>{
     try {
         const administrador = JSON.parse(localStorage.getItem('administrador'));

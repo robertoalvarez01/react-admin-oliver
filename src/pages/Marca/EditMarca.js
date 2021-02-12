@@ -1,12 +1,13 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
-import Loader from '../components/Loader';
-import {authentication,getData} from '../helpers/helpers';
-import config from '../config/config';
-import CategoriaForm from '../components/CategoriaForm';
+import Loader from '../../components/Loader';
+import {authentication,getData} from '../../helpers/helpers';
+import MarcaForm from '../../components/MarcaForm';
+import config from '../../config/config';
 const Swal = require('sweetalert2');
 
-class EditCategoria extends React.Component {
+class EditMarca extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -20,12 +21,12 @@ class EditCategoria extends React.Component {
         ...this.state,
         loading:true
       });
-      this.getCategoria();
+      this.getMarca();
     }
 
-    async getCategoria(){
+    async getMarca(){
       try {
-        const data = await getData(`${config.url}/categoria/${this.props.match.params.id}`);
+        const data = await getData(`${config.url}/marca/${this.props.match.params.id}`);
         this.setState({
           loading:false,
           formValues:data.data[0]
@@ -46,29 +47,24 @@ class EditCategoria extends React.Component {
 
     handleSubmit = e => {
       e.preventDefault();
-      this.setState({...this.state,loading:true});
+      this.setState({loading:true});
       const administrador = JSON.parse(localStorage.getItem('administrador'));
       let myHeaders = new Headers();
       myHeaders.append("token", administrador.token);
+      let data = new FormData(document.getElementById('formAgregarMarca'));
       let requestOptions = {
         method: 'PUT',
         headers: myHeaders,
-        body: new FormData(document.getElementById('form-categoria'))
+        body: data,
+        redirect: 'follow'
       };
-      fetch(`${config.url}/categoria/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
-        this.setState({...this.state,loading:false});
-        if (resultado.error) {
-          return Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: resultado.error
-          });
-        }
-        return Swal.fire(
+      fetch(`${config.url}/marca/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
+        this.setState({loading:false});
+        Swal.fire(
             'Modificación exitosa',
-            'Se modifico la categoria de manera exitosa!',
+            'Se modifico la marca de manera exitosa!',
             'success'
-        ).then(()=>(this.props.history.push('/categorias')))
+        ).then(()=>(this.props.history.push('/marcas')))
       })
       .catch(error => console.log('error', error));
     };
@@ -78,13 +74,14 @@ class EditCategoria extends React.Component {
         (this.state.loading)?<Loader/>:
         <React.Fragment>
           <div className="container mt-4 p-2">
-              <Link to="/categorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
-              <p className="text-center h3 mb-2">Modificar categoria</p>
-              <CategoriaForm
-                add={false}
+              <Link to="/marcas" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
+              <p className="text-center h3 mb-2">Modificar marca</p>
+              <MarcaForm
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
+                loading={this.state.loading}
                 formValues={this.state.formValues}
+                accion="modificar"
               />
           </div>
         </React.Fragment>
@@ -92,4 +89,4 @@ class EditCategoria extends React.Component {
     }
 }
 
-export default EditCategoria;
+export default EditMarca;

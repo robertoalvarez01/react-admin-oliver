@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../helpers/helpers';
-import config from '../config/config';
-import Loader from '../components/Loader';
-import ZonaForm from '../components/ZonaForm';
+import {authentication} from '../../helpers/helpers';
+import config from '../../config/config';
+import Loader from '../../components/Loader';
+import ZonaForm from '../../components/ZonaForm';
 const Swal = require('sweetalert2');
 
 class NewZona extends React.Component {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Loader from '../components/Loader';
-import {authentication,getData} from '../helpers/helpers';
+import Loader from '../../components/Loader';
+import {authentication,getData} from '../../helpers/helpers';
 //import MarcaForm from '../components/MarcaForm';
-import config from '../config/config';
-import LegalesForm from '../components/LegalesForm';
+import config from '../../config/config';
+import LegalesForm from '../../components/LegalesForm';
 const Swal = require('sweetalert2');
 
 export default class EditLegales extends Component {

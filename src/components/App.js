@@ -4,32 +4,30 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
-import Products from '../pages/Products';
-import Marcas from '../pages/Marcas'
-import NewProduct from '../pages/NewProduct';
-import Categorias from '../pages/Categorias';
-import NewCategoria from '../pages/NewCategoria';
-import NewMarca from '../pages/NewMarca';
-import Probe from '../components/Probe';
-import ViewProduct from '../pages/ViewProduct';
-import EditProduct from '../pages/EditProduct';
-import EditMarca from '../pages/EditMarca';
-import EditCategoria from '../pages/EditCategoria';
-import SubCategorias from '../pages/Subcategorias';
-import NewSubCategoria from '../pages/NewSubCategoria';
-import EditSubCategoria from '../pages/EditSubCategoria';
-import SubProducto from '../pages/SubProducto';
-import NewSubProducto from '../pages/NewSubProducto';
-import EditSubProducto from '../pages/EditSubProducto'
-import Tamaño from '../pages/Tamaño';
-import NewTamaño from '../pages/NewTamaño';
-import EditTamaño from '../pages/EditTamaño';
-import Legales from '../pages/Legales';
-import EditLegales from '../pages/EditLegales';
-import Zonas from '../pages/Zonas';
-import NewZona from '../pages/NewZona';
-import EditZona from '../pages/EditZona'
-import Envios from '../pages/envios';
+import Products from '../pages/Producto/Products';
+import Marcas from '../pages/Marca/Marcas'
+import NewProduct from '../pages/Producto/NewProduct';
+import Categorias from '../pages/Categorias/Categorias';
+import NewCategoria from '../pages/Categorias/NewCategoria';
+import NewMarca from '../pages/Marca/NewMarca';
+import EditProduct from '../pages/Producto/EditProduct';
+import EditMarca from '../pages/Marca/EditMarca';
+import EditCategoria from '../pages/Categorias/EditCategoria';
+import SubCategorias from '../pages/SubCategoria/Subcategorias';
+import NewSubCategoria from '../pages/SubCategoria/NewSubCategoria';
+import EditSubCategoria from '../pages/SubCategoria/EditSubCategoria';
+import SubProducto from '../pages/SubProducto/SubProducto';
+import NewSubProducto from '../pages/SubProducto/NewSubProducto';
+import EditSubProducto from '../pages/SubProducto/EditSubProducto'
+import Tamaño from '../pages/Tamaño/Tamaño';
+import NewTamaño from '../pages/Tamaño/NewTamaño';
+import EditTamaño from '../pages/Tamaño/EditTamaño';
+import Legales from '../pages/Legales/Legales';
+import EditLegales from '../pages/Legales/EditLegales';
+import Zonas from '../pages/Zona/Zonas';
+import NewZona from '../pages/Zona/NewZona';
+import EditZona from '../pages/Zona/EditZona'
+import Envios from '../pages/Envio/envios';
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -41,9 +39,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/ingresar" component={Login} />
-          <Route exact path="/prueba" component={Probe} /> {/* Retirar esta linea despues... */}
           {/*}<Route exact path="/imagen/:productId" component={imageForm} />{*/}
-          <Route exact path="/describirProducto/:productId" component={ViewProduct} />
 
           <Route exact path="/subproductos" component={SubProducto} />
           <Route exact path="/subproducto/agregar" component={NewSubProducto} />

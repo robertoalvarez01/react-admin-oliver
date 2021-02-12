@@ -1,41 +1,53 @@
 import React from 'react';
-import Loader from '../components/Loader';
-import ProductList from "../components/ProductList";
-import config from '../config/config';
-import {authentication,requestDelete,getData} from '../helpers/helpers';
+import SubProductoList from '../../components/SubProductoList';
+import Loader from '../../components/Loader';
+import config from '../../config/config'
+import {authentication,requestDelete,getData} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
-class Products extends React.Component {
+class SubProductos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      loading:false,
       error:null,
+      loading:false,
       desde:1,
       limite:50
     };
   }
 
-  componentDidMount() {
-    this.setState({...this.state,loading:true});
-    authentication();
-    this.getProductos();
-  }
 
-  async getProductos(){
+  componentDidMount() {
+    authentication();
+    this.setState({
+      ...this.state,
+      loading:true
+    });
+    this.getSubProducto();
+  }
+  
+  async getSubProducto(){
     try {
-      const data = await getData(`${config.url}/producto?desde=${this.state.desde}&limite=${this.state.limite}`);
-      this.setState({...this.state,data:data.data,loading:false});
+      const data = await getData(`${config.url}/subproducto?desde=${this.state.desde}&limite=${this.state.limite}`);
+      this.setState({
+        ...this.state,
+        data:data.data,
+        loading:false
+      });
     } catch (error) {
-      this.setState({...this.state,error,loading:false})
+      this.setState({
+        ...this.state,
+        loading:false,
+        error
+      });
     }
   }
 
-  delete(id){
-    Swal.fire({
-      title: '¿Seguro quieres eliminar el producto?',
-      text: "Este producto hace referencia a otros subproductos, de eliminarlos se eliminarán los subproductos tambien",
+  async delete(id){
+    await Swal.fire({
+      title: '¿Seguro quieres eliminar el recurso?',
+      text: "Esta accción no se puede deshacer",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -43,16 +55,14 @@ class Products extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/producto/${id}`);
-        Swal.fire(
+        await requestDelete(`${config.url}/subproducto/${id}`);
+        return Swal.fire(
           'Eliminado',
           'Recurso eliminado',
           'success'
-        ).then(()=>{
-            window.location.assign('/productos');
-        })
+        ).then(()=>window.location.assign('/subproductos'));
       }
-    })
+    });
   }
 
   async cargarMas(){
@@ -63,7 +73,7 @@ class Products extends React.Component {
       });
       resolve();
     }).then(()=>{
-      this.getProductos();
+      this.getSubProducto();
     })
   }
 
@@ -72,7 +82,7 @@ class Products extends React.Component {
       let key = event.target.value;
       if(key.length===0) return this.cargarMas();
       if(key.length<3) return;
-      const data = await getData(`${config.url}/productos/buscar?busqueda=${key}`);
+      const data = await getData(`${config.url}/subproductos/buscar?busqueda=${key}`);
       this.setState({
         ...this.state,
         data:data.data
@@ -82,6 +92,10 @@ class Products extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+  }
+
+
   render() {
     return (
       (this.state.loading)?<Loader/>:
@@ -89,7 +103,7 @@ class Products extends React.Component {
         <div className="container pt-3">
           <input type="text" className="form-control d-none" id="buscador" onChange={this.buscarProducto.bind(this)} placeholder="Ingrese el nombre del producto"/>
         </div>
-        <ProductList products={this.state.data} delete={this.delete}/>
+        <SubProductoList subproductos={this.state.data} delete={this.delete}/>
         <div className="text-center">
           <button className="btn btn-info mt-3 mx-2" onClick={()=>this.cargarMas(this.state.desde,this.state.limite)}>Ver más</button>
           <button className="btn btn-warning mt-3 mx-2" onClick={()=>document.getElementById('buscador').classList.toggle('d-none')}>Buscar</button>
@@ -99,4 +113,4 @@ class Products extends React.Component {
   }
 }
 
-export default Products;
+export default SubProductos;

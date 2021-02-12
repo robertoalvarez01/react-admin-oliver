@@ -1,25 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../helpers/helpers';
-import CategoriaForm from '../components/CategoriaForm';
-import config from '../config/config';
-import Loader from '../components/Loader';
+import {authentication, getData} from '../../helpers/helpers';
+import TamañoForm from '../../components/TamañoForm';
+import config from '../../config/config';
+import Loader from '../../components/Loader';
 const Swal = require('sweetalert2');
 
-class NewCategoria extends React.Component {
+class NewTamaño extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading:false,
       error:null,
       formValues:{
-        categoria:''
+        tamaño:''
       }
     }
   }
   
   componentDidMount(){
     authentication();
+    this.setState({...this.state,loading:true});
+    this.getTamaño();
+  }
+
+  async getTamaño(){
+    try {
+      const data = await getData(`${config.url}/tamaños/${this.props.match.params.id}`);
+      this.setState({
+        ...this.state,
+        formValues:{
+          tamaño:data.data[0].tamaño
+        },
+        loading:false
+      })
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        error,
+        loading:false
+      })
+    }
   }
 
   handleChange = e => {
@@ -37,27 +58,28 @@ class NewCategoria extends React.Component {
     const administrador = JSON.parse(localStorage.getItem('administrador'));
     let myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
+    myHeaders.append("Content-Type", "application/json");
     let requestOptions = {
-      method: 'POST',
-      body: new FormData(document.getElementById('form-categoria')),
+      method: 'PUT',
+      body: JSON.stringify(this.state.formValues),
       headers:myHeaders
     };
-    fetch(`${config.url}/categoria`, requestOptions)
+    fetch(`${config.url}/tamaño/${this.props.match.params.id}`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});
-        if (resultado.error) {
+        if (resultado.info.code) {
             return Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: resultado.error
+                text: resultado.info.code
             });
         }
         Swal.fire(
             'Guardado exitoso',
-            'Se guardó la categoria de manera exitosa!',
+            'Se modificó el tamaño de manera exitosa!',
             'success'
-        ).then(()=>this.props.history.push('/categorias'));
+        ).then(()=>this.props.history.push('/tamaños'));
       })
       .catch(error => console.log('error', error));
   };
@@ -67,10 +89,9 @@ class NewCategoria extends React.Component {
       (this.state.loading)?<Loader/>:
       <React.Fragment>
         <div className="container mt-4 p-2">
-              <Link to="/categorias" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
-              <p className="text-center h3 mb-2">Agregar categoria</p>
-              <CategoriaForm
-              add={true} 
+              <Link to="/tamaños" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
+              <p className="text-center h3 mb-2">Modificar Tamaño</p>
+              <TamañoForm 
               onChange={this.handleChange}
               formValues={this.state.formValues}
               onSubmit={this.handleSubmit}/>
@@ -80,4 +101,4 @@ class NewCategoria extends React.Component {
   }
 }
 
-export default NewCategoria;
+export default NewTamaño;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../helpers/helpers';
-import TamañoForm from '../components/TamañoForm';
-import config from '../config/config';
-import Loader from '../components/Loader';
+import {authentication} from '../../helpers/helpers';
+import TamañoForm from '../../components/TamañoForm';
+import config from '../../config/config';
+import Loader from '../../components/Loader';
 const Swal = require('sweetalert2');
 
 class NewTamaño extends React.Component {

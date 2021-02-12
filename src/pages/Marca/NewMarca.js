@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import Loader from '../components/Loader';
+import Loader from '../../components/Loader';
 
-import MarcaForm from '../components/MarcaForm';
-import config from '../config/config';
+import MarcaForm from '../../components/MarcaForm';
+import config from '../../config/config';
 const Swal = require('sweetalert2');
 
 class NewMarca extends React.Component {

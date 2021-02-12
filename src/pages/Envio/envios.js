@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import EnvioList from '../components/EnvioList';
-import Loader from '../components/Loader';
-import config from '../config/config';
-import {authentication,requestDelete,requestPut,getData} from '../helpers/helpers';
-import Modal from '../components/Modal';
-import DetalleVenta from '../components/DetalleVenta';
-import FiltrosEnvio from '../components/FiltrosEnvio';
+import EnvioList from '../../components/EnvioList';
+import Loader from '../../components/Loader';
+import config from '../../config/config';
+import {authentication,requestDelete,requestPut,getData} from '../../helpers/helpers';
+import Modal from '../../components/Modal';
+import DetalleVenta from '../../components/DetalleVenta';
+import FiltrosEnvio from '../../components/FiltrosEnvio';
 const Swal = require('sweetalert2');
 
 const Envios = () => {

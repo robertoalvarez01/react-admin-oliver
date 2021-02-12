@@ -1,8 +1,8 @@
 import React from 'react';
-import Loader from '../components/Loader';
-import MarcasList from '../components/MarcasList';
-import config from '../config/config';
-import {authentication,requestDelete,getData} from '../helpers/helpers';
+import Loader from '../../components/Loader';
+import MarcasList from '../../components/MarcasList';
+import config from '../../config/config';
+import {authentication,requestDelete,getData} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
 class Marcas extends React.Component {

@@ -61,5 +61,12 @@
         "subtitulo":"Ver estado de envíos",
         "boton":"Ingresar",
         "url":"/envios"
+    },
+    {
+        "id":10,
+        "titulo":"Medios de pago",
+        "subtitulo":"Ver medios de pagos disponibles",
+        "boton":"Ingresar",
+        "url":"/medios-de-pago"
     }
 ]

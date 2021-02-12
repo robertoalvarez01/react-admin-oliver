@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../helpers/helpers';
-import SubCategoriaForm from '../components/SubCategoriaForm';
-import config from '../config/config';
-import Loader from '../components/Loader';
+import {authentication} from '../../helpers/helpers';
+import SubCategoriaForm from '../../components/SubCategoriaForm';
+import config from '../../config/config';
+import Loader from '../../components/Loader';
 const Swal = require('sweetalert2');
 
 class NewSubCategoria extends React.Component {

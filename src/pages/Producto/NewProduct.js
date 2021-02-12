@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProductForm from '../components/ProductForm';
-import Loader from '../components/Loader';
-import config from '../config/config';
-import {authentication, getData} from '../helpers/helpers';
+import Loader from '../../components/Loader';
+import ProductForm from '../../components/ProductForm';
+import config from '../../config/config';
+import {authentication, getData} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
-class EditProduct extends React.Component {
-
+class NewProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state={
@@ -24,8 +23,8 @@ class EditProduct extends React.Component {
       loading:false,
       error:null,
       categorias:[],
-      marcas:[],
-      subCategorias:[]
+      subCategorias:[],
+      marcas:[]
     }
   }
 
@@ -36,7 +35,6 @@ class EditProduct extends React.Component {
         ...this.state,
         loading:true
       });
-      await this.getProducto();
       await this.getCategorias();
       await this.getSubCategorias();
       await this.getMarcas();
@@ -48,38 +46,17 @@ class EditProduct extends React.Component {
       })
     } 
   }
-
-  async getProducto(){
-    try {
-      const producto = await getData(`${config.url}/producto/${this.props.match.params.productId}`);
-      return this.setState({
-        ...this.state,
-        formValues:{
-          producto: producto.data[0].producto,
-          precioUnidad: producto.data[0].precioUnidad,
-          descripcion: producto.data[0].descripcion,
-          descripcionBasica: producto.data[0].descripcion_basica,
-          disponible: producto.data[0].disponible,
-          idCategoria: producto.data[0].idCategoria,
-          idMarca: producto.data[0].idMarca,
-          idSubCategoria:producto.data[0].idSubCategoria
-        }
-      })
-    } catch (error) {
-      this.setState({
-        ...this.state,
-        error,
-        loading:false
-      })
-    }
-  }
-
+  
   async getCategorias(){
     try {
       const categorias = await getData(`${config.url}/categorias`);
       return this.setState({
         ...this.state,
-        categorias:categorias.data
+        categorias:categorias.data,
+        formValues:{
+          ...this.state.formValues,
+          idCategoria:categorias.data[0].idCategoria
+        }
       })
     } catch (error) {
       this.setState({
@@ -95,7 +72,11 @@ class EditProduct extends React.Component {
       const subCategorias = await getData(`${config.url}/subcategoria`);
       return this.setState({
         ...this.state,
-        subCategorias:subCategorias.data
+        subCategorias:subCategorias.data,
+        formValues:{
+          ...this.state.formValues,
+          idSubCategoria:subCategorias.data[0].idSubCategoria
+        }
       })
     } catch (error) {
       this.setState({
@@ -112,6 +93,10 @@ class EditProduct extends React.Component {
       return this.setState({
         ...this.state,
         marcas:marcas.data,
+        formValues:{
+          ...this.state.formValues,
+          idMarca:marcas.data[0].idMarca
+        },
         loading:false
       })
     } catch (error) {
@@ -135,29 +120,22 @@ class EditProduct extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({
-      ...this.state,
-      loading:true
-    })
+    this.setState({...this.state,loading:true});
     const administrador = JSON.parse(localStorage.getItem('administrador'));
-    console.log(this.state);
     var myHeaders = new Headers();
     myHeaders.append("token", administrador.token);
     myHeaders.append("Content-Type", "application/json");
-    
     var requestOptions = {
-      method: 'PUT',
+      method: 'POST',
       headers: myHeaders,
-      body: JSON.stringify(this.state.formValues)
+      body: JSON.stringify(this.state.formValues),
+      redirect: 'follow'
     };
-
-    fetch(`${config.url}/producto/${this.props.match.params.productId}`, requestOptions)
+    
+    fetch(`${config.url}/producto`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
-        this.setState({
-          ...this.state,
-          loading:false
-        })
+        this.setState({...this.state,loading:false});
         if (resultado.info.code) {
             return Swal.fire({
                 icon: 'error',
@@ -167,29 +145,20 @@ class EditProduct extends React.Component {
         }
         Swal.fire(
             'Guardado exitoso',
-            'Se modificó el producto de manera exitosa!',
+            'Se guardó el producto de manera exitosa!',
             'success'
         ).then(()=>this.props.history.push('/productos'));
       })
-      .catch(error => {
-        this.setState({
-          ...this.state,
-          error,
-          loading:false
-        })
-      });
+      .catch(error => this.setState({...this.state,error,loading:false}));
   };
+
   render() {
     return (
       (this.state.loading)?<Loader/>:
       <React.Fragment>
-        {/* <div className="BadgeNew__hero">
-          <img className="img-fluid" src={header} alt="Logo" />
-        </div> */}
-
         <div className="container mt-4 p-2">
             <div className="row justify-content-between px-3">
-              <p className="text-center h3 mb-2">Editar producto</p>
+              <p className="text-center h3 mb-2">Agregar producto</p>
               <Link to="/productos" className="mb-2 btn btn-outline-danger float">Volver al listado</Link>
             </div>
             <ProductForm
@@ -206,4 +175,4 @@ class EditProduct extends React.Component {
   }
 }
 
-export default EditProduct;
+export default NewProduct;

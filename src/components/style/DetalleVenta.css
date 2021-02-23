@@ -1,3 +1,6 @@
+.detalleVenta{
+    overflow-y: auto;
+}
 .detalleVenta ul{
     border-bottom:solid 3px #FFB347;
     list-style: none;
@@ -6,7 +9,6 @@
 .datosComprador{
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .datosComprador p{
@@ -23,6 +25,9 @@
 .detalleVenta span{font-weight: bold;}
 
 @media(max-width:768px){
+    .datosComprador{
+        justify-content: space-between;
+    }
     .detalleVenta h3{font-size: 20px;}
     .detalleVenta ul{
         font-size: 13px;

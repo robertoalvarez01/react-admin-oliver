@@ -29,11 +29,11 @@ const Envios = () => {
       try {
         setLoading(true);
         let url = `${config.url}/envios`;
-        if(filtros.tipo!=''){
+        if(filtros.tipo!==''){
             url += `?tipo=${filtros.tipo}`;
         }
-        if(filtros.idZona!=''){
-            url += `${(filtros.tipo!='')?`&`:`?`}idZona=${filtros.idZona}`;
+        if(filtros.idZona!==''){
+            url += `${(filtros.tipo!=='')?`&`:`?`}idZona=${filtros.idZona}`;
         }
         const data = await getData(url);
         setData(data.data);
@@ -87,7 +87,7 @@ const Envios = () => {
             confirmButtonText: 'Confirmar'
         }).then(async(result) => {
             if (result.isConfirmed) {
-                let email = data.filter(res=>res.idEnvio == id)[0].venta.email;
+                let email = data.filter(res=>res.idEnvio === id)[0].venta.email;
                 if(!email) return Swal.fire('Error','Ha ocurrido un error','error');
                 setLoading(true);
                 await requestPut(`${config.url}/envios/modificarEstadoEntregado/${id}?email=${email}`);
@@ -137,6 +137,8 @@ const Envios = () => {
 
     const filtrarEnvios = event=>{
         event.preventDefault();
+        document.getElementById('formFiltroEnvios').classList.remove('show');
+        document.getElementById('btn-mostrarFiltro').classList.remove('d-none');
         return getEnvios();
     }
 

@@ -36,7 +36,7 @@ export const request = (url,method,body=null)=>{
             body
         };
         const req = await fetch(url, requestOptions);
-        if(req.status==200){
+        if(req.status===200){
             const dataReq = await req.json();
             return resolve(dataReq);
         }

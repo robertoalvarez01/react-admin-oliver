@@ -24,6 +24,12 @@ const DetalleVenta = (props) => {
                 <li>
                     <p className="text-muted">Descuento: <span className="">{props.data.descuento}</span></p>
                 </li>
+                <li>
+                    <p className="text-muted">Medio de pago: <span>{props.data.medio}</span></p>
+                </li>
+                <li>
+                    <p className="text-muted">Pagado: <span>SI</span></p>
+                </li>
             </ul>
             <h3>Productos de la venta:</h3>
             <table className="table table-hover text-center">
@@ -32,7 +38,7 @@ const DetalleVenta = (props) => {
                     <th scope="col" className="d-none">Producto</th>
                     <th scope="col">Sub Producto</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col" className="d-none">Foto</th>
+                    <th scope="col">Foto</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,7 +48,7 @@ const DetalleVenta = (props) => {
                             <th scope="row" className="d-none">{prd.producto}</th>
                             <td>{prd.subProducto}</td>
                             <td>{prd.cantidad}</td>
-                            <td className="d-none"><img src={prd.foto} style={{width:'50px'}} alt={prd.subProducto}/></td>
+                            <td><img src={prd.foto} style={{width:'50px'}} alt={prd.subProducto}/></td>
                         </tr>
                     );
                 })}

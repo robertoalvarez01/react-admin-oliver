@@ -1,5 +1,23 @@
+#btn-mostrarFiltro{
+    display: none;
+}
 @media(max-width:768px){
+    #formFiltroEnvios{
+        transition: all 1s ease;
+        display: none;
+    }
+
+    #formFiltroEnvios.show{
+        display: block;
+    }
     #formFiltroEnvios section{
         margin:15px 0px
+    }
+
+    #btn-mostrarFiltro{
+        display: block;
+        position: absolute;
+        right: 28px;
+        top: 86px;
     }
 }

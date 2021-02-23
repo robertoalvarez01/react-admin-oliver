@@ -28,7 +28,7 @@ const DetalleVenta = (props) => {
                     <p className="text-muted">Medio de pago: <span>{props.data.medio}</span></p>
                 </li>
                 <li>
-                    <p className="text-muted">Pagado: <span>SI</span></p>
+                    <p className="text-muted">Pagado: <span>{(props.data.pagado==0)?'NO':'SI'}</span></p>
                 </li>
             </ul>
             <h3>Productos de la venta:</h3>

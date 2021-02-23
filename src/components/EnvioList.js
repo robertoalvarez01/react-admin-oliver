@@ -5,7 +5,7 @@ class EnvioListItem extends React.Component {
   render() {
     return (
       <>
-        <tr className={(this.props.envio.venta.pagado)?'nopago':'pago'}>
+        <tr className={(this.props.envio.venta.pagado == 0)?'nopago':'pago'}>
           {/* <th style={{verticalAlign:'baseline'}}>
             <span className="span-pagado" style={{display:'block',width:'10px',height:'10px',backgroundColor:'#439443',borderRadius:'5px'}}></span>
           </th> */}

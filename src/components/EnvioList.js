@@ -12,9 +12,6 @@ class EnvioListItem extends React.Component {
           <th>{this.props.envio.zona || '-'}</th>
           <td>{this.props.envio.tipo}</td>
           <td className="buttonsDesktop">
-            <button className="btn btn-danger mx-1" onClick={()=>this.props.delete(this.props.envio.idEnvio)}>
-              <i className="fas fa-trash-alt"></i>
-            </button>
             <button className="btn btn-warning mx-1" onClick={()=>this.props.mostrarDetalle(this.props.envio.venta)}>
               <i className="fas fa-eye"></i>
             </button>
@@ -27,7 +24,7 @@ class EnvioListItem extends React.Component {
                 <i className="fas fa-ambulance"></i>
               </button>
             </>:
-              <button className="btn btn-success mx-1">Entregar</button>
+              <button className={`btn mx-1 btn-${(this.props.envio.venta.pagado==0)?'success':'danger'}`} onClick={()=>this.props.cambiarEstadoPagado(this.props.envio.venta.idVenta)}>{(this.props.envio.venta.pagado==0)?'Entregar':'Desentregar'}</button>
             }
           </td>
         </tr>
@@ -52,7 +49,7 @@ class EnvioList extends React.Component {
               <tbody>
               {this.props.envios.map((envio,key) => {
                   return (
-                    <EnvioListItem delete={this.props.delete} key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} />
+                    <EnvioListItem key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} cambiarEstadoPagado={this.props.cambiarEstadoPagado}/>
                   );
               })}
               </tbody>

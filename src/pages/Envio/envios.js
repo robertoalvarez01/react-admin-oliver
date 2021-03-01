@@ -44,29 +44,6 @@ const Envios = () => {
       }
     }
 
-    const borrar = (id)=>{
-        Swal.fire({
-            title: '¿Seguro quieres eliminar el envío?',
-            text: "Puede que existan ventas con este envío, se eliminarán también.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirmar'
-        }).then(async(result) => {
-            if (result.isConfirmed) {
-                //await requestDelete(`${config.url}/marca/${id}`);
-                Swal.fire(
-                    'Eliminado',
-                    'Recurso eliminado',
-                    'success'
-                ).then(()=>{
-                    getEnvios();
-                })
-            }
-        })
-    } 
-    
     const switchModal= ()=>{
         return setModalIsOpen(!modalIsOpen);
     }
@@ -128,6 +105,36 @@ const Envios = () => {
         })
     }
 
+    const cambiarEstadoPagado = idVenta=>{
+        Swal.fire({
+            title: '¿Seguro quieres notificar la entrega de este pedido?',
+            text: "Esta acción se puede revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar'
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                const response = await requestPut(`${config.url}/ventas/modificarEstadoPago/${idVenta}`);
+                if(response.ok){
+                    return Swal.fire(
+                        'Listo!',
+                        'Estado del pedido modificado',
+                        'success'
+                    ).then(()=>{
+                        getEnvios();
+                    })
+                }
+                Swal.fire(
+                    'Error',
+                    'Ha ocurrido un error con la operación',
+                    'error'
+                )
+            }
+        })
+    }
+
     const aplicarFiltro = event=>{
         return setFiltros({
             ...filtros,
@@ -150,7 +157,7 @@ const Envios = () => {
                 <FiltrosEnvio filtros={filtros} aplicarFiltro={aplicarFiltro} filtrarEnvios={filtrarEnvios}/>
             </div>
             {(loading)?<Loader/>:
-            <EnvioList envios={data} delete={borrar} mostrarDetalle={mostrarDetalle} cambiarEstadoEntregado={cambiarEstadoEntregado} cambiarEstadoEnCamino={cambiarEstadoEnCamino}/>}
+            <EnvioList envios={data} mostrarDetalle={mostrarDetalle} cambiarEstadoEntregado={cambiarEstadoEntregado} cambiarEstadoEnCamino={cambiarEstadoEnCamino} cambiarEstadoPagado={cambiarEstadoPagado}/>}
         </React.Fragment>
     );
 }

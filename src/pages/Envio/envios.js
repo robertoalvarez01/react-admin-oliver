@@ -6,6 +6,7 @@ import {authentication,requestDelete,requestPut,getData} from '../../helpers/hel
 import Modal from '../../components/Modal';
 import DetalleVenta from '../../components/DetalleVenta';
 import FiltrosEnvio from '../../components/FiltrosEnvio';
+import {isMobile} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
 const Envios = () => {
@@ -22,7 +23,8 @@ const Envios = () => {
     const [filtros, setFiltros] = useState({
         tipo:'',
         idZona:'',
-        diaEntrega:''
+        diaEntrega:'',
+        idEnvio:''
     })
     
     const getEnvios = async()=>{
@@ -34,6 +36,9 @@ const Envios = () => {
         }
         if(filtros.idZona!==''){
             url += `${(filtros.tipo!=='')?`&`:`?`}idZona=${filtros.idZona}`;
+        }
+        if(filtros.idEnvio!==''){
+            url += `?idEnvio=${filtros.idEnvio}`;
         }
         const data = await getData(url);
         setData(data.data);
@@ -149,6 +154,10 @@ const Envios = () => {
         return getEnvios();
     }
 
+    const escanearQr = ()=>{
+        
+    }
+
     return (
         <React.Fragment>
             {(modalIsOpen)?<Modal closeModal={switchModal}><DetalleVenta data={dataModal}/></Modal>:null}
@@ -158,6 +167,11 @@ const Envios = () => {
             </div>
             {(loading)?<Loader/>:
             <EnvioList envios={data} mostrarDetalle={mostrarDetalle} cambiarEstadoEntregado={cambiarEstadoEntregado} cambiarEstadoEnCamino={cambiarEstadoEnCamino} cambiarEstadoPagado={cambiarEstadoPagado}/>}
+            {(isMobile())?
+                <button className="mx-1 btn btn-danger" onClick={escanearQr}>
+                <i class="fas fa-qrcode"></i>
+              </button>
+            :null}
         </React.Fragment>
     );
 }

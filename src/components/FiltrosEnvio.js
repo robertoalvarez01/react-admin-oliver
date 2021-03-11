@@ -39,7 +39,7 @@ const FiltrosEnvio = (props) => {
             <button id="btn-mostrarFiltro" className="btn btn-warning" onClick={mostrarFiltros}>Filtrar</button>
             <form onSubmit={props.filtrarEnvios} id="formFiltroEnvios">
                 <div className="row mt-3">
-                    <section className="filtro-tipo col-12 col-md-5 d-flex align-items-center">
+                    <section className="filtro-tipo col-12 col-md-3 d-flex align-items-center">
                         <label className="my-0 mr-2">Envío: </label>
                         <select className="form-control" name="tipo" defaultValue={props.filtros.tipo} onChange={props.aplicarFiltro}>
                             <option value="">Todos</option>
@@ -48,7 +48,7 @@ const FiltrosEnvio = (props) => {
                             ))}
                         </select>
                     </section>
-                    <section className="filtro-zona col-12 col-md-5 d-flex align-items-center">
+                    <section className="filtro-zona col-12 col-md-3 d-flex align-items-center">
                         <label className="my-0 mr-2">Zona</label>
                         <select className="form-control" name="idZona" defaultValue={props.filtros.idZona} onChange={props.aplicarFiltro}>
                             <option value="">Todas</option>
@@ -56,6 +56,10 @@ const FiltrosEnvio = (props) => {
                                 <option key={key} value={zona.idZona}>{zona.zona}</option>
                             ))}
                         </select>
+                    </section>
+                    <section className="filtro-zona col-12 col-md-4 d-flex align-items-center">
+                        <label className="my-0 mr-2">Cód. Envío</label>
+                        <input type="text" className="form-control" name="idEnvio" value={props.filtros.idEnvio} onChange={props.aplicarFiltro}/>
                     </section>
                     <div className="col-12 col-md-2 text-right">
                         <button type="submit" className="btn btn-info">Aplicar filtro</button>

@@ -20,7 +20,7 @@ class EnvioListItem extends React.Component {
               <button className={`btn btn-${(this.props.envio.entregado===0)?`info`:`success`} mx-1`} disabled={(this.props.envio.en_camino===0 || this.props.envio.entregado===1)?true:false} onClick={()=>this.props.cambiarEstadoEntregado(this.props.envio.idEnvio)}>
                 {(this.props.envio.entregado===0)?`E`:`R`}
               </button>
-              <button className={`btn btn-${(this.props.envio.en_camino===0)?`info`:`danger`} mx-1`} disabled={(this.props.envio.en_camino===0)?false:true} onClick={()=>this.props.cambiarEstadoEnCamino(this.props.envio.idEnvio)}>
+              <button className='btn btn-secondary mx-1' disabled={(this.props.envio.en_camino===0)?false:true} onClick={()=>this.props.cambiarEstadoEnCamino(this.props.envio.idEnvio)}>
                 <i className="fas fa-ambulance"></i>
               </button>
             </>:
@@ -38,7 +38,6 @@ class EnvioList extends React.Component {
 
   calcularTiempo(time){
     let horarioVenta = new Date(time.split('.')[0]);
-    console.log(horarioVenta);
     let horarioActual = new Date();
 
     let minutos = Math.floor((horarioActual - horarioVenta)/1000/60);
@@ -52,11 +51,9 @@ class EnvioList extends React.Component {
       case 0:
         return `Hace ${minutos} min.`;
       case 1:
-        return 'Hace 1 Hora'
-      case horas>1:
-        return `Hace ${horas} horas`;
+        return 'Hace 1 Hora';
       default:
-        break;
+        return `Hace ${horas} horas`;
     }
   }
 

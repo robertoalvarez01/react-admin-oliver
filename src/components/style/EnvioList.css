@@ -31,6 +31,9 @@
 }
 
 @media(max-width:768px){
+    .table-envios tbody{
+        height: calc(100vh - 200px);
+    }
     .table-envios thead{display: none!important;}
 
     .table-envios thead, .table-envios tbody tr {

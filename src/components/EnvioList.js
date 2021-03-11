@@ -26,6 +26,7 @@ class EnvioListItem extends React.Component {
             </>:
               <button className={`btn mx-1 btn-${(this.props.envio.venta.pagado==0)?'success':'danger'}`} onClick={()=>this.props.cambiarEstadoPagado(this.props.envio.venta.idVenta)}>{(this.props.envio.venta.pagado==0)?'Entregar':'Desentregar'}</button>
             }
+            <span style={{float:'right'}}>{this.props.temporizador}</span>
           </td>
         </tr>
       </>
@@ -34,6 +35,30 @@ class EnvioListItem extends React.Component {
 }
 
 class EnvioList extends React.Component {
+
+  calcularTiempo(time){
+    let horarioVenta = new Date(time.split('.')[0]);
+    console.log(horarioVenta);
+    let horarioActual = new Date();
+
+    let minutos = Math.floor((horarioActual - horarioVenta)/1000/60);
+    let horas = Math.floor(minutos/60);
+    switch (horas) {
+      case 1:
+        return 'Hace 1 Hora'
+      case horas>1:
+        return `Hace ${horas} horas`;
+      case horas >=24 && horas<48:
+        return 'Hace 1 día';
+      case horas>= 48:
+        return 'Hace 2 días';
+      case 0:
+        return `Hace ${minutos} min.`;
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
         <div className="container mt-3">
@@ -48,8 +73,9 @@ class EnvioList extends React.Component {
                 </thead>
               <tbody>
               {this.props.envios.map((envio,key) => {
+                  let temporizador = this.calcularTiempo(envio.venta.fecha)
                   return (
-                    <EnvioListItem key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} cambiarEstadoPagado={this.props.cambiarEstadoPagado}/>
+                    <EnvioListItem key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} cambiarEstadoPagado={this.props.cambiarEstadoPagado} temporizador={temporizador}/>
                   );
               })}
               </tbody>

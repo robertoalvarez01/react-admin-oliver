@@ -43,17 +43,18 @@ class EnvioList extends React.Component {
 
     let minutos = Math.floor((horarioActual - horarioVenta)/1000/60);
     let horas = Math.floor(minutos/60);
+    let dias = Math.floor(horas/24);
+    if(dias>0){
+      if(dias==1) return 'Hace 1 día';
+      return `Hace ${dias} días`;
+    }
     switch (horas) {
+      case 0:
+        return `Hace ${minutos} min.`;
       case 1:
         return 'Hace 1 Hora'
       case horas>1:
         return `Hace ${horas} horas`;
-      case horas >=24 && horas<48:
-        return 'Hace 1 día';
-      case horas>= 48:
-        return 'Hace 2 días';
-      case 0:
-        return `Hace ${minutos} min.`;
       default:
         break;
     }

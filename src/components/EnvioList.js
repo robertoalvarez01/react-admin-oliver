@@ -1,11 +1,13 @@
 import React from 'react';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import EnvioListExcel from './EnvioListExcel';
 import './style/EnvioList.css';
 
 class EnvioListItem extends React.Component {
   render() {
     return (
       <>
-        <tr className={(this.props.envio.venta.pagado == 0)?'nopago':'pago'}>
+        <tr className={(this.props.envio.venta.pagado === 0)?'nopago':'pago'}>
           {/* <th style={{verticalAlign:'baseline'}}>
             <span className="span-pagado" style={{display:'block',width:'10px',height:'10px',backgroundColor:'#439443',borderRadius:'5px'}}></span>
           </th> */}
@@ -24,7 +26,7 @@ class EnvioListItem extends React.Component {
                 <i className="fas fa-ambulance"></i>
               </button>
             </>:
-              <button className={`btn mx-1 btn-${(this.props.envio.venta.pagado==0)?'success':'danger'}`} onClick={()=>this.props.cambiarEstadoPagado(this.props.envio.venta.idVenta)}>{(this.props.envio.venta.pagado==0)?'Entregar':'Desentregar'}</button>
+              <button className={`btn mx-1 btn-${(this.props.envio.venta.pagado===0)?'success':'danger'}`} onClick={()=>this.props.cambiarEstadoPagado(this.props.envio.venta.idVenta)}>{(this.props.envio.venta.pagado===0)?'Entregar':'Desentregar'}</button>
             }
             <span style={{float:'right'}}>{this.props.temporizador}</span>
           </td>
@@ -44,7 +46,7 @@ class EnvioList extends React.Component {
     let horas = Math.floor(minutos/60);
     let dias = Math.floor(horas/24);
     if(dias>0){
-      if(dias==1) return 'Hace 1 día';
+      if(dias===1) return 'Hace 1 día';
       return `Hace ${dias} días`;
     }
     switch (horas) {
@@ -58,27 +60,37 @@ class EnvioList extends React.Component {
   }
 
   render() {
+  
+  
     return (
-        <div className="container mt-3">
-            <table className="table text-center table-envios">
-                <thead className="thead-dark">
-                    <tr>
-                      <th scope="col">Zona</th>
-                      <th scope="col">Tipo</th>
-                      <th scope="col">
-                      </th>
-                    </tr>
-                </thead>
-              <tbody>
-              {this.props.envios.map((envio,key) => {
-                  let temporizador = this.calcularTiempo(envio.venta.fecha)
-                  return (
-                    <EnvioListItem key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} cambiarEstadoPagado={this.props.cambiarEstadoPagado} temporizador={temporizador}/>
-                  );
-              })}
-              </tbody>
-            </table>
-        </div>
+      <div className="container mt-3">
+        <EnvioListExcel data={this.props.envios}/>
+        <table className="table text-center table-envios">
+            <thead className="thead-dark">
+                <tr>
+                  <th scope="col">Zona</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">
+                    <ReactHTMLTableToExcel
+                      id="test-table-xls-button"
+                      className="btn btn-info"
+                      table="table-envios-excel"
+                      filename="envios"
+                      sheet="tablexls"
+                      buttonText="Exportar"/>
+                  </th>
+                </tr>
+            </thead>
+          <tbody>
+          {this.props.envios.map((envio,key) => {
+              let temporizador = this.calcularTiempo(envio.venta.fecha)
+              return (
+                <EnvioListItem key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} cambiarEstadoPagado={this.props.cambiarEstadoPagado} temporizador={temporizador}/>
+              );
+          })}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

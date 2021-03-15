@@ -17,7 +17,7 @@ class EnvioListItem extends React.Component {
             <button className="btn btn-warning mx-1" onClick={()=>this.props.mostrarDetalle(this.props.envio.venta)}>
               <i className="fas fa-eye"></i>
             </button>
-            {(this.props.envio.idZona)?
+            {(this.props.envio.tipo != 'Local')?
             <>
               <button className={`btn btn-${(this.props.envio.entregado===0)?`info`:`success`} mx-1`} disabled={(this.props.envio.en_camino===0 || this.props.envio.entregado===1)?true:false} onClick={()=>this.props.cambiarEstadoEntregado(this.props.envio.idEnvio)}>
                 {(this.props.envio.entregado===0)?`E`:`R`}
@@ -26,7 +26,7 @@ class EnvioListItem extends React.Component {
                 <i className="fas fa-ambulance"></i>
               </button>
             </>:
-              <button className={`btn mx-1 btn-${(this.props.envio.venta.pagado===0)?'success':'danger'}`} onClick={()=>this.props.cambiarEstadoPagado(this.props.envio.venta.idVenta)}>{(this.props.envio.venta.pagado===0)?'Entregar':'Desentregar'}</button>
+              <button className={`btn mx-1 btn-${(this.props.envio.venta.pagado===0)?'success':'danger'}`} onClick={()=>this.props.cambiarEstadoPagado(this.props.envio.venta.idVenta)}>{(this.props.envio.venta.entregado===0)?'Entregar':'Desentregar'}</button>
             }
             <span style={{float:'right'}}>{this.props.temporizador}</span>
           </td>

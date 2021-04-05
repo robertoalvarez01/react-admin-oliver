@@ -24,7 +24,8 @@ class NewSubProducto extends React.Component {
         peso:'',
         idTamaño:'',
         precioUnidad:'',
-        foto:''
+        foto:'',
+        mostrar:0
       }
     }
   }

@@ -16,7 +16,7 @@ class EditProduct extends React.Component {
         precioUnidad: '',
         descripcion: '',
         descripcionBasica: '',
-        disponible: 1,
+        mostrar: 1,
         idCategoria: 0,
         idMarca: 0,
         idSubCategoria:0
@@ -59,7 +59,7 @@ class EditProduct extends React.Component {
           precioUnidad: producto.data[0].precioUnidad,
           descripcion: producto.data[0].descripcion,
           descripcionBasica: producto.data[0].descripcion_basica,
-          disponible: producto.data[0].disponible,
+          mostrar: producto.data[0].mostrar,
           idCategoria: producto.data[0].idCategoria,
           idMarca: producto.data[0].idMarca,
           idSubCategoria:producto.data[0].idSubCategoria

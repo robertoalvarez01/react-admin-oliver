@@ -39,7 +39,7 @@ class ProductForm extends React.Component {
                 ))}
               </select>
             </div>
-
+                
             <div className="form-group col-12 col-md-3">
               <label>Subcategoria:</label>
               <select required className="form-control" name="idSubCategoria" defaultValue={this.props.formValues.idSubCategoria} onChange={this.props.onChange}>
@@ -59,10 +59,10 @@ class ProductForm extends React.Component {
             </div>
 
             <div className="form-group col-12 col-md-3">
-            <label>Estado:</label>
-              <select required className="form-control" name="disponible" defaultValue={this.props.formValues.disponible} onChange={this.props.onChange}>
-                <option value="0">No disponible</option>
-                <option value="1">Disponible</option>
+              <label>Mostrar en web: </label>
+              <select required className="form-control" name="mostrar" defaultValue={this.props.formValues.mostrar} onChange={this.props.onChange}>
+                <option value="0">No</option>
+                <option value="1">Si</option>
               </select>
             </div>
 

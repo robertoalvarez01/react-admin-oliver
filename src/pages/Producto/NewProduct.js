@@ -15,7 +15,7 @@ class NewProduct extends React.Component {
         precioUnidad: '',
         descripcion: '',
         descripcionBasica: '',
-        disponible: 1,
+        mostrar: 0,
         idCategoria: 0,
         idMarca: 0,
         idSubCategoria:0

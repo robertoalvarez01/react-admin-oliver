@@ -25,6 +25,13 @@ class MarcaForm extends React.Component {
                             onChange={this.props.handleChange}
                             />
                         </div>
+                        <div className="form-group">
+                            <label>Destacada</label>
+                            <select className="form-control" defaultValue={this.props.formValues.destacada} name="destacada" onChange={this.props.handleChange}>
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                        </div>
                         <input type="checkbox" className="mb-4" onChange={this.habilitarFormImagen}/> Modificar foto de la marca
                         <div className="form-group d-none" id="form-imagen">
                             <label>Imágen de la marca</label>
@@ -50,6 +57,13 @@ class MarcaForm extends React.Component {
                             type="text"
                             name="marca"
                             />
+                        </div>
+                        <div className="form-group">
+                            <label>Destacada</label>
+                            <select className="form-control" name="destacada">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
                         </div>
                         <div className="form-group">
                             <label>Imágen de la marca</label>

@@ -29,7 +29,7 @@ class SubProductos extends React.Component {
   
   async getSubProducto(){
     try {
-      const data = await getData(`${config.url}/subproducto?desde=${this.state.desde}&limite=${this.state.limite}`);
+      const data = await getData(`${config.url}/subproducto?desde=${this.state.desde}&limite=${this.state.limite}&admin=true`);
       this.setState({
         ...this.state,
         data:data.data,

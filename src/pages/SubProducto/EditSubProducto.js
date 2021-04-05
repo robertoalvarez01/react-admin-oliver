@@ -24,7 +24,8 @@ class EditSubCategoria extends React.Component {
           peso:'0',
           idTamaño:0,
           precioUnidad:0,
-          foto:''
+          foto:'',
+          mostrar:0
         }
       }
     }
@@ -63,7 +64,8 @@ class EditSubCategoria extends React.Component {
                   peso:data.data[0].peso,
                   idTamaño:data.data[0].idTamaño,
                   precioUnidad:data.data[0].precioUnidad,
-                  foto:data.data[0].foto
+                  foto:data.data[0].foto,
+                  mostrar:data.data[0].mostrar
                 }
             });
         } catch (error) {

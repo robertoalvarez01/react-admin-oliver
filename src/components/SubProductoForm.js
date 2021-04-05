@@ -129,6 +129,13 @@ const SubProductoForm = (props) => {
                     <input type="file" name="foto" className="form-control" required/>
                   </div>
                 }
+                <div className="form-group col-12">
+                  <label>Mostrar en web:</label>
+                  <select required className="form-control" name="mostrar" onChange={props.onChange} defaultValue={props.formValues.mostrar}>
+                    <option value="0">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                </div>
               </div>
             </div>
             {props.formId === 'formModificarSubProducto'?

@@ -68,5 +68,12 @@
         "subtitulo":"Ver medios de pagos disponibles",
         "boton":"Ingresar",
         "url":"/medios-de-pago"
+    },
+    {
+        "id":11,
+        "titulo":"Banners",
+        "subtitulo":"Administrár banners",
+        "boton":"Ingresar",
+        "url":"/banners"
     }
 ]

@@ -27,6 +27,17 @@ class ZonaForm extends React.Component {
                 <option value="Sabado">Sabado</option>
               </select>
             </div>
+            <div className="form-group">
+              <label>Cotización de zona</label>
+              <input
+                    onChange={this.props.onChange}
+                    className="form-control"
+                    type="text"
+                    name="precio"
+                    value={this.props.formValues.precio}
+                    required
+                  />
+            </div>
             <button type="submit" className="btn btn-outline-success btn-block">
               Guardar
             </button>

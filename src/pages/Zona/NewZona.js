@@ -14,7 +14,8 @@ class NewZona extends React.Component {
       error:null,
       formValues:{
         zona:'',
-        dia:''
+        dia:'',
+        precio:''
       }
     }
   }

@@ -25,7 +25,8 @@ class EditSubCategoria extends React.Component {
           idTamaño:0,
           precioUnidad:0,
           foto:'',
-          mostrar:0
+          mostrar:0,
+          descuento:0
         }
       }
     }
@@ -65,7 +66,8 @@ class EditSubCategoria extends React.Component {
                   idTamaño:data.data[0].idTamaño,
                   precioUnidad:data.data[0].precioUnidad,
                   foto:data.data[0].foto,
-                  mostrar:data.data[0].mostrar
+                  mostrar:data.data[0].mostrar,
+                  descuento:data.data[0].descuento
                 }
             });
         } catch (error) {

@@ -118,18 +118,26 @@ const SubProductoForm = (props) => {
                     step="any"
                     name="precioUnidad"/>
                 </div>
+                <div className="form-group col-12 col-md-4">
+                  <label>% Descuento:</label>
+                  <input
+                    defaultValue={props.formValues.descuento}
+                    className="form-control"
+                    type="text"
+                    name="descuento"/>
+                </div>
                 {(props.formId === 'formModificarSubProducto')?
-                  <div className="form-group col-12 col-md-4">
+                  <div className="form-group col-12 col-md-6">
                     <input type="checkbox" onChange={habilitarInputfile}/> Modificar imágen de producto
                     <input type="file" id="input-file-subproducto" name="foto" className="form-control d-none"/>
                   </div>
                 :
-                  <div className="form-group col-12 col-md-4">
+                  <div className="form-group col-12 col-md-6">
                     <label>Imagen del producto:</label>
                     <input type="file" name="foto" className="form-control" required/>
                   </div>
                 }
-                <div className="form-group col-12">
+                <div className="form-group col-12 col-md-6">
                   <label>Mostrar en web:</label>
                   <select required className="form-control" name="mostrar" onChange={props.onChange} defaultValue={props.formValues.mostrar}>
                     <option value="0">No</option>

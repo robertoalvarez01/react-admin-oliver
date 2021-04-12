@@ -25,7 +25,8 @@ class NewSubProducto extends React.Component {
         idTamaño:'',
         precioUnidad:'',
         foto:'',
-        mostrar:0
+        mostrar:0,
+        descuento:0
       }
     }
   }

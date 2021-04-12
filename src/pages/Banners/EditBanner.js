@@ -14,7 +14,8 @@ class EditBanner extends React.Component {
         formValues:{
           descripcion:"",
           activo:0,
-          url:""
+          url:"",
+          tiempo:0
         }
       }
     }
@@ -32,7 +33,12 @@ class EditBanner extends React.Component {
         const data = await getData(`${config.url}/banner/${this.props.match.params.id}`);
         this.setState({
           loading:false,
-          formValues:data.data[0]
+          formValues:{
+            descripcion:data.data[0].descripcion,
+            activo:data.data[0].activo,
+            url:data.data[0].url,
+            tiempo:data.data[0].tiempo_slider
+          }
         })
       } catch (error) {
         console.log(error);

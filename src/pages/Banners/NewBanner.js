@@ -14,7 +14,8 @@ class NewBanner extends React.Component {
       error:null,
       formValues:{
         descripcion:'',
-        activo:0
+        activo:0,
+        tiempo:0
       }
     }
   }
@@ -53,6 +54,16 @@ class NewBanner extends React.Component {
       })
       .catch(error => console.log('error', error));
   };
+
+  handleChange = e=>{
+    this.setState({
+      ...this.state,
+      formValues:{
+        ...this.state.formValues,
+        [e.target.name]:e.target.value
+      }
+    })
+  }
 
   render() {
     return (

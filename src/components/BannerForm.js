@@ -10,7 +10,7 @@ class BannerForm extends React.Component {
         <div className="container bg-light border rounded p-4"> 
           <form onSubmit={this.props.onSubmit} id="form-banner">
             <div className="row">
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-4">
                 <div className="form-group">
                   <label>Descripción</label>
                   <input
@@ -23,7 +23,20 @@ class BannerForm extends React.Component {
                       />
                 </div>
               </div>
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-4">
+                <div className="form-group">
+                  <label>Duración en pantalla (en segundos)</label>
+                  <input
+                        onChange={this.props.onChange}
+                        className="form-control"
+                        type="text"
+                        name="tiempo"
+                        value={this.props.formValues.tiempo || ''}
+                        required
+                      />
+                </div>
+              </div>
+              <div className="col-12 col-md-4">
                 <div className="form-group">
                   <label>Activo</label>
                   <select

@@ -32,6 +32,8 @@ import MediosDePago from '../pages/MedioDePago';
 import Banners from '../pages/Banners/Banners';
 import NewBanner from '../pages/Banners/NewBanner';
 import EditBanner from '../pages/Banners/EditBanner';
+import UsuarioOferta from '../pages/UsuarioOfertas';
+import NuevaNovedad from '../pages/UsuarioOfertas/nueva-novedad';
 
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
@@ -85,6 +87,9 @@ function App() {
           <Route exact path="/banners/agregar" component={NewBanner} />
           
           <Route exact path="/medios-de-pago" component={MediosDePago}/>
+
+          <Route exact path="/usuarios-ofertas" component={UsuarioOferta}/>
+          <Route exact path="/nueva-novedad" component={NuevaNovedad}/>
           {/* <Route component={NotFound} /> */}
         </Switch>
       </Layout>

@@ -75,5 +75,12 @@
         "subtitulo":"Administrár banners",
         "boton":"Ingresar",
         "url":"/banners"
+    },
+    {
+        "id":12,
+        "titulo":"Newsletters",
+        "subtitulo":"Comunicarse con usuarios",
+        "boton":"Ingresar",
+        "url":"/usuarios-ofertas"
     }
 ]

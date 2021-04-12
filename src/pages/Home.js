@@ -15,7 +15,7 @@ export default class Home extends Component {
 
   render() {
     return (
-		<div className="container mt-5">
+		<div className="container my-5">
             <div className="row">
                 {Menu.map(item=>(
                     <div key={item.id} className="col-12 col-sm-6 col-md-4 my-3">

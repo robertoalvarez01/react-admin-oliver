@@ -1,24 +1,24 @@
 import React from 'react';
-const NovedadForm = ({onSubmit,handleChange,formValues}) => {
+import Loader from './Loader';
+const NovedadForm = ({onSubmit,handleChange,formValues,error}) => {
     return (
-        <div className="container bg-light border rounded p-4"> 
+        <div className="container bg-light border rounded p-4">
+            {error ? <div className="alert alert-danger text-center">{error}</div> : null} 
             <form onSubmit={onSubmit}>
                 <div className="form-group">
                     <label>Asunto</label>
                     <input
-                        required
                         className="form-control"
                         type="text"
                         name="asunto"
                         value={formValues.asunto}
                         onChange={handleChange}
                         placeholder="Titulo del email" 
-                    />
+                        />
                 </div>
                 <div className="form-group">
                     <label>Novedad</label>
                     <textarea
-                    required
                     className="form-control"
                     name="contenido"
                     defaultValue={formValues.contenido}

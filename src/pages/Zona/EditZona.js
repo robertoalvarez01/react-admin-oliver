@@ -15,7 +15,8 @@ class EditZona extends React.Component {
       formValues:{
         zona:'',
         dia:'',
-        precio:0
+        precio:0,
+        precioExpress:0
       }
     }
   }
@@ -34,7 +35,8 @@ class EditZona extends React.Component {
         formValues:{
           zona:data.data[0].zona,
           dia:data.data[0].dia,
-          precio:data.data[0].precio
+          precio:data.data[0].precio,
+          precioExpress:data.data[0].precio_express
         },
         loading:false
       })

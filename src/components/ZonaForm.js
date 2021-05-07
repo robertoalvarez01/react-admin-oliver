@@ -38,6 +38,17 @@ class ZonaForm extends React.Component {
                     required
                   />
             </div>
+            <div className="form-group">
+              <label>Cotización express de zona</label>
+              <input
+                    onChange={this.props.onChange}
+                    className="form-control"
+                    type="text"
+                    name="precioExpress"
+                    value={this.props.formValues.precioExpress}
+                    required
+                  />
+            </div>
             <button type="submit" className="btn btn-outline-success btn-block">
               Guardar
             </button>

@@ -38,61 +38,65 @@ import NuevaNovedad from '../pages/UsuarioOfertas/nueva-novedad';
 // import BadgeNew from '../pages/BadgeNew';
 // import NotFound from '../pages/NotFound';
 
+import UsuarioState from '../context/usuario/usuarioState';
+
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/ingresar" component={Login} />
-          {/*}<Route exact path="/imagen/:productId" component={imageForm} />{*/}
+      <UsuarioState>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/ingresar" component={Login} />
+            {/*}<Route exact path="/imagen/:productId" component={imageForm} />{*/}
 
-          <Route exact path="/subproductos" component={SubProducto} />
-          <Route exact path="/subproducto/agregar" component={NewSubProducto} />
-          <Route exact path="/subproducto/editar/:id" component={EditSubProducto} />
+            <Route exact path="/subproductos" component={SubProducto} />
+            <Route exact path="/subproducto/agregar" component={NewSubProducto} />
+            <Route exact path="/subproducto/editar/:id" component={EditSubProducto} />
 
-          <Route exact path="/productos" component={Products} />
-          <Route exact path="/producto/agregar" component={NewProduct} />
-          <Route exact path="/producto/editar/:productId" component={EditProduct} />
+            <Route exact path="/productos" component={Products} />
+            <Route exact path="/producto/agregar" component={NewProduct} />
+            <Route exact path="/producto/editar/:productId" component={EditProduct} />
 
-          <Route exact path="/categorias" component={Categorias} />
-          <Route exact path="/categoria/agregar" component={NewCategoria} />
-          <Route exact path="/categoria/editar/:id" component={EditCategoria} />
+            <Route exact path="/categorias" component={Categorias} />
+            <Route exact path="/categoria/agregar" component={NewCategoria} />
+            <Route exact path="/categoria/editar/:id" component={EditCategoria} />
 
-          <Route exact path="/subcategorias" component={SubCategorias} />
-          <Route exact path="/subcategoria/agregar" component={NewSubCategoria} />
-          <Route exact path="/subcategoria/editar/:id" component={EditSubCategoria} />
+            <Route exact path="/subcategorias" component={SubCategorias} />
+            <Route exact path="/subcategoria/agregar" component={NewSubCategoria} />
+            <Route exact path="/subcategoria/editar/:id" component={EditSubCategoria} />
 
-          <Route exact path="/marcas" component={Marcas} />
-          <Route exact path="/marca/agregar" component={NewMarca} />
-          <Route exact path="/marca/editar/:id" component={EditMarca} />
+            <Route exact path="/marcas" component={Marcas} />
+            <Route exact path="/marca/agregar" component={NewMarca} />
+            <Route exact path="/marca/editar/:id" component={EditMarca} />
 
-          <Route exact path="/tamaños" component={Tamaño} />
-          <Route exact path="/tamaño/agregar" component={NewTamaño} />
-          <Route exact path="/tamaño/editar/:id" component={EditTamaño} />
+            <Route exact path="/tamaños" component={Tamaño} />
+            <Route exact path="/tamaño/agregar" component={NewTamaño} />
+            <Route exact path="/tamaño/editar/:id" component={EditTamaño} />
 
-          <Route exact path="/legales" component={Legales} />
-          <Route exact path="/legales/editar" component={EditLegales} />
+            <Route exact path="/legales" component={Legales} />
+            <Route exact path="/legales/editar" component={EditLegales} />
 
-          <Route exact path="/zonas-envio" component={Zonas} />
-          <Route exact path="/zonas-envio/editar/:id" component={EditZona} />
-          <Route exact path="/zonas-envio/agregar" component={NewZona} />
-          
-          <Route exact path="/envios" component={Envios} />
-          <Route exact path="/envios/editar/:id" component={Envios} />
-          <Route exact path="/envios/agregar" component={Envios} />
+            <Route exact path="/zonas-envio" component={Zonas} />
+            <Route exact path="/zonas-envio/editar/:id" component={EditZona} />
+            <Route exact path="/zonas-envio/agregar" component={NewZona} />
+            
+            <Route exact path="/envios" component={Envios} />
+            <Route exact path="/envios/editar/:id" component={Envios} />
+            <Route exact path="/envios/agregar" component={Envios} />
 
-          <Route exact path="/banners" component={Banners} />
-          <Route exact path="/banners/editar/:id" component={EditBanner} />
-          <Route exact path="/banners/agregar" component={NewBanner} />
-          
-          <Route exact path="/medios-de-pago" component={MediosDePago}/>
+            <Route exact path="/banners" component={Banners} />
+            <Route exact path="/banners/editar/:id" component={EditBanner} />
+            <Route exact path="/banners/agregar" component={NewBanner} />
+            
+            <Route exact path="/medios-de-pago" component={MediosDePago}/>
 
-          <Route exact path="/usuarios-ofertas" component={UsuarioOferta}/>
-          <Route exact path="/nueva-novedad" component={NuevaNovedad}/>
-          {/* <Route component={NotFound} /> */}
-        </Switch>
-      </Layout>
+            <Route exact path="/usuarios-ofertas" component={UsuarioOferta}/>
+            <Route exact path="/nueva-novedad" component={NuevaNovedad}/>
+            {/* <Route component={NotFound} /> */}
+          </Switch>
+        </Layout>
+      </UsuarioState>
     </BrowserRouter>
   );
 }

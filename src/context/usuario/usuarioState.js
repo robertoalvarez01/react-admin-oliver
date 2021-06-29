@@ -36,7 +36,7 @@ const UsuarioState = (props) => {
         const req = await fetch(`${config.url}/login`, requestOptions);
         const response = await req.json();
         if(response.ok && response.usuario.admin === 1){
-            localStorage.setItem('administrador',response);
+            localStorage.setItem('administrador',JSON.stringify(response));
             return dispatch({
                 type:USUARIO_LOGIN,
                 payload:response.usuario
@@ -49,8 +49,16 @@ const UsuarioState = (props) => {
     }
 
     const obtenerUsuario = async()=>{
+        dispatch({
+            type:USUARIO_LOADING
+        });
+
         const administrador = JSON.parse(localStorage.getItem('administrador'));
         if(!administrador){
+            dispatch({
+                type:USUARIO_ERROR,
+                payload:null
+            })
             return false;
         }
 

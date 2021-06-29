@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '../../components/Loader';
 import config from '../../config/config';
-import {authentication,request,requestDelete} from '../../helpers/helpers';
+import {request,requestDelete} from '../../helpers/helpers';
 import Modal from '../../components/Modal';
 import MediosDePagoList from '../../components/MediosDePagoList';
 import MediosDePagoForm from '../../components/MediosDePagoForm';
@@ -9,7 +9,6 @@ const Swal = require('sweetalert2');
 
 const MediosDePago = () => {
     useEffect(() => {
-        authentication();
         getMedios();
     }, []);
     

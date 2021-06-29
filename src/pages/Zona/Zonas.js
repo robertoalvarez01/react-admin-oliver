@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Loader from '../../components/Loader';
 import ZonasList from '../../components/ZonasList';
 import config from '../../config/config';
-import {authentication,getData,requestDelete} from '../../helpers/helpers';
+import {getData,requestDelete} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
 export default class Zonas extends Component {
@@ -16,7 +16,6 @@ export default class Zonas extends Component {
     }
 
     componentDidMount() {
-        authentication();
         this.setState({
             ...this.state,
             loading:true

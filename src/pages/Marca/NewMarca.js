@@ -14,12 +14,6 @@ class NewMarca extends React.Component {
         loading:false
       }
     }
-    componentDidMount(){
-      const adminUser = localStorage.getItem('administrador');
-      if (adminUser === null) {
-        this.props.history.push('/ingresar');
-      }
-    }
 
   handleSubmit = e => {
     e.preventDefault();

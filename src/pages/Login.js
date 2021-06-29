@@ -12,7 +12,7 @@ const Login = (props) => {
 		email:'',
 		password:''
 	});
-	const {loading,error,logueado,usuario,login,verificarSesion} = useContext(UsuarioContext);
+	const {loading,error,logueado,usuario,login} = useContext(UsuarioContext);
 
 	useEffect(() => {
 		if(logueado){

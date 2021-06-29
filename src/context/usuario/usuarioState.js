@@ -36,7 +36,7 @@ const UsuarioState = (props) => {
         const req = await fetch(`${config.url}/login`, requestOptions);
         const response = await req.json();
         if(response.ok && response.usuario.admin === 1){
-            localStorage.setItem('administrador',JSON.stringify(response.usuario))
+            localStorage.setItem('administrador',response);
             return dispatch({
                 type:USUARIO_LOGIN,
                 payload:response.usuario
@@ -48,18 +48,27 @@ const UsuarioState = (props) => {
         })
     }
 
-    const verificarSesion = ()=>{
-        dispatch({
-            type:USUARIO_LOADING
-        })
-        const usuario = JSON.parse(localStorage.getItem('administrador'));
-        if(!usuario){
+    const obtenerUsuario = async()=>{
+        const administrador = JSON.parse(localStorage.getItem('administrador'));
+        if(!administrador){
             return false;
         }
-        dispatch({
-            type:USUARIO_LOGIN,
-            payload:usuario
-        })
+
+        const {usuario,token} = administrador;
+        
+        let myHeaders = new Headers();
+        myHeaders.append("token", token);
+
+        const respuesta = await fetch(`${config.url}/verify-sesion`,{
+            method:'GET',
+            headers:myHeaders
+        });
+        if(respuesta.status === 200){
+            return dispatch({
+                type:USUARIO_LOGIN,
+                payload:usuario
+            })
+        }
     }
 
     const logout = ()=>{
@@ -77,7 +86,7 @@ const UsuarioState = (props) => {
                 usuario:state.usuario,
                 logueado:state.logueado,
                 login,
-                verificarSesion,
+                obtenerUsuario,
                 logout
             }}>
             {props.children}

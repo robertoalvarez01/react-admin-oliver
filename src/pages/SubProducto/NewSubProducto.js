@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication,getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 import SubProductoForm from '../../components/SubProductoForm';
 import config from '../../config/config';
 import Loader from '../../components/Loader';
@@ -33,7 +33,6 @@ class NewSubProducto extends React.Component {
   
   async componentDidMount(){
     try {
-      authentication();
       this.setState({
           ...this.state,
           loading:true

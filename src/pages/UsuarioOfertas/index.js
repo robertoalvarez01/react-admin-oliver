@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import UsuarioOfertaList from '../../components/UsuarioOfertaList';
 import Loader from '../../components/Loader';
 import config from '../../config/config';
-import {authentication,getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 
 const UsuarioOferta = () => {
     useEffect(() => {
-        authentication();
         getUsuarios();
     }, []);
 

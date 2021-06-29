@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication,getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 import config from '../../config/config';
 import Loader from '../../components/Loader';
 import ZonaForm from '../../components/ZonaForm';
@@ -22,7 +22,6 @@ class EditZona extends React.Component {
   }
   
   componentDidMount(){
-    authentication();
     this.setState({...this.state,loading:true});
     this.getZona();
   }

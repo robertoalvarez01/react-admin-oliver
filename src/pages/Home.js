@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Menu from '../Menu.json';
 export default class Home extends Component {
-	state = {
-		administrador: '',
-	};
-	// Aquí irá el hook que reenviará a /Login
-	componentDidMount(){
-		const adminUser = localStorage.getItem('administrador');
-		if (adminUser === null) {
-			this.props.history.push('/ingresar');
-		}
-	}
 
   render() {
     return (

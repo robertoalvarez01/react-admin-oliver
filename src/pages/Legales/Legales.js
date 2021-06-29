@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Loader from '../../components/Loader';
 import LegalesList from '../../components/LegalesList';
 import config from '../../config/config';
-import {authentication,getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 export default class Legales extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +14,6 @@ export default class Legales extends Component {
     }
 
     componentDidMount() {
-        authentication();
         this.setState({
             ...this.state,
             loading:true

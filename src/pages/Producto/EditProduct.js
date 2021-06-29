@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ProductForm from '../../components/ProductForm';
 import Loader from '../../components/Loader';
 import config from '../../config/config';
-import {authentication, getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
 class EditProduct extends React.Component {
@@ -31,7 +31,6 @@ class EditProduct extends React.Component {
 
   async componentDidMount(){
     try {
-      authentication();
       this.setState({
         ...this.state,
         loading:true

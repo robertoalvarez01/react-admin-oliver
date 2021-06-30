@@ -9,14 +9,13 @@ table .buttonsDesktop{
 
 
 .menu-lateral{
-    position: fixed;
+    position: absolute;
     top: 0;
-    left: 0;
-    width: 14%;
-    height: 100vh;
+    width: 90%;
+    height: calc(100vh - 66px);
     background-color: teal;
     box-shadow: 0px 10px 0px 0px rgb(0, 0, 0.5);
-    padding: 60px 10px 0px 10px;
+    padding: 40px 10px 0px 10px;
 }
 
 .menu-lateral a{
@@ -31,4 +30,33 @@ table .buttonsDesktop{
 
 body{
     background-color: #e1dfdf;
+    overflow-x: hidden;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
 }

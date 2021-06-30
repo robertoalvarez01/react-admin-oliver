@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Quicksand&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none!important;
+    box-sizing: border-box;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-family: 'Quicksand', sans-serif;
 }
@@ -9,13 +17,17 @@ table .buttonsDesktop{
 
 
 .menu-lateral{
-    position: absolute;
+    position: fixed;
     top: 0;
-    width: 90%;
-    height: calc(100vh - 66px);
+    width: 13%;
+    height: 100vh;
     background-color: teal;
     box-shadow: 0px 10px 0px 0px rgb(0, 0, 0.5);
-    padding: 40px 10px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 14px;
+    overflow-y:auto;
 }
 
 .menu-lateral a{

@@ -6,6 +6,8 @@
     padding: 10px 15px;
     box-shadow: 0 2px 5px rgb(163, 161, 161);
     transition: all .5 ease;
+    margin: 10px 0px;
+    position: relative;
 }
 
 .box__balance:hover{
@@ -23,6 +25,12 @@
     border-radius: 50%;
 }
 
+.box__balance .box__avatar img{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
 .box__balance .box__data{
     padding: 0px 0px 0px 15px;
 }
@@ -36,4 +44,21 @@
     text-transform: uppercase;
     font-size: 13px;
     font-weight: bold;
+}
+
+.box__balance .box__detalle{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.box__balance .box__detalle.warning{
+    color: #f7cc20;
+}
+
+.box__balance .box__detalle.success{
+    color: teal;
 }

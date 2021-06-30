@@ -72,3 +72,10 @@ body{
 .fadeIn {
     animation-name: fadeIn;
 }
+
+
+@media(max-width:768px){
+    .menu-lateral{
+        display: none;
+    }
+}

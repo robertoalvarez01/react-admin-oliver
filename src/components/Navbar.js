@@ -28,7 +28,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-ligh sticky-top" style={{backgroundColor:"#FFB347"}}>
+    <nav className="navbar navbar-expand-lg navbar-ligh" style={{backgroundColor:"#FFB347"}}>
       <section className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img src={logoOliver} width={35} height={35} alt="Admin oliver" loading="lazy" />

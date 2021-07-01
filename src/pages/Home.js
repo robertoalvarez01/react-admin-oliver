@@ -31,20 +31,20 @@ const Home = () => {
         </div>
         <br/>
         <div className="row">
-          <div className="col-12 col-md-8 my-2">
-            <VentasEnTiempo/>
-          </div>
-          <div className="col-12 col-md-4 my-2">
-            <GraficoMediosDePago/>
-          </div>
-        </div>
-        <br/>
-        <div className="row">
           <div className="col-12 col-sm-6">
             <Calendario/>
           </div>
           <div className="col-12 col-sm-6">
             <UltimasVentas/>
+          </div>
+        </div>
+        
+        <div className="row">
+          <div className="col-12 col-md-8 my-2">
+            <VentasEnTiempo/>
+          </div>
+          <div className="col-12 col-md-4 my-2">
+            <GraficoMediosDePago/>
           </div>
         </div>
         <br/>

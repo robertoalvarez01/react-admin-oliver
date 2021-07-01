@@ -1,6 +1,6 @@
 import React,{useReducer} from 'react';
 import config from '../../config/config';
-import { BALANCE_ERROR, BALANCE_LOADING, BALANCE_OBTENER_DATOS } from '../../types';
+import { BALANCE_CAMBIAR_FECHA, BALANCE_CAMBIAR_FORMATO_FECHA, BALANCE_ERROR, BALANCE_LOADING, BALANCE_OBTENER_DATOS } from '../../types';
 import { BalanceContext } from './balanceContext';
 import balanceReducer from './balanceReducer';
 
@@ -15,7 +15,8 @@ const BalanceState = (props) => {
             recaudacion:0,
             sin_stock:0
         },
-        fecha:null
+        fecha:null,
+        formatoFecha:'YYYY-MM-DD'
     }
 
     const [state, dispatch] = useReducer(balanceReducer, INITIAL_STATE);
@@ -54,13 +55,30 @@ const BalanceState = (props) => {
         })
     }
 
+    const aplicarFecha = fecha => {
+        dispatch({
+            type:BALANCE_CAMBIAR_FECHA,
+            payload:fecha
+        })
+    }
+
+    const cambiarFormatoFecha = formato =>{
+        dispatch({
+            type:BALANCE_CAMBIAR_FORMATO_FECHA,
+            payload:formato
+        })
+    }
+
     return (
         <BalanceContext.Provider value={{
             loading:state.loading,
             error:state.error,
             data:state.data,
             fecha:state.fecha,
-            traerInfo
+            formatoFecha:state.formatoFecha,
+            traerInfo,
+            aplicarFecha,
+            cambiarFormatoFecha
         }}>
             {props.children}
         </BalanceContext.Provider>

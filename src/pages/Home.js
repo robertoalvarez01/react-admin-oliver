@@ -5,29 +5,44 @@ import UltimasVentas from '../components/UltimasVentas';
 import Loader from '../components/Loader';
 import { useContext } from 'react';
 import {UsuarioContext} from '../context/usuario/usuarioContext';
+import { BalanceContext } from "../context/balance/balanceContext";
 import BotonCircle from '../components/BotonCircle';
 import GraficoMediosDePago from '../components/Graficos/mediosDePago';
 import VentasEnTiempo from '../components/Graficos/ventasEnTiempo';
+import FormFormatoFecha from '../components/FormFormatoFecha';
 
 const Home = () => {
+
   const {usuario} = useContext(UsuarioContext);
+  const {data:{recaudacion,ventas,usuarios,sin_stock},loading} = useContext(BalanceContext);
+
   return (
     !usuario ? <Loader/> :
     <div className="container mt-2 mb-5">
-        <h2>Hola, {usuario.nombre}</h2>
-        <div className="row">
-          <div className="col-12 col-sm-6 col-md-3">
-            <BoxBalance valor={23} label="ventas" icon="fas fa-money-bill-alt"/>
-          </div>
-          <div className="col-12 col-sm-6 col-md-3">
-            <BoxBalance valor={10} label="Usuarios" icon="fas fa-users"/>
-          </div>
-          <div className="col-12 col-sm-6 col-md-3">
-            <BoxBalance valor={13500} label="Recaudación hoy" icon="fas fa-cash-register"/>
-          </div>
-          <div className="col-12 col-sm-6 col-md-3">
-            <BoxBalance valor={16} label="Sin stock" icon="fas fa-exclamation"/>
-          </div>
+
+        <div className="d-flex justify-content-between align-items-center">
+          <h2>Hola, {usuario.nombre}</h2>
+          <FormFormatoFecha/>
+        </div>
+      
+      
+        <div className="row"> 
+          {loading ? <div className="text-center"><Loader/></div> : 
+            <>
+              <div className="col-12 col-sm-6 col-md-3">
+                <BoxBalance valor={ventas} label="ventas" icon="fas fa-money-bill-alt"/>
+              </div>
+              <div className="col-12 col-sm-6 col-md-3">
+                <BoxBalance valor={usuarios} label="Nuevos usuarios" icon="fas fa-users"/>
+              </div>
+              <div className="col-12 col-sm-6 col-md-3">
+                <BoxBalance valor={recaudacion ? recaudacion : 0} label="Recaudación" icon="fas fa-cash-register"/>
+              </div>
+              <div className="col-12 col-sm-6 col-md-3">
+                <BoxBalance valor={sin_stock} label="Sin stock" icon="fas fa-exclamation"/>
+              </div>
+            </>
+          }
         </div>
         <br/>
         <div className="row">

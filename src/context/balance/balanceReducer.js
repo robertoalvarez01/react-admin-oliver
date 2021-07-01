@@ -1,4 +1,4 @@
-import { BALANCE_ERROR, BALANCE_LOADING, BALANCE_OBTENER_DATOS } from "../../types";
+import { BALANCE_CAMBIAR_FECHA, BALANCE_CAMBIAR_FORMATO_FECHA, BALANCE_ERROR, BALANCE_LOADING, BALANCE_OBTENER_DATOS } from "../../types";
 
 const balanceReducer = (state,action)=>{
     switch (action.type) {
@@ -21,6 +21,16 @@ const balanceReducer = (state,action)=>{
                     recaudacion:action.payload.recaudacion,
                     sin_stock:action.payload.sin_stock
                 }
+            }
+        case BALANCE_CAMBIAR_FORMATO_FECHA:
+            return {
+                ...state,
+                formatoFecha:action.payload
+            }
+        case BALANCE_CAMBIAR_FECHA:
+            return {
+                ...state,
+                fecha:action.payload
             }
         default:
             return state;

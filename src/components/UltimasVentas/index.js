@@ -3,6 +3,7 @@ import BoxBalance from '../BoxBalance/boxBalance';
 import ListUsuarios from '../ListUsuarios';
 import Loader from '../Loader';
 import { VentasContext } from "../../context/ventas/ventasContext";
+import foto from '../../assets/user.jpg';
 
 const UltimasVentas = () => {
     const {loading,error,ultimasVentas,traerUltimas} = useContext(VentasContext);
@@ -19,7 +20,7 @@ const UltimasVentas = () => {
         <ListUsuarios titulo="Últimas ventas" btnReload={true} reload={reload}>
             {loading || !ultimasVentas.length ? <Loader/> : <>
                 {ultimasVentas.map(venta=>(
-                    <BoxBalance key={venta.idVenta} valor={venta.total} label={venta.nombre} detalle={venta.pagado==1 ? 'Pago aprobado' : 'Pago pendiente'} iconDetalle={venta.pagado==1 ? 'fas fa-check' : 'fas fa-exclamation'} colorDetalle={venta.pagado==1 ? 'success' : 'warning'} avatar={venta.foto}/>
+                    <BoxBalance key={venta.idVenta} valor={venta.total} label={venta.nombre} detalle={venta.pagado==1 ? 'Pago aprobado' : 'Pago pendiente'} iconDetalle={venta.pagado==1 ? 'fas fa-check' : 'fas fa-exclamation'} colorDetalle={venta.pagado==1 ? 'success' : 'warning'} avatar={venta.foto && venta.foto !== 'null' ? venta.foto : foto}/>
                 ))}
             </>}
         </ListUsuarios>

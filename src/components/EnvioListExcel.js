@@ -18,9 +18,9 @@ const EnvioListExcel = (props) => {
                         <td>{envio.idEnvio}</td>
                         <td>{envio.zona}</td>
                         <td>{envio.tipo}</td>
-                        <td>{envio.venta.nombre}</td>
-                        <td>{envio.venta.address}</td>
-                        <td>{envio.venta.email}</td>
+                        <td>{envio.venta ? envio.venta.nombre : 'No registrado'}</td>
+                        <td>{envio.venta ? envio.venta.address : 'No registrado'}</td>
+                        <td>{envio.venta ? envio.venta.email : 'No registrado'}</td>
                     </tr>
                 ))}
             </tbody>

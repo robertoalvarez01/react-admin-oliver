@@ -6,6 +6,7 @@ import './style/EnvioList.css';
 class EnvioListItem extends React.Component {
   render() {
     return (
+      !this.props.envio.venta ? null :
       <>
         <tr className={(this.props.envio.venta.pagado === 0)?'nopago':'pago'}>
           {/* <th style={{verticalAlign:'baseline'}}>
@@ -45,6 +46,7 @@ class EnvioList extends React.Component {
     let minutos = Math.floor((horarioActual - horarioVenta)/1000/60);
     let horas = Math.floor(minutos/60);
     let dias = Math.floor(horas/24);
+    console.log(dias,horas,minutos);
     if(dias>0){
       if(dias===1) return 'Hace 1 día';
       return `Hace ${dias} días`;
@@ -83,7 +85,7 @@ class EnvioList extends React.Component {
             </thead>
           <tbody>
           {this.props.envios.map((envio,key) => {
-              let temporizador = this.calcularTiempo(envio.venta.fecha)
+              let temporizador = envio.venta ? this.calcularTiempo(envio.venta.fecha) : '-';
               return (
                 <EnvioListItem key={key} envio={envio} mostrarDetalle={this.props.mostrarDetalle} cambiarEstadoEntregado={this.props.cambiarEstadoEntregado} cambiarEstadoEnCamino={this.props.cambiarEstadoEnCamino} cambiarEstadoPagado={this.props.cambiarEstadoPagado} temporizador={temporizador}/>
               );

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../../helpers/helpers';
 import CategoriaForm from '../../components/CategoriaForm';
 import config from '../../config/config';
 import Loader from '../../components/Loader';
@@ -16,10 +15,6 @@ class NewCategoria extends React.Component {
         categoria:''
       }
     }
-  }
-  
-  componentDidMount(){
-    authentication();
   }
 
   handleChange = e => {

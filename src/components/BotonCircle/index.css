@@ -1,0 +1,25 @@
+#btn__circle{
+    border:none;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    font-size: 12px;
+    box-shadow: 0 2px 5px rgb(163, 161, 161);
+    transition: all .5s ease;
+}
+
+#btn__circle:hover{
+    box-shadow: 10px 10px 20px rgb(163, 161, 161);
+    font-weight: 13px;
+}
+
+#btn__circle.success{
+    background-color: teal;
+    color: white;
+}
+
+#btn__circle i{
+    display: block;
+    font-size: 36px;
+    margin-bottom: 10px;
+}

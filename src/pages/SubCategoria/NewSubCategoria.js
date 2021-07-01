@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../../helpers/helpers';
 import SubCategoriaForm from '../../components/SubCategoriaForm';
 import config from '../../config/config';
 import Loader from '../../components/Loader';
@@ -16,10 +15,6 @@ class NewSubCategoria extends React.Component {
         subcategoria:''
       }
     }
-  }
-  
-  componentDidMount(){
-    authentication();
   }
 
   handleChange = e => {

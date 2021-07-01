@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication} from '../../helpers/helpers';
 import config from '../../config/config';
 import Loader from '../../components/Loader';
 import BannerForm from '../../components/BannerForm';
@@ -20,9 +19,6 @@ class NewBanner extends React.Component {
     }
   }
   
-  componentDidMount(){
-    authentication();
-  }
 
   handleSubmit = e => {
     e.preventDefault();

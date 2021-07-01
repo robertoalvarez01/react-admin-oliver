@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {authentication, getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 import TamañoForm from '../../components/TamañoForm';
 import config from '../../config/config';
 import Loader from '../../components/Loader';
@@ -19,7 +19,6 @@ class NewTamaño extends React.Component {
   }
   
   componentDidMount(){
-    authentication();
     this.setState({...this.state,loading:true});
     this.getTamaño();
   }

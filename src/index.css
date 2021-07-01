@@ -1,8 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Quicksand&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none!important;
+    box-sizing: border-box;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-family: 'Quicksand', sans-serif;
 }
 
 table .buttonsDesktop{
     display: block;
+}
+
+
+.menu-lateral{
+    position: fixed;
+    top: 0;
+    width: 13%;
+    height: 100vh;
+    background-color: teal;
+    box-shadow: 0px 10px 0px 0px rgb(0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 14px;
+    overflow-y:auto;
+}
+
+.menu-lateral a{
+    color: white;
+    transition: all .2s ease;
+}
+
+.menu-lateral a:hover{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body{
+    background-color: #e1dfdf;
+    overflow-x: hidden;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+
+@media(max-width:768px){
+    .menu-lateral{
+        display: none;
+    }
 }

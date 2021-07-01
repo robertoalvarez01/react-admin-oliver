@@ -2,7 +2,7 @@ import React from 'react';
 import Loader from '../../components/Loader';
 import ProductList from "../../components/ProductList";
 import config from '../../config/config';
-import {authentication,requestDelete,getData} from '../../helpers/helpers';
+import {requestDelete,getData} from '../../helpers/helpers';
 const Swal = require('sweetalert2');
 
 class Products extends React.Component {
@@ -19,7 +19,6 @@ class Products extends React.Component {
 
   componentDidMount() {
     this.setState({...this.state,loading:true});
-    authentication();
     this.getProductos();
   }
 

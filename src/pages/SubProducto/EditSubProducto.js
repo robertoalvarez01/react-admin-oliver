@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader';
-import {authentication,getData} from '../../helpers/helpers';
+import {getData} from '../../helpers/helpers';
 import config from '../../config/config';
 import SubProductoForm from '../../components/SubProductoForm';
 const Swal = require('sweetalert2');
@@ -33,7 +33,6 @@ class EditSubCategoria extends React.Component {
     
     async componentDidMount(){
         try {
-            authentication();
             this.setState({
               ...this.state,
               loading:true

@@ -1,16 +1,12 @@
-import React,{useEffect,useState} from 'react';
+import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import NovedadForm from '../../components/NovedadForm';
 import config from '../../config/config';
-import {authentication} from '../../helpers/helpers';
 
 const Swal = require('sweetalert2');
 
 const NuevaNovedad = (props) => {
-    useEffect(() => {
-        authentication();
-    }, []);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);

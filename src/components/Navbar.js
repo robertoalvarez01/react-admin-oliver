@@ -33,9 +33,11 @@ const Navbar = () => {
         <Link className="navbar-brand" to="/">
           <img src={logoOliver} width={35} height={35} alt="Admin oliver" loading="lazy" />
         </Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        {logueado ? 
+          <span>
+            <img src={usuario.foto ? usuario.foto : userPng} alt="user" height={34} width={34} style={{borderRadius:'17px'}}/>
+          </span>
+        : <i className="fas fa-bars"/>}
   
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">

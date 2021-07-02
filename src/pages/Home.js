@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BoxBalance from '../components/BoxBalance/boxBalance';
 import Calendario from '../components/Calendario/Calendario';
 import UltimasVentas from '../components/UltimasVentas';
@@ -10,11 +10,18 @@ import BotonCircle from '../components/BotonCircle';
 import GraficoMediosDePago from '../components/Graficos/mediosDePago';
 import VentasEnTiempo from '../components/Graficos/ventasEnTiempo';
 import FormFormatoFecha from '../components/FormFormatoFecha';
+import Modal from '../components/Modal';
+import FormAumento from '../components/FormAumento/FormAumento';
 
 const Home = () => {
 
   const {usuario} = useContext(UsuarioContext);
   const {data:{recaudacion,ventas,usuarios,sin_stock},loading} = useContext(BalanceContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const switchModal = ()=>{
+    setModalIsOpen(!modalIsOpen);
+  }
 
   return (
     !usuario ? <Loader/> :
@@ -65,19 +72,22 @@ const Home = () => {
         <br/>
         <div className="row text-center">
           <div className="col-6 col-md-3">
-            <BotonCircle icon="fas fa-arrow-circle-up" value="Aumentos masivos" color="success"/>
+            <BotonCircle icon="fas fa-arrow-circle-up" value="Aumentos masivos" color="success" action={switchModal}/>
           </div>
           <div className="col-6 col-md-3">
-            <BotonCircle icon="fas fa-truck" value="Estado de mis envíos" color="success"/>
+            <BotonCircle icon="fas fa-truck" value="Estado de mis envíos" color="success" link="/envios"/>
           </div>
           <div className="col-6 col-md-3">
-            <BotonCircle icon="fas fa-plus" value="Nuevo producto" color="success"/>
+            <BotonCircle icon="fas fa-plus" value="Nuevo producto" color="success" link="/producto/agregar"/>
           </div>
           <div className="col-6 col-md-3">
-            <BotonCircle icon="fas fa-credit-card" value="Nuevo medio de pago" color="success"/>
+            <BotonCircle icon="fas fa-credit-card" value="Nuevo medio de pago" color="success" link="/medios-de-pago"/>
           </div>
         </div>
         <br/>
+        {modalIsOpen ? <Modal closeModal={switchModal}>
+          <FormAumento/>
+        </Modal> : null}
     </div>
   );
 }

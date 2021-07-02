@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Chart from "react-google-charts";
 import Loader from '../Loader';
+import { MediosContext } from "../../context/mediosPago/mediosContext";
 
 const GraficoMediosDePago = () => {
+    
+    const {dataInforme,traerDataInforme} = useContext(MediosContext);
+
+    useEffect(() => {
+        traerDataInforme();
+    }, [])
+
     return (
+        !dataInforme ? <Loader/> :
         <Chart
             width={'100%'}
             height={'300px'}
@@ -11,8 +20,8 @@ const GraficoMediosDePago = () => {
             loader={<Loader/>}
             data={[
                 ['Task', 'Hours per Day'],
-                ['Mercado pago', 11],
-                ['Efectivo', 4]
+                ['Mercado pago', dataInforme.mercado_pago],
+                ['Efectivo', dataInforme.efectivo]
             ]}
             options={{
                 title: 'Venta por medio',

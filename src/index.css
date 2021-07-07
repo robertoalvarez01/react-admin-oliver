@@ -76,6 +76,12 @@ body{
 
 @media(max-width:768px){
     .menu-lateral{
-        display: none;
+        width: 40%;
+        left: -100%;
+        transition: all .5s ease;
+    }
+
+    .menu-lateral.show{
+        left: 0;
     }
 }

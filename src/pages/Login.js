@@ -50,22 +50,20 @@ const Login = (props) => {
 	}
 
 	return (
-		<div>
-			<div className="container">
-				<form className="myForm bg-dark text-white p-5 border rounded" onSubmit={handleSubmit}>
-					<div className="form-group">
-						<label htmlFor="email">Email</label>
-						<input className="form-control input-lg text-center" type="email" name="email" id="email" placeholder="Ingrese su Email..." onChange={handleChange} value={formValues.email}/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="password">Contraseña</label>
-						<input className="form-control input-lg text-center" type="password" name="password" placeholder="Ingrese su Contraseña..." onChange={handleChange} value={formValues.password}/>
-					</div>
-					<div className="form-group mt-5">
-						{loading ? <Loader/> : <input type="submit" name="submit" className="btn btn-success btn-block" defaultValue="Sign Up" />}
-					</div>
-				</form>
-			</div>
+		<div className="myForm">
+			<form className="bg-dark text-white p-5" onSubmit={handleSubmit}>
+				<div className="form-group">
+					<label htmlFor="email">Email</label>
+					<input className="form-control input-lg text-center" type="email" name="email" id="email" placeholder="Ingrese su Email..." onChange={handleChange} value={formValues.email}/>
+				</div>
+				<div className="form-group">
+					<label htmlFor="password">Contraseña</label>
+					<input className="form-control input-lg text-center" type="password" name="password" placeholder="Ingrese su Contraseña..." onChange={handleChange} value={formValues.password}/>
+				</div>
+				<div className="form-group mt-5">
+					{loading ? <Loader/> : <input type="submit" name="submit" className="btn btn-success btn-block" value="Ingresar"/>}
+				</div>
+			</form>
 		</div>
 	);
 }

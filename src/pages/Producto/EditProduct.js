@@ -50,7 +50,7 @@ class EditProduct extends React.Component {
 
   async getProducto(){
     try {
-      const producto = await getData(`${config.url}/producto/${this.props.match.params.productId}`);
+      const producto = await getData(`${config.url}/productos/${this.props.match.params.productId}`);
       return this.setState({
         ...this.state,
         formValues:{
@@ -91,7 +91,7 @@ class EditProduct extends React.Component {
 
   async getSubCategorias(){
     try {
-      const subCategorias = await getData(`${config.url}/subcategoria`);
+      const subCategorias = await getData(`${config.url}/subcategorias`);
       return this.setState({
         ...this.state,
         subCategorias:subCategorias.data
@@ -107,7 +107,7 @@ class EditProduct extends React.Component {
 
   async getMarcas(){
     try {
-      const marcas = await getData(`${config.url}/marca`);
+      const marcas = await getData(`${config.url}/marcas`);
       return this.setState({
         ...this.state,
         marcas:marcas.data,
@@ -150,7 +150,7 @@ class EditProduct extends React.Component {
       body: JSON.stringify(this.state.formValues)
     };
 
-    fetch(`${config.url}/producto/${this.props.match.params.productId}`, requestOptions)
+    fetch(`${config.url}/productos/update/${this.props.match.params.productId}`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({

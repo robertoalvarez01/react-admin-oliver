@@ -25,7 +25,7 @@ class EditMarca extends React.Component {
 
     async getMarca(){
       try {
-        const data = await getData(`${config.url}/marca/${this.props.match.params.id}`);
+        const data = await getData(`${config.url}/marcas/${this.props.match.params.id}`);
         this.setState({
           loading:false,
           formValues:data.data[0]
@@ -57,7 +57,7 @@ class EditMarca extends React.Component {
         body: data,
         redirect: 'follow'
       };
-      fetch(`${config.url}/marca/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
+      fetch(`${config.url}/marcas/update/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
         this.setState({loading:false});
         Swal.fire(
             'Modificación exitosa',

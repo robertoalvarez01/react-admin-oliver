@@ -27,7 +27,7 @@ class Marcas extends React.Component {
     
     async getMarcas(){
       try {
-        const data = await getData(`${config.url}/marca`);
+        const data = await getData(`${config.url}/marcas`);
         this.setState({
           ...this.state,
           data:data.data,
@@ -54,7 +54,7 @@ class Marcas extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/marca/${id}`);
+        await requestDelete(`${config.url}/marcas/delete/${id}`);
         Swal.fire(
           'Eliminado',
           'Recurso eliminado',

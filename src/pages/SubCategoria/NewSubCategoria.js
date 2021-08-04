@@ -39,7 +39,7 @@ class NewSubCategoria extends React.Component {
       body: JSON.stringify(this.state.formValues),
       headers:myHeaders
     };
-    fetch(`${config.url}/subcategoria`, requestOptions)
+    fetch(`${config.url}/subcategorias/add`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});

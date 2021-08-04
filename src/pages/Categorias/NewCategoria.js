@@ -37,7 +37,7 @@ class NewCategoria extends React.Component {
       body: new FormData(document.getElementById('form-categoria')),
       headers:myHeaders
     };
-    fetch(`${config.url}/categoria`, requestOptions)
+    fetch(`${config.url}/categorias/add`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});

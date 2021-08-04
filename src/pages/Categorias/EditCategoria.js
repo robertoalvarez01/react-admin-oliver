@@ -24,7 +24,7 @@ class EditCategoria extends React.Component {
 
     async getCategoria(){
       try {
-        const data = await getData(`${config.url}/categoria/${this.props.match.params.id}`);
+        const data = await getData(`${config.url}/categorias/${this.props.match.params.id}`);
         this.setState({
           loading:false,
           formValues:data.data[0]
@@ -54,7 +54,7 @@ class EditCategoria extends React.Component {
         headers: myHeaders,
         body: new FormData(document.getElementById('form-categoria'))
       };
-      fetch(`${config.url}/categoria/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
+      fetch(`${config.url}/categorias/update/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
         this.setState({...this.state,loading:false});
         if (resultado.error) {
           return Swal.fire({

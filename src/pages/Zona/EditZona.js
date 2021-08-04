@@ -70,7 +70,7 @@ class EditZona extends React.Component {
             body: JSON.stringify(this.state.formValues),
             headers:myHeaders
         };
-        fetch(`${config.url}/zona/${this.props.match.params.id}`, requestOptions)
+        fetch(`${config.url}/zonas/update/${this.props.match.params.id}`, requestOptions)
         .then(response => response.json())
         .then(resultado => {
             this.setState({...this.state,loading:false});

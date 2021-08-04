@@ -43,7 +43,7 @@ class NewZona extends React.Component {
             body: JSON.stringify(this.state.formValues),
             headers:myHeaders
         };
-        fetch(`${config.url}/zona`, requestOptions)
+        fetch(`${config.url}/zonas/add`, requestOptions)
         .then(response => response.json())
         .then(resultado => {
             this.setState({...this.state,loading:false});

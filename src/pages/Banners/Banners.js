@@ -52,7 +52,7 @@ class Banners extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/banner/${id}`);
+        await requestDelete(`${config.url}/banners/delete/${id}`);
         return Swal.fire(
           'Eliminado',
           'Recurso eliminado',

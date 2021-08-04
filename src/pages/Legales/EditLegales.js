@@ -61,7 +61,7 @@ export default class EditLegales extends Component {
             }),
             redirect: 'follow'
         };
-        fetch(`${config.url}/legales`,requestOptions).then(response => response.json()).then(resultado => {
+        fetch(`${config.url}/legales/update`,requestOptions).then(response => response.json()).then(resultado => {
             console.log(resultado);
             this.setState({...this.state,loading:false});
             Swal.fire(

@@ -29,7 +29,7 @@ class EditBanner extends React.Component {
 
     async getBanner(){
       try {
-        const data = await getData(`${config.url}/banner/${this.props.match.params.id}`);
+        const data = await getData(`${config.url}/banners/${this.props.match.params.id}`);
         this.setState({
           loading:false,
           formValues:{
@@ -65,7 +65,7 @@ class EditBanner extends React.Component {
         headers: myHeaders,
         body: new FormData(document.getElementById('form-banner'))
       };
-      fetch(`${config.url}/banner/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
+      fetch(`${config.url}/banners/update/${this.props.match.params.id}`,requestOptions).then(response => response.json()).then(resultado => {
         this.setState({...this.state,loading:false});
         if (resultado.error) {
           return Swal.fire({

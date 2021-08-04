@@ -28,7 +28,7 @@ class SubProductos extends React.Component {
   
   async getSubProducto(){
     try {
-      const data = await getData(`${config.url}/subproducto?desde=${this.state.desde}&limite=${this.state.limite}&admin=true`);
+      const data = await getData(`${config.url}/subproductos?desde=${this.state.desde}&limite=${this.state.limite}&admin=true`);
       this.setState({
         ...this.state,
         data:data.data,
@@ -54,7 +54,7 @@ class SubProductos extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/subproducto/${id}`);
+        await requestDelete(`${config.url}/subproductos/delete/${id}`);
         return Swal.fire(
           'Eliminado',
           'Recurso eliminado',

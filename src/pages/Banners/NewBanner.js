@@ -31,7 +31,7 @@ class NewBanner extends React.Component {
       body: new FormData(document.getElementById('form-banner')),
       headers:myHeaders
     };
-    fetch(`${config.url}/banner`, requestOptions)
+    fetch(`${config.url}/banners/add`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});

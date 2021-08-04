@@ -24,7 +24,7 @@ class Products extends React.Component {
 
   async getProductos(){
     try {
-      const data = await getData(`${config.url}/producto?desde=${this.state.desde}&limite=${this.state.limite}&admin=true`);
+      const data = await getData(`${config.url}/productos?desde=${this.state.desde}&limite=${this.state.limite}&admin=true`);
       this.setState({...this.state,data:data.data,loading:false});
     } catch (error) {
       this.setState({...this.state,error,loading:false})
@@ -42,7 +42,7 @@ class Products extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/producto/${id}`);
+        await requestDelete(`${config.url}/productos/delete/${id}`);
         Swal.fire(
           'Eliminado',
           'Recurso eliminado',

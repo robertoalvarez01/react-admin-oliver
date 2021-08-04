@@ -51,7 +51,7 @@ class EditSubCategoria extends React.Component {
 
     async getSubProducto(){
         try {
-            const data = await getData(`${config.url}/subproducto/${this.props.match.params.id}`);
+            const data = await getData(`${config.url}/subproductos/${this.props.match.params.id}`);
             return this.setState({
                 ...this.state,
                 formValues:{
@@ -80,7 +80,7 @@ class EditSubCategoria extends React.Component {
 
     async getProductos(){
       try {
-        const data = await getData(`${config.url}/producto?desde=1&limite=500`);
+        const data = await getData(`${config.url}/productos?desde=1&limite=500`);
         this.setState({...this.state,productos:data.data});
       } catch (error) {
         this.setState({...this.state,error,loading:false})
@@ -115,7 +115,7 @@ class EditSubCategoria extends React.Component {
         body: new FormData(document.getElementById('formModificarSubProducto')),
         headers:myHeaders
       };
-      fetch(`${config.url}/subproducto/${this.props.match.params.id}`, requestOptions)
+      fetch(`${config.url}/subproductos/update/${this.props.match.params.id}`, requestOptions)
         .then(response => response.json())
         .then(resultado => {
           this.setState({...this.state,loading:false});

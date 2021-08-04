@@ -25,7 +25,7 @@ const MediosDePago = () => {
 
     const getMedios = ()=>{
         setLoading(true);
-        request(`${config.url}/mediosDePago`,'GET').then(res=>{
+        request(`${config.url}/medioDePago`,'GET').then(res=>{
             setData(res.data);
             setLoading(false);
         }).catch(err=>{
@@ -44,7 +44,7 @@ const MediosDePago = () => {
             confirmButtonText: 'Confirmar'
         }).then(async(result) => {
             if (result.isConfirmed) {
-                await requestDelete(`${config.url}/medioDePago/${id}`);
+                await requestDelete(`${config.url}/medioDePago/delete/${id}`);
                 Swal.fire(
                     'Eliminado',
                     'Recurso eliminado',
@@ -91,10 +91,10 @@ const MediosDePago = () => {
         event.preventDefault();
         setModalIsOpen(false);
         setLoading(true);
-        let url = `${config.url}/medioDePago`;
+        let url = `${config.url}/medioDePago/add`;
         let method = 'POST';
         if(actionForm=='edit'){
-            url = `${config.url}/medioDePago/${formValues.idMedioPago}`;
+            url = `${config.url}/medioDePago/update/${formValues.idMedioPago}`;
             method = 'PUT';
         }
         request(url,method,JSON.stringify(formValues)).then(()=>{

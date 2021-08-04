@@ -39,7 +39,7 @@ class NewTamaño extends React.Component {
       body: JSON.stringify(this.state.formValues),
       headers:myHeaders
     };
-    fetch(`${config.url}/tamaño`, requestOptions)
+    fetch(`${config.url}/tamaños/add`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});

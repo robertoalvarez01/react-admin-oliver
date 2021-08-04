@@ -32,7 +32,7 @@ class EditSubCategoria extends React.Component {
 
     async getSubCategoria(){
         try {
-            const data = await getData(`${config.url}/subcategoria/${this.props.match.params.id}`);
+            const data = await getData(`${config.url}/subcategorias/${this.props.match.params.id}`);
             return this.setState({
                 ...this.state,
                 formValues:{
@@ -71,7 +71,7 @@ class EditSubCategoria extends React.Component {
         body: JSON.stringify(this.state.formValues),
         headers:myHeaders
       };
-      fetch(`${config.url}/subcategoria/${this.props.match.params.id}`, requestOptions)
+      fetch(`${config.url}/subcategorias/update/${this.props.match.params.id}`, requestOptions)
         .then(response => response.json())
         .then(resultado => {
           this.setState({...this.state,loading:false});

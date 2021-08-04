@@ -54,7 +54,7 @@ export default class Zonas extends Component {
           confirmButtonText: 'Confirmar'
         }).then(async(result) => {
           if (result.isConfirmed) {
-            await requestDelete(`${config.url}/zona/${id}`);
+            await requestDelete(`${config.url}/zonas/delete/${id}`);
             Swal.fire(
               'Eliminado',
               'Recurso eliminado',

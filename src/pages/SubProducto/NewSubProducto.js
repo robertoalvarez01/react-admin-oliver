@@ -50,7 +50,7 @@ class NewSubProducto extends React.Component {
 
   async getProductos(){
     try {
-      const data = await getData(`${config.url}/producto?desde=1&limite=500`);
+      const data = await getData(`${config.url}/productos?desde=1&limite=500`);
       this.setState({...this.state,productos:data.data});
     } catch (error) {
       this.setState({...this.state,error,loading:false})
@@ -89,7 +89,7 @@ class NewSubProducto extends React.Component {
       body: new FormData(document.getElementById('formAgregarSubProducto')),
       headers:myHeaders
     };
-    fetch(`${config.url}/subproducto`, requestOptions)
+    fetch(`${config.url}/subproductos/add`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});

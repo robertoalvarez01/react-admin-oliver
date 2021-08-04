@@ -31,7 +31,7 @@ const MarcasState = (props) => {
         let myHeaders = new Headers();
         myHeaders.append("token", token);
 
-        const req = await fetch(`${config.url}/marca`,{
+        const req = await fetch(`${config.url}/marcas`,{
             headers:myHeaders
         });
         if(req.status !== 200){

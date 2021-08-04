@@ -33,7 +33,7 @@ const UsuarioState = (props) => {
             redirect: 'follow'
         };
     
-        const req = await fetch(`${config.url}/login`, requestOptions);
+        const req = await fetch(`${config.url}/auth/login`, requestOptions);
         const response = await req.json();
         if(response.ok && response.usuario.admin === 1){
             localStorage.setItem('administrador',JSON.stringify(response));
@@ -67,7 +67,7 @@ const UsuarioState = (props) => {
         let myHeaders = new Headers();
         myHeaders.append("token", token);
 
-        const respuesta = await fetch(`${config.url}/verify-sesion`,{
+        const respuesta = await fetch(`${config.url}/auth/verify-sesion`,{
             method:'GET',
             headers:myHeaders
         });

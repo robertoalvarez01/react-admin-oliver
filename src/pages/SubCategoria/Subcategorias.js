@@ -26,7 +26,7 @@ class SubCategorias extends React.Component {
   
   async getSubCategorias(){
     try {
-      const data = await getData(`${config.url}/subcategoria`);
+      const data = await getData(`${config.url}/subcategorias`);
       this.setState({
         ...this.state,
         data:data.data,
@@ -52,7 +52,7 @@ class SubCategorias extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/subcategoria/${id}`);
+        await requestDelete(`${config.url}/subcategorias/delete/${id}`);
         return Swal.fire(
           'Eliminado',
           'Recurso eliminado',

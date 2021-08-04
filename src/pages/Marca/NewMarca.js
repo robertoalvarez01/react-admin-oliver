@@ -28,7 +28,7 @@ class NewMarca extends React.Component {
       body: data,
       redirect: 'follow'
     };
-    fetch(`${config.url}/marca`,requestOptions).then(response => response.json()).then(resultado => {
+    fetch(`${config.url}/marcas/add`,requestOptions).then(response => response.json()).then(resultado => {
       this.setState({loading:false});
       Swal.fire(
           'Guardado exitoso',

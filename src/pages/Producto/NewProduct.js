@@ -68,7 +68,7 @@ class NewProduct extends React.Component {
 
   async getSubCategorias(){
     try {
-      const subCategorias = await getData(`${config.url}/subcategoria`);
+      const subCategorias = await getData(`${config.url}/subcategorias`);
       return this.setState({
         ...this.state,
         subCategorias:subCategorias.data,
@@ -88,7 +88,7 @@ class NewProduct extends React.Component {
 
   async getMarcas(){
     try {
-      const marcas = await getData(`${config.url}/marca`);
+      const marcas = await getData(`${config.url}/marcas`);
       return this.setState({
         ...this.state,
         marcas:marcas.data,
@@ -131,7 +131,7 @@ class NewProduct extends React.Component {
       redirect: 'follow'
     };
     
-    fetch(`${config.url}/producto`, requestOptions)
+    fetch(`${config.url}/productos/add`, requestOptions)
       .then(response => response.json())
       .then(resultado => {
         this.setState({...this.state,loading:false});

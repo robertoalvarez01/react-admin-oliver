@@ -52,7 +52,7 @@ class Categorias extends React.Component {
       confirmButtonText: 'Confirmar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await requestDelete(`${config.url}/categoria/${id}`);
+        await requestDelete(`${config.url}/categorias/delete/${id}`);
         return Swal.fire(
           'Eliminado',
           'Recurso eliminado',

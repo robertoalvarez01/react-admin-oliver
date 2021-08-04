@@ -77,6 +77,7 @@ const UsuarioState = (props) => {
                 payload:usuario
             })
         }
+        return;
     }
 
     const logout = ()=>{

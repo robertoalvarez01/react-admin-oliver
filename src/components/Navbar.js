@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoOliver from "../images/logo-mascota.png";
 import { UsuarioContext } from "../context/usuario/usuarioContext";
 import Swal from 'sweetalert2';
 import userPng from '../assets/user.jpg';
+import SideBarMenu from './sidebarMenu';
+import { isMobile } from "../helpers/helpers";
 import './style/navbar.css';
 
 const Navbar = () => {
 
   const {logueado,usuario,logout} = useContext(UsuarioContext);
+  const [mostrarMenu, setMostrarMenu] = useState(false);
 
   const cerrarSesion =  () => {
     Swal.fire({
@@ -34,10 +37,10 @@ const Navbar = () => {
           <img src={logoOliver} width={35} height={35} alt="Admin oliver" loading="lazy" />
         </Link>
         {logueado ? 
-          <span>
+          <span className="d-block d-md-none" onClick={()=>setMostrarMenu(!mostrarMenu)}>
             <img src={usuario.foto ? usuario.foto : userPng} alt="user" height={34} width={34} style={{borderRadius:'17px'}}/>
           </span>
-        : <i className="fas fa-bars"/>}
+        : null}
   
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
@@ -59,6 +62,7 @@ const Navbar = () => {
           </ul>
         </div>
       </section>
+      {isMobile() ? <SideBarMenu show={mostrarMenu}/> : null}
     </nav>
   );
 }

@@ -15,7 +15,7 @@ const RutaPrivada = ({component:Component,...props}) => {
         await obtenerUsuario();
         setChequeado(true);
     }
-
+    
     return (
         !chequeado ? <Loader/> :
         <Route

@@ -1,7 +1,7 @@
 import { UsuarioContext } from "./usuarioContext";
 import usuarioReducer from "./usuarioReducer";
 import React,{useReducer} from 'react';
-import { USUARIO_ERROR, USUARIO_LOADING, USUARIO_LOGIN, USUARIO_LOGOUT } from "../../types/index";
+import { USUARIO_ERROR, USUARIO_LOADING, USUARIO_LOGIN, USUARIO_LOGOUT, USUARIO_SESION_VENCIDA } from "../../types/index";
 import config from "../../config/config";
 
 const UsuarioState = (props) => {
@@ -77,7 +77,9 @@ const UsuarioState = (props) => {
                 payload:usuario
             })
         }
-        return;
+        return dispatch({
+            type:USUARIO_SESION_VENCIDA
+        });
     }
 
     const logout = ()=>{

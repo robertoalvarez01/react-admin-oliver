@@ -85,3 +85,15 @@ body{
         left: 0;
     }
 }
+
+@media(min-width:768px){
+    .menu-lateral{
+        padding-top: 200px;
+    }
+}   
+
+@media (min-width:1400px) {
+    .menu-lateral{
+        padding-top: 0px;
+    }
+}

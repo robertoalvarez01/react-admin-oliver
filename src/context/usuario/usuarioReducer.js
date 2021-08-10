@@ -1,4 +1,4 @@
-import { USUARIO_ERROR, USUARIO_LOADING, USUARIO_LOGIN, USUARIO_LOGOUT } from "../../types";
+import { USUARIO_ERROR, USUARIO_LOADING, USUARIO_LOGIN, USUARIO_LOGOUT, USUARIO_SESION_VENCIDA } from "../../types";
 
 const usuarioReducer = (state,action)=>{
     switch (action.type) {
@@ -29,6 +29,12 @@ const usuarioReducer = (state,action)=>{
                 error:null,
                 logueado:false,
                 usuario:null
+            }
+        case USUARIO_SESION_VENCIDA:
+            return {
+                ...state,
+                loading:false,
+                logueado:false
             }
         default:
             return state;

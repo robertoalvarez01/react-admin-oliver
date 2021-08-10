@@ -16,8 +16,6 @@ const RutaPrivada = ({component:Component,...props}) => {
         setChequeado(true);
     }
 
-    console.log(chequeado,loading);
-    
     return (
         !chequeado ? <Loader/> :
         <Route

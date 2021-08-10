@@ -38,7 +38,6 @@ class EditSubCategoria extends React.Component {
               loading:true
             })
             await this.getSubProducto();
-            await this.getProductos();
             await this.getTamaños();
         } catch (error) {
           this.setState({
@@ -110,9 +109,10 @@ class EditSubCategoria extends React.Component {
       const administrador = JSON.parse(localStorage.getItem('administrador'));
       let myHeaders = new Headers();
       myHeaders.append("token", administrador.token);
+      const data = new FormData(document.getElementById('formModificarSubProducto'));
       let requestOptions = {
         method: 'PUT',
-        body: new FormData(document.getElementById('formModificarSubProducto')),
+        body: data,
         headers:myHeaders
       };
       fetch(`${config.url}/subproductos/update/${this.props.match.params.id}`, requestOptions)
@@ -146,7 +146,6 @@ class EditSubCategoria extends React.Component {
               </div>
               <SubProductoForm
                 formId="formModificarSubProducto"
-                productos={this.state.productos}
                 tamaños={this.state.tamaños} 
                 onChange={this.handleChange}
                 formValues={this.state.formValues}

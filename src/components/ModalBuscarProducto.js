@@ -4,9 +4,7 @@ import config from '../config/config';
 import {getData} from '../helpers/helpers';
 import Loader from './Loader';
 const ModalBuscarProducto = (props) => {
-    useEffect(() => {
-        setFiltrados(props.productos);
-    }, [])
+
     const [filtrados, setFiltrados] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -16,6 +14,7 @@ const ModalBuscarProducto = (props) => {
             if(key.length<3) return;
             setLoading(true);
             const data = await getData(`${config.url}/productos/buscar?busqueda=${key}`);
+            console.log(data);
             setFiltrados(data.data);
             setLoading(false);
         } catch (error) {
@@ -38,7 +37,7 @@ const ModalBuscarProducto = (props) => {
                     filtrados.map(prd=>(
                     <div className="col-12 col-md-6" key={prd.idProducto} style={{'cursor':'pointer'}} onClick={()=>props.setProductoPadre(prd.idProducto,`${prd.producto}`)}>
                         <div className="bg-light border rounded">
-                        <p className="my-2 mx-2">{prd.producto} | {prd.marca} | {prd.categoria}</p>
+                            <p className="my-2 mx-2">{prd.producto} | {prd.marca} | {prd.categoria}</p>
                         </div>
                     </div>
                     ))

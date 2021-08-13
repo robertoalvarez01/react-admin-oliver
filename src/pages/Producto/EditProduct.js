@@ -132,7 +132,7 @@ class EditProduct extends React.Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({
       ...this.state,
@@ -150,33 +150,19 @@ class EditProduct extends React.Component {
       body: JSON.stringify(this.state.formValues)
     };
 
-    fetch(`${config.url}/productos/update/${this.props.match.params.productId}`, requestOptions)
-      .then(response => response.json())
-      .then(resultado => {
-        this.setState({
-          ...this.state,
-          loading:false
-        })
-        if (resultado.info.code) {
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: resultado.info.code
-            })
-        }
-        Swal.fire(
-            'Guardado exitoso',
-            'Se modificó el producto de manera exitosa!',
-            'success'
-        ).then(()=>this.props.history.push('/productos'));
-      })
-      .catch(error => {
-        this.setState({
-          ...this.state,
-          error,
-          loading:false
-        })
-      });
+    const res = await fetch(`${config.url}/productos/update/${this.props.match.params.productId}`, requestOptions);
+    if(res.status!=200){
+      return Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Error al modificar el producto'
+      });  
+    }
+    Swal.fire(
+        'Guardado exitoso',
+        'Se modificó el producto de manera exitosa!',
+        'success'
+    ).then(()=>this.props.history.push('/productos'));
   };
   render() {
     return (

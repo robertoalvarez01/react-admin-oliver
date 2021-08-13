@@ -103,7 +103,7 @@ class EditSubCategoria extends React.Component {
       }
     }
   
-    handleSubmit = e => {
+    handleSubmit = async e => {
       e.preventDefault();
       this.setState({...this.state,loading:true});
       const administrador = JSON.parse(localStorage.getItem('administrador'));
@@ -115,24 +115,19 @@ class EditSubCategoria extends React.Component {
         body: data,
         headers:myHeaders
       };
-      fetch(`${config.url}/subproductos/update/${this.props.match.params.id}`, requestOptions)
-        .then(response => response.json())
-        .then(resultado => {
-          this.setState({...this.state,loading:false});
-          if (resultado.info.code) {
-              return Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: resultado.info.code
-              });
-          }
-          Swal.fire(
-              'Guardado exitoso',
-              'Se Modificó el subproducto de manera exitosa!',
-              'success'
-          ).then(()=>this.props.history.push('/subproductos'));
-        })
-        .catch(error => console.log('error', error));
+      const res = await fetch(`${config.url}/subproductos/update/${this.props.match.params.id}`, requestOptions);
+      if(res.status!=200){
+        return Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error al modificar el subproducto'
+        });
+      }
+      Swal.fire(
+          'Guardado exitoso',
+          'Se Modificó el subproducto de manera exitosa!',
+          'success'
+      ).then(()=>this.props.history.push('/subproductos'));
     };
   
     render() {

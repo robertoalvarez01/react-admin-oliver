@@ -78,7 +78,7 @@ class NewSubProducto extends React.Component {
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({...this.state,loading:true});
     const administrador = JSON.parse(localStorage.getItem('administrador'));
@@ -89,30 +89,21 @@ class NewSubProducto extends React.Component {
       body: new FormData(document.getElementById('formAgregarSubProducto')),
       headers:myHeaders
     };
-    fetch(`${config.url}/subproductos/add`, requestOptions)
-      .then(response => response.json())
-      .then(resultado => {
-        this.setState({...this.state,loading:false});
-        if (resultado.info.code) {
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: resultado.info.code
-            });
-        }
-        Swal.fire(
-            'Guardado exitoso',
-            'Se guardó el subproducto de manera exitosa!',
-            'success'
-        ).then(()=>this.props.history.push('/subproductos'));
-      })
-      .catch(error =>{
-        this.setState({
-          ...this.state,
-          loading:false,
-          error
-        })
+    const res = await fetch(`${config.url}/subproductos/add`, requestOptions);
+    const response = await res.json();
+    console.log(response);
+    if(res.status != 200){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: response.error
       });
+    }
+    Swal.fire(
+        'Guardado exitoso',
+        'Se guardó el subproducto de manera exitosa!',
+        'success'
+    ).then(()=>this.props.history.push('/subproductos'));
   };
 
   render() {

@@ -117,7 +117,7 @@ class NewProduct extends React.Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({...this.state,loading:true});
     const administrador = JSON.parse(localStorage.getItem('administrador'));
@@ -131,24 +131,19 @@ class NewProduct extends React.Component {
       redirect: 'follow'
     };
     
-    fetch(`${config.url}/productos/add`, requestOptions)
-      .then(response => response.json())
-      .then(resultado => {
-        this.setState({...this.state,loading:false});
-        if (resultado.info.code) {
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: resultado.info.code
-            })
-        }
-        Swal.fire(
-            'Guardado exitoso',
-            'Se guardó el producto de manera exitosa!',
-            'success'
-        ).then(()=>this.props.history.push('/productos'));
+    const res = await fetch(`${config.url}/productos/add`, requestOptions);
+    if(res.status != 200){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error al registrar el producto'
       })
-      .catch(error => this.setState({...this.state,error,loading:false}));
+    }
+    Swal.fire(
+        'Guardado exitoso',
+        'Se guardó el producto de manera exitosa!',
+        'success'
+    ).then(()=>this.props.history.push('/productos'));
   };
 
   render() {

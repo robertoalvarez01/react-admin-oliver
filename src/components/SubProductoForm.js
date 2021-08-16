@@ -24,7 +24,7 @@ const SubProductoForm = (props) => {
   
   let claseContainerForm = (props.formId==='formModificarSubProducto')?'col-12 col-md-9':'col-12';
 
-  if(productoPadreName === "" || !idProducto){
+  if(props.formId === "formModificarSubProducto" && (productoPadreName === "" || !idProducto) ){
     return null;
   }
 

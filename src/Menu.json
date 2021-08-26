@@ -82,5 +82,12 @@
         "subtitulo":"Comunicarse con usuarios",
         "boton":"Ingresar",
         "url":"/usuarios-ofertas"
+    },
+    {
+        "id":13,
+        "titulo":"Ofertas",
+        "subtitulo":"-",
+        "boton":"Ingresar",
+        "url":"/ofertas"
     }
 ]

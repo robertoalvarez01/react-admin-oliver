@@ -51,6 +51,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Ofertas from '../pages/Ofertas';
 import OfertasState from '../context/ofertas/ofertasState';
 import NuevaOferta from '../pages/Ofertas/add';
+import EditarOferta from '../pages/Ofertas/edit';
 
 function App() {
   return (
@@ -114,6 +115,7 @@ function App() {
 
                         <RutaPrivada exact path="/ofertas" component={Ofertas}/>
                         <RutaPrivada exact path="/ofertas/agregar" component={NuevaOferta}/>
+                        <RutaPrivada exact path="/ofertas/editar/:id" component={EditarOferta}/>
                         {/* <Route component={NotFound} /> */}
                       </Switch>
                     </Layout>

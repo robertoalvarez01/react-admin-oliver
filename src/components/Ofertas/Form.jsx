@@ -4,11 +4,12 @@ import Swal from 'sweetalert2';
 import config from '../../config/config';
 import ModalBuscarProducto from '../ModalBuscarProducto';
 import { OfertasContext } from '../../context/ofertas/ofertasContext';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Loader from '../Loader';
+import ProductosOferta from './ProductosOferta';
 
 const FormOferta = () => {
-    const {loading:loadingContext,error:errorContext,agregarOferta} = useContext(OfertasContext);
+    const {loading:loadingContext,error:errorContext,oferta,agregarOferta,modificarOferta,agregarProducto,traerOfertaPorId,eliminarProducto} = useContext(OfertasContext);
     const [formValues, setFormValues] = useState({
         descripcion:'',
         validoHasta:moment(new Date()).format('YYYY-MM-DD'),
@@ -32,6 +33,18 @@ const FormOferta = () => {
     const [subProductos, setSubProductos] = useState([])//state para guardar los subproductos del producto padre. Se usa para el select.
 
     const history = useHistory();
+
+    useEffect(() => {
+        if(oferta){
+            setFormValues({
+                descripcion:oferta.descripcion,
+                validoHasta:moment(oferta.validoHasta).format('YYYY-MM-DD'),
+                precioFinal:oferta.precioFinal,
+                activo:oferta.activo
+            });
+            setProductos(oferta.productos);
+        }
+    }, [])
     
     useEffect(() => {
         if(loading){
@@ -58,17 +71,27 @@ const FormOferta = () => {
         alert('!!');
     }
 
-    const handleSubmitProductos = (e)=>{
+    const handleSubmitProductos = async (e)=>{
         e.preventDefault();
-        setProductos([
-            ...productos,
-            formValuesProductos
-        ]);
-        setFormValuesProductos({
-            idProducto:'',
-            idSubProducto:'',
-            producto:''
-        })
+        if(formValuesProductos.idProducto=="" || formValuesProductos.idSubProducto==""){
+            Swal.fire('Atención','Quedan campos por completar','warning');
+            return;
+        }
+        if(oferta){
+            await agregarProducto(formValuesProductos,oferta.id);
+            if(errorContext){
+                Swal.fire('Atención',errorContext,'error');
+                return;
+            }
+            Swal.fire('Listo','El producto se agregó a la oferta','success').then(()=>{
+                setFormValuesProductos({
+                    idProducto:'',
+                    idSubProducto:'',
+                    producto:''
+                });
+                traerOfertaPorId(oferta.id);
+            });
+        }
     }
 
     const setProductoPadre = (idProducto,productoName)=>{
@@ -98,14 +121,39 @@ const FormOferta = () => {
         data.append('validoHasta',formValues.validoHasta);
         data.append('precioFinal',formValues.precioFinal);
         data.append('activo',formValues.activo);
-        data.append('foto',document.getElementById('foto').files[0]);
-        data.append('productos',JSON.stringify(productos));
-        await agregarOferta(data);
+        data.append('foto',document.getElementById('foto').files[0] ? document.getElementById('foto').files[0] : null);
+        if(!oferta){
+            data.append('productos',JSON.stringify(productos));
+            await agregarOferta(data);
+        }else{
+            await modificarOferta(data,oferta.id);
+        }
         if(!errorContext){
             Swal.fire('Listo','Oferta guardada con éxito','success').then(()=>{
                 history.push('/ofertas');
             })
         }
+    }
+
+    const eliminarProductoDeOferta = id => {
+        Swal.fire({
+            title: '¿Seguro quieres eliminar el producto?',
+            text: "Esta acción no se puede deshacer",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar'
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                await eliminarProducto(id);
+                Swal.fire(
+                    'Eliminado',
+                    'Recurso eliminado',
+                    'success'
+                ).then(()=>traerOfertaPorId(oferta.id));
+            }
+        });
     }
 
     if(error){
@@ -156,11 +204,7 @@ const FormOferta = () => {
             </form>
             <h2 className="my-3">Productos de la oferta</h2>
             <div className="row">
-                {productos.map((prd,key)=>(
-                    <div className="col-12 col-md-4" key={key}>
-                        <span style={{backgroundColor:'gray',color:'white',borderRadius:'10px'}} className="d-block mt-2 text-center">{prd.producto}</span>
-                    </div>
-                ))}
+                <ProductosOferta productos={productos} onDelete={eliminarProductoDeOferta}/>
             </div>
             <hr/>
             {loadingContext ? <Loader/> : <button type="button" className="btn btn-warning w-100" onClick={handleClickCarga}>Cargar Oferta</button> }

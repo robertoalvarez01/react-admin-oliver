@@ -7,13 +7,30 @@ import {OfertasContext} from '../../context/ofertas/ofertasContext'
 import Loader from '../Loader';
 
 const ListadoOfertas = () => {
-    const {loading,error,data,traerOfertas} = useContext(OfertasContext);
+    const {loading,error,data,traerOfertas,eliminarOferta} = useContext(OfertasContext);
     useEffect(() => {
         traerOfertas();
     }, []);
 
     const deleteOferta = id=>{
-
+        Swal.fire({
+            title: '¿Seguro quieres eliminar la oferta?',
+            text: "Esta acción no se puede deshacer",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar'
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                await eliminarOferta(id);
+                Swal.fire(
+                    'Eliminado',
+                    'Recurso eliminado',
+                    'success'
+                ).then(()=>traerOfertas());
+            }
+        });
     }
 
     if(loading){
@@ -24,6 +41,10 @@ const ListadoOfertas = () => {
         Swal.fire('Error',error,'error');
     }
 
+    const handleChangeEstado = e=>{
+        console.log(e);
+    }
+
     return (
         <>
             <table className="table text-center table-hover">
@@ -32,6 +53,7 @@ const ListadoOfertas = () => {
                         <th scope="col">Foto</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Valido hasta</th>
+                        <th scope="col">Activo</th>
                         <th scope="col">
                             <Link to="/ofertas/agregar" className="btn btn-outline-success">Agregar oferta</Link>
                         </th>
@@ -44,7 +66,13 @@ const ListadoOfertas = () => {
                                 <img style={{objectFit:'cover'}} src={oferta.foto} alt={oferta.descripcion} width={50} height={50}/>
                             </th>
                             <td>{oferta.descripcion}</td>
-                            <td>{moment(oferta.validoHassta).format('DD-MM-YYYY')}</td>
+                            <td>{moment(oferta.validoHasta).format('DD-MM-YYYY')}</td>
+                            <td>
+                                <label className="switch">
+                                    <input type="checkbox" checked={oferta.activo} onChange={handleChangeEstado}/>
+                                    <span className="slider round"></span>
+                                </label>
+                            </td>
                             <td>
                                 <button className="btn btn-outline-danger mx-1" onClick={()=>deleteOferta(oferta.id)}>
                                     <i className="fas fa-trash-alt"></i>

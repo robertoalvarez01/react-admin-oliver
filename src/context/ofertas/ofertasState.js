@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import config from '../../config/config';
-import { OFERTAS_AGREGAR, OFERTAS_AGREGAR_PRODUCTO, OFERTAS_ELIMINAR, OFERTAS_ELIMINAR_PRODUCTO, OFERTAS_ERROR, OFERTAS_LOADING, OFERTAS_MODIFICAR, OFERTAS_TRAER, OFERTAS_TRAER_MAS, OFERTAS_TRAER_UNA, OFERTAS_UPDATE_PAGINATION } from '../../types';
+import { OFERTAS_AGREGAR, OFERTAS_AGREGAR_PRODUCTO, OFERTAS_CAMBIAR_ACTIVO, OFERTAS_ELIMINAR, OFERTAS_ELIMINAR_PRODUCTO, OFERTAS_ERROR, OFERTAS_LOADING, OFERTAS_MODIFICAR, OFERTAS_TRAER, OFERTAS_TRAER_MAS, OFERTAS_TRAER_UNA, OFERTAS_UPDATE_PAGINATION } from '../../types';
 import {OfertasContext} from './ofertasContext';
 import OfertasReducer from './ofertasReducer';
 
@@ -206,6 +206,29 @@ const OfertasState = (props) => {
         }
     }
 
+    const cambiarEstado = async id =>{
+        dispatch({
+            type:OFERTAS_LOADING
+        });
+        try {
+            const administrador = JSON.parse(localStorage.getItem('administrador'));
+            const headers = new Headers();
+            headers.append('token',administrador.token);
+            const res = await fetch(`${config.url}/ofertas/cambiarEstado/${id}`,{
+                method:'PUT',
+                headers
+            });
+            return dispatch({
+                type:OFERTAS_CAMBIAR_ACTIVO
+            })
+        } catch (error) {
+            dispatch({
+                type:OFERTAS_ERROR,
+                payload:error.message
+            }) 
+        }
+    }
+
     return (
         <OfertasContext.Provider value={{
             loading:state.loading,
@@ -220,7 +243,8 @@ const OfertasState = (props) => {
             modificarOferta,
             agregarProducto,
             eliminarProducto,
-            eliminarOferta
+            eliminarOferta,
+            cambiarEstado
         }}>
             {props.children}
         </OfertasContext.Provider>

@@ -7,7 +7,7 @@ import {OfertasContext} from '../../context/ofertas/ofertasContext'
 import Loader from '../Loader';
 
 const ListadoOfertas = () => {
-    const {loading,error,data,traerOfertas,eliminarOferta} = useContext(OfertasContext);
+    const {loading,error,data,traerOfertas,eliminarOferta,cambiarEstado} = useContext(OfertasContext);
     useEffect(() => {
         traerOfertas();
     }, []);
@@ -41,8 +41,9 @@ const ListadoOfertas = () => {
         Swal.fire('Error',error,'error');
     }
 
-    const handleChangeEstado = e=>{
-        console.log(e);
+    const handleChangeEstado = async id=>{
+        await cambiarEstado(id);
+        traerOfertas();
     }
 
     return (
@@ -69,7 +70,7 @@ const ListadoOfertas = () => {
                             <td>{moment(oferta.validoHasta).format('DD-MM-YYYY')}</td>
                             <td>
                                 <label className="switch">
-                                    <input type="checkbox" checked={oferta.activo} onChange={handleChangeEstado}/>
+                                    <input type="checkbox" checked={oferta.activo} onChange={e=>handleChangeEstado(oferta.id)}/>
                                     <span className="slider round"></span>
                                 </label>
                             </td>

@@ -11,9 +11,9 @@ import ProductosOferta from './ProductosOferta';
 const FormOferta = () => {
     const {loading:loadingContext,error:errorContext,oferta,agregarOferta,modificarOferta,agregarProducto,traerOfertaPorId,eliminarProducto} = useContext(OfertasContext);
     const [formValues, setFormValues] = useState({
+        titulo:'',
         descripcion:'',
         validoHasta:moment(new Date()).format('YYYY-MM-DD'),
-        precioFinal:'',
         activo:0
     });
 
@@ -39,7 +39,7 @@ const FormOferta = () => {
             setFormValues({
                 descripcion:oferta.descripcion,
                 validoHasta:moment(oferta.validoHasta).format('YYYY-MM-DD'),
-                precioFinal:oferta.precioFinal,
+                titulo:oferta.titulo,
                 activo:oferta.activo
             });
             setProductos(oferta.productos);
@@ -68,12 +68,11 @@ const FormOferta = () => {
 
     const handleSubmit = e =>{
         e.preventDefault();
-        alert('!!');
     }
 
     const handleSubmitProductos = async (e)=>{
         e.preventDefault();
-        if(formValuesProductos.idProducto=="" || formValuesProductos.idSubProducto==""){
+        if(formValuesProductos.idProducto==="" || formValuesProductos.idSubProducto===""){
             Swal.fire('Atención','Quedan campos por completar','warning');
             return;
         }
@@ -91,6 +90,8 @@ const FormOferta = () => {
                 });
                 traerOfertaPorId(oferta.id);
             });
+        }else{
+            setProductos([...productos,formValuesProductos]);
         }
     }
 
@@ -119,11 +120,11 @@ const FormOferta = () => {
         const data = new FormData();
         data.append('descripcion',formValues.descripcion);
         data.append('validoHasta',formValues.validoHasta);
-        data.append('precioFinal',formValues.precioFinal);
+        data.append('titulo',formValues.titulo);
         data.append('activo',formValues.activo);
         data.append('foto',document.getElementById('foto').files[0] ? document.getElementById('foto').files[0] : null);
         if(!oferta){
-            data.append('productos',JSON.stringify(productos));
+            data.append('productos',JSON.stringify(productos))
             await agregarOferta(data);
         }else{
             await modificarOferta(data,oferta.id);
@@ -165,15 +166,18 @@ const FormOferta = () => {
             <form className="form-group" onSubmit={handleSubmit} id="form-oferta">
                 <div className="row">
                     <div className="col-12 col-md-6 my-3">
-                        <input type="text" name="descripcion" id="descripcion" onChange={handleChange} className="form-control" placeholder="Descripción de la oferta" value={formValues.descripcion}/>     
+                        <input type="text" name="titulo" id="titulo" onChange={handleChange} className="form-control" placeholder="Titulo de la oferta" value={formValues.titulo}/>     
                     </div>
                     <div className="col-12 col-md-6 my-3">
                         <input type="date" name="validoHasta" id="validoHasta" onChange={handleChange} className="form-control" value={formValues.validoHasta}/>     
                     </div>
-                    <div className="col-12 col-md-6 my-3">
-                        <input type="number" step="any" name="precioFinal" min="1" id="precioFinal" onChange={handleChange} className="form-control" placeholder="Precio final de la oferta" value={formValues.precioFinal}/>     
+                    <div className="col-12 my-3">
+                        <label htmlFor="descripcion">Descripción:</label>
+                        <textarea className="form-control" name="descripcion" id="descripcion" defaultValue={formValues.descripcion} onChange={handleChange} rows={7}>
+                            
+                        </textarea>
                     </div>
-                    <div className="col-12 col-md-6 my-3">
+                    <div className="col-12 my-3">
                         <input type="file" name="foto" id="foto" onChange={handleChange} className="form-control"/>     
                     </div>
                     <input type="hidden" name="activo" value={formValues.activo}/>

@@ -52,7 +52,7 @@ const ListadoOfertas = () => {
                 <thead className="thead-dark">
                     <tr>
                         <th scope="col">Foto</th>
-                        <th scope="col">Descripcion</th>
+                        <th scope="col">Titulo</th>
                         <th scope="col">Valido hasta</th>
                         <th scope="col">Activo</th>
                         <th scope="col">
@@ -66,7 +66,7 @@ const ListadoOfertas = () => {
                             <th scope="row">
                                 <img style={{objectFit:'cover'}} src={oferta.foto} alt={oferta.descripcion} width={50} height={50}/>
                             </th>
-                            <td>{oferta.descripcion}</td>
+                            <td>{oferta.titulo}</td>
                             <td>{moment(oferta.validoHasta).format('DD-MM-YYYY')}</td>
                             <td>
                                 <label className="switch">

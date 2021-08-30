@@ -12,8 +12,8 @@ const ProductosOferta = (props) => {
                 </tr>
             </thead>
             <tbody>
-                { props.productos.map(prd=>(
-                    <tr key={prd.id}>
+                { props.productos.map((prd,key)=>(
+                    <tr key={key}>
                         <th scope="row">{prd.producto}</th>
                         <td>{prd.subProducto}</td>
                         <td>

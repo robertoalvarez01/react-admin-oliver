@@ -24,7 +24,10 @@ const OfertasState = (props) => {
             type:OFERTAS_LOADING
         })
         try {
-            const res = await fetch(`${config.url}/ofertas?desde=${state.pagination.desde}&cantidad=${state.pagination.cantidad}`)
+            const administrador = JSON.parse(localStorage.getItem('administrador'));
+            const res = await fetch(`${config.url}/ofertas?desde=${state.pagination.desde}&cantidad=${state.pagination.cantidad}`,{
+                headers:{'token':administrador.token}
+            })
             const data = await res.json();
             return dispatch({
                 type:OFERTAS_TRAER,
